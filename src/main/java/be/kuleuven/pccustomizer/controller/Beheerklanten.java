@@ -60,6 +60,7 @@ public class Beheerklanten {
     }
 
     private void addNewRow() {
+
     }
 
     private void deleteCurrentRow() {

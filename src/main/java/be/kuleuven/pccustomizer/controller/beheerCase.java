@@ -59,6 +59,7 @@ public class beheerCase {
     }
 
     private void addNewRow() {
+
     }
 
     private void deleteCurrentRow() {

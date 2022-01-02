@@ -9,6 +9,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import static com.sun.javafx.application.PlatformImpl.exit;
+
 public class BeheerHwComponentenController {
 
     @FXML
@@ -32,8 +34,9 @@ public class BeheerHwComponentenController {
     @FXML
     private Button btnClose;
 
-
     public void initialize() {
+
+
         btnMotherboard.setOnAction(e -> showBeheerScherm("Motherboard"));
         btnPSU.setOnAction(e -> showBeheerScherm("PSU"));
         btnCPU.setOnAction(e -> showBeheerScherm("CPU"));
@@ -43,11 +46,32 @@ public class BeheerHwComponentenController {
         btnCase.setOnAction(e -> showBeheerScherm("Case"));
         btnCooling.setOnAction(e -> showBeheerScherm("Cooling"));
         btnExtra.setOnAction(e -> showBeheerScherm("Extra"));
-        btnClose.setOnAction(e -> showBeheerScherm("pccustomizermain"));
+
+        btnClose.setOnAction(e -> {
+            var stage = (Stage) btnClose.getScene().getWindow();
+            stage.close();
+        });
     }
 
+    private void showMainScherm(String id) {
+
+        var resourceName = id + ".fxml";
+        try {
+            var stage = new Stage();
+            var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));
+            var scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Admin " + id);
+            stage.initOwner(ProjectMain.getRootStage());
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.show();
+
+        } catch (Exception e) {
+            throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
+        }
+    }
     private void showBeheerScherm(String id) {
-        var resourceName = "beheer" + id + ".fxml";
+        var resourceName = "_c_beheer" + id + ".fxml";
         try {
             var stage = new Stage();
             var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));
