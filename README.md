@@ -18,4 +18,4 @@ Denk aan je eigen ER schema:
   wij kiezen voor een admin tool
 - ...
 
-Pas aan waar nodig!
+Pas aan waar nodig! 
