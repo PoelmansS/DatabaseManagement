@@ -1,29 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="be.kuleuven.pccustomizer.controller.beheerGPU"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.pccustomizer.controller.Beheer.beheerGPU">
     <children>
         <ImageView fitHeight="420.0" fitWidth="608.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../build/resources/main/_c_bg.png" />
             </image>
         </ImageView>
-        <TableView fx:id="tblConfigs" layoutX="14.0" layoutY="47.0" prefHeight="246.0" prefWidth="567.0">
+        <TableView fx:id="tableView" layoutX="14.0" layoutY="47.0" prefHeight="246.0" prefWidth="567.0">
             <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
+                <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
+                <TableColumn fx:id="VRAMColumn" prefWidth="75.0" text="VRAM" />
+                <TableColumn fx:id="powerUsageColumn" prefWidth="100" text="PowerUsage" />
             </columns>
         </TableView>
         <Text layoutX="16.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beheer GPU" wrappingWidth="567.21875">
@@ -31,9 +25,20 @@
                 <Font name="System Bold Italic" size="13.0" />
             </font>
         </Text>
-        <Button fx:id="btnAdd" layoutX="16.0" layoutY="304.0" mnemonicParsing="false" text="Voeg Toe" />
-        <Button fx:id="btnModify" layoutX="120.0" layoutY="304.0" mnemonicParsing="false" text="Bewerk" />
+        <Button fx:id="btnAdd" layoutX="16.0" layoutY="360.0" mnemonicParsing="false" text="Voeg Toe" />
+        <Button fx:id="btnModify" layoutX="64.0" layoutY="304.0" mnemonicParsing="false" text="Modify" />
         <Button fx:id="btnClose" layoutX="520.0" layoutY="304.0" mnemonicParsing="false" text="Sluiten" />
         <Button fx:id="btnDelete" layoutX="431.0" layoutY="304.0" mnemonicParsing="false" text="Verwijder" />
+        <Button fx:id="btnLoad" layoutX="16.0" layoutY="304.0" mnemonicParsing="false" text="Load" />
+
+        <TextField fx:id="addName" layoutX="91.0" layoutY="360.0" prefHeight="25.0" prefWidth="67.0" />
+        <TextField fx:id="addPrice" layoutX="166.0" layoutY="360.0" prefHeight="25.0" prefWidth="92.0" />
+        <TextField fx:id="addVRAM" layoutX="268.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
+        <TextField fx:id="addPowerUsage" layoutX="357.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
+
+        <Text layoutX="91.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="53.0" />
+        <Text layoutX="166.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" wrappingWidth="92.0" />
+        <Text layoutX="268.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VRAM" />
+        <Text layoutX="362.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Power Usage" />
     </children>
 </AnchorPane>

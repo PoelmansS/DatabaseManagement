@@ -1,4 +1,4 @@
-package be.kuleuven.pccustomizer.controller;
+package be.kuleuven.pccustomizer.controller.config;
 
 import be.kuleuven.pccustomizer.ProjectMain;
 import javafx.fxml.FXML;
@@ -11,13 +11,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class configExtra {
+public class configCooling {
     @FXML
     private Button btnAdd;
     @FXML
     private Button btnClose;
-    @FXML
-    private Button btnSkip;
     @FXML
     private TableView tblComp;
     @FXML
@@ -25,15 +23,8 @@ public class configExtra {
 
 
     public void initialize() {
-        btnAdd.setOnAction(e -> {
-            var stage = (Stage) btnClose.getScene().getWindow();
-            stage.close();
-        });
+        btnAdd.setOnAction(e -> showBeheerScherm("PSU"));
         btnClose.setOnAction(e -> {
-            var stage = (Stage) btnClose.getScene().getWindow();
-            stage.close();
-        });
-        btnSkip.setOnAction(e -> {
             var stage = (Stage) btnClose.getScene().getWindow();
             stage.close();
         });

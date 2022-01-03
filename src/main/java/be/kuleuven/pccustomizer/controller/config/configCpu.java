@@ -1,4 +1,4 @@
-package be.kuleuven.pccustomizer.controller;
+package be.kuleuven.pccustomizer.controller.config;
 
 import be.kuleuven.pccustomizer.ProjectMain;
 import javafx.fxml.FXML;
@@ -11,7 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class configMotherboard {
+public class configCpu {
     @FXML
     private Button btnAdd;
     @FXML
@@ -23,7 +23,7 @@ public class configMotherboard {
 
 
     public void initialize() {
-        btnAdd.setOnAction(e -> showBeheerScherm("Cooling"));
+        btnAdd.setOnAction(e -> showBeheerScherm("Gpu"));
         btnClose.setOnAction(e -> {
             var stage = (Stage) btnClose.getScene().getWindow();
             stage.close();

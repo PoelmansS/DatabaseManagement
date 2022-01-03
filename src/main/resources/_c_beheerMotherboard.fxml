@@ -1,29 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="be.kuleuven.pccustomizer.controller.beheerMotherboard"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.pccustomizer.controller.Beheer.beheerMotherboard">
     <children>
         <ImageView fitHeight="420.0" fitWidth="608.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../build/resources/main/_c_bg.png" />
             </image>
         </ImageView>
-        <TableView fx:id="tblConfigs" layoutX="14.0" layoutY="47.0" prefHeight="246.0" prefWidth="567.0">
+        <TableView fx:id="tableView" layoutX="14.0" layoutY="47.0" prefHeight="246.0" prefWidth="567.0">
             <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
+                <TableColumn fx:id="hasWifiColumn" prefWidth="75.0" text="Wifi" />
+                <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
+                <TableColumn fx:id="caseSizeColumn" prefWidth="75.0" text="Case Size" />
+                <TableColumn fx:id="RAMSlotsColumn" prefWidth="75.0" text="RAM slots" />
+                <TableColumn fx:id="PCIESlotsColumn" prefWidth="75.0" text="PCIE slots" />
             </columns>
         </TableView>
         <Text layoutX="16.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beheer Motherboard" wrappingWidth="567.21875">
@@ -31,9 +27,24 @@
                 <Font name="System Bold Italic" size="13.0" />
             </font>
         </Text>
-        <Button fx:id="btnAdd" layoutX="16.0" layoutY="304.0" mnemonicParsing="false" text="Voeg Toe" />
-        <Button fx:id="btnModify" layoutX="120.0" layoutY="304.0" mnemonicParsing="false" text="Bewerk" />
+        <Button fx:id="btnAdd" layoutX="16.0" layoutY="360.0" mnemonicParsing="false" text="Voeg Toe" />
+        <Button fx:id="btnModify" layoutX="64.0" layoutY="304.0" mnemonicParsing="false" text="Modify" />
         <Button fx:id="btnClose" layoutX="520.0" layoutY="304.0" mnemonicParsing="false" text="Sluiten" />
         <Button fx:id="btnDelete" layoutX="431.0" layoutY="304.0" mnemonicParsing="false" text="Verwijder" />
+        <Button fx:id="btnLoad" layoutX="16.0" layoutY="304.0" mnemonicParsing="false" text="Load" />
+
+        <TextField fx:id="addName" layoutX="91.0" layoutY="360.0" prefHeight="25.0" prefWidth="67.0" />
+        <TextField fx:id="addHasWifi" layoutX="167.0" layoutY="360.0" prefHeight="25.0" prefWidth="66.0" />
+        <TextField fx:id="addPrice" layoutX="237.0" layoutY="360.0" prefHeight="25.0" prefWidth="85.0" />
+        <TextField fx:id="addCaseSize" layoutX="333.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
+        <TextField fx:id="addRAMSlots" layoutX="419.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
+        <TextField fx:id="addPCIESlots" layoutX="507.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
+
+        <Text layoutX="91.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="53.0" />
+        <Text layoutX="167.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wifi" wrappingWidth="92.0" />
+        <Text layoutX="237.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" />
+        <Text layoutX="333.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Case Size" />
+        <Text layoutX="419.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RAM Slots" />
+        <Text layoutX="507.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PCIE Slots" />
     </children>
 </AnchorPane>

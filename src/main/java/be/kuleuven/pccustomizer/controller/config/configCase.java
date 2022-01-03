@@ -1,4 +1,4 @@
-package be.kuleuven.pccustomizer.controller;
+package be.kuleuven.pccustomizer.controller.config;
 
 import be.kuleuven.pccustomizer.ProjectMain;
 import javafx.fxml.FXML;
@@ -11,7 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class configPSU {
+public class configCase {
     @FXML
     private Button btnAdd;
     @FXML
@@ -23,7 +23,7 @@ public class configPSU {
 
 
     public void initialize() {
-        btnAdd.setOnAction(e -> showBeheerScherm("Case"));
+        btnAdd.setOnAction(e -> showBeheerScherm("Extra"));
         btnClose.setOnAction(e -> {
             var stage = (Stage) btnClose.getScene().getWindow();
             stage.close();

@@ -1,4 +1,4 @@
-package be.kuleuven.pccustomizer.controller;
+package be.kuleuven.pccustomizer.controller.Beheer;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-public class beheerCPU {
+public class beheerCooling {
     @FXML
     private Button btnDelete;
     @FXML
@@ -42,7 +42,7 @@ public class beheerCPU {
 
         // TODO verwijderen en "echte data" toevoegen!
         int colIndex = 0;
-        for(var colName : new String[]{"name", "price","threads","cores","clock speed","power usage"}) {
+        for(var colName : new String[]{"ID", "Voornaam", "Achternaam", "adres"}) {
             TableColumn<ObservableList<String>, String> col = new TableColumn<>(colName);
             final int finalColIndex = colIndex;
             col.setCellValueFactory(f -> new ReadOnlyObjectWrapper<>(f.getValue().get(finalColIndex)));
@@ -53,7 +53,7 @@ public class beheerCPU {
 
         for(int i = 0; i < 10; i++) {
 
-            tblConfigs.getItems().add(FXCollections.observableArrayList("i7","300","12","8","6 GH","300w"));
+            tblConfigs.getItems().add(FXCollections.observableArrayList("15063","Bob","Baker","groenplaats 15c"));
         }
     }
 
@@ -61,6 +61,8 @@ public class beheerCPU {
     }
 
     private void deleteCurrentRow() {
+        int selectedRow = tblConfigs.getSelectionModel().getSelectedIndex();
+        tblConfigs.getItems().remove(selectedRow);
     }
 
     private void modifyCurrentRow() {

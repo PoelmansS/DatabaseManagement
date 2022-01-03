@@ -1,4 +1,4 @@
-package be.kuleuven.pccustomizer.controller;
+package be.kuleuven.pccustomizer.controller.config;
 
 import be.kuleuven.pccustomizer.ProjectMain;
 import javafx.fxml.FXML;
@@ -11,11 +11,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class configCase {
+public class configGpu {
     @FXML
     private Button btnAdd;
     @FXML
     private Button btnClose;
+    @FXML
+    private Button btnSkip;
     @FXML
     private TableView tblComp;
     @FXML
@@ -23,11 +25,12 @@ public class configCase {
 
 
     public void initialize() {
-        btnAdd.setOnAction(e -> showBeheerScherm("Extra"));
+        btnAdd.setOnAction(e -> showBeheerScherm("Ram"));
         btnClose.setOnAction(e -> {
             var stage = (Stage) btnClose.getScene().getWindow();
             stage.close();
         });
+        btnSkip.setOnAction(e -> showBeheerScherm("Ram"));
     }
 
     private void showBeheerScherm(String id) {

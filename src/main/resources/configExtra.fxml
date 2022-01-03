@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.pccustomizer.controller.configExtra">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.pccustomizer.controller.config.configExtra">
     <children>
         <Button fx:id="btnAdd" layoutX="465.0" layoutY="349.0" mnemonicParsing="false" text="add component" />
         <Button fx:id="btnClose" layoutX="31.0" layoutY="349.0" mnemonicParsing="false" text="end config" />
