@@ -22,9 +22,9 @@
                 <TableColumn fx:id="writeSpeedColumn" prefWidth="100.0" text="Write Speed" />
             </columns>
         </TableView>
-        <Text layoutX="16.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beheer Storage" wrappingWidth="567.21875">
+        <Text layoutX="9.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beheer Storage" wrappingWidth="567.21875">
             <font>
-                <Font name="System Bold Italic" size="13.0" />
+                <Font name="System Bold Italic" size="20.0" />
             </font>
         </Text>
         <Button fx:id="btnAdd" layoutX="16.0" layoutY="360.0" mnemonicParsing="false" text="Voeg Toe" />

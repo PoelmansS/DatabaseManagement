@@ -84,8 +84,8 @@ public class beheerStorage {
         typeColumn.setCellValueFactory(new PropertyValueFactory<Storage, String>("type"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<Storage, Integer>("price"));
         sizeColumn.setCellValueFactory(new PropertyValueFactory<Storage, Integer>("size"));
-        readSpeedColumn.setCellValueFactory(new PropertyValueFactory<Storage, Integer>("read speed"));
-        writeSpeedColumn.setCellValueFactory(new PropertyValueFactory<Storage, Integer>("write speed"));
+        readSpeedColumn.setCellValueFactory(new PropertyValueFactory<Storage, Integer>("readSpeed"));
+        writeSpeedColumn.setCellValueFactory(new PropertyValueFactory<Storage, Integer>("writeSpeed"));
 
         Storage storage1 = new Storage("storage1", "HDD", 50, 5,300,100);
         Storage storage2 = new Storage("storage2", "SSD", 100, 1 , 800, 300);

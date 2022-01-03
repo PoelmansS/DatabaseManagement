@@ -69,7 +69,7 @@ public class beheerGPU {
         nameColumn.setCellValueFactory(new PropertyValueFactory<GPU, String>("name"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("price"));
         VRAMColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("VRAM"));
-        powerUsageColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("power usage"));
+        powerUsageColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("powerUsage"));
 
         GPU GPU1 = new GPU("3060",600,8,200);
         GPU GPU2 = new GPU("3070",1000,16,400);

@@ -56,6 +56,10 @@ public class BeheerHwComponentenController {
     private void showMainScherm(String id) {
 
         var resourceName = id + ".fxml";
+        showMethod(id, resourceName);
+    }
+
+    private void showMethod(String id, String resourceName) {
         try {
             var stage = new Stage();
             var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));
@@ -70,20 +74,9 @@ public class BeheerHwComponentenController {
             throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
         }
     }
+
     private void showBeheerScherm(String id) {
         var resourceName = "_c_beheer" + id + ".fxml";
-        try {
-            var stage = new Stage();
-            var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));
-            var scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Admin " + id);
-            stage.initOwner(ProjectMain.getRootStage());
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.show();
-
-        } catch (Exception e) {
-            throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
-        }
+        showMethod(id, resourceName);
     }
 }

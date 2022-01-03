@@ -83,11 +83,11 @@ public class beheerMotherboard {
 
     private void initTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<MotherBoard, String>("name"));
-        hasWifiColumn.setCellValueFactory(new PropertyValueFactory<MotherBoard, Boolean>("has Wifi"));
+        hasWifiColumn.setCellValueFactory(new PropertyValueFactory<MotherBoard, Boolean>("hasWifi"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<MotherBoard, Integer>("price"));
-        caseSizeColumn.setCellValueFactory(new PropertyValueFactory<MotherBoard, String>("case size"));
-        RAMSlotsColumn.setCellValueFactory(new PropertyValueFactory<MotherBoard, Integer>("RAM slots"));
-        PCIESlotsColumn.setCellValueFactory(new PropertyValueFactory<MotherBoard, Integer>("PCIE slots"));
+        caseSizeColumn.setCellValueFactory(new PropertyValueFactory<MotherBoard, String>("caseSize"));
+        RAMSlotsColumn.setCellValueFactory(new PropertyValueFactory<MotherBoard, Integer>("RAMSlots"));
+        PCIESlotsColumn.setCellValueFactory(new PropertyValueFactory<MotherBoard, Integer>("PCIESlots"));
 
 
         MotherBoard motherBoard1 = new MotherBoard("motherboard1",true,150,"small",2,1);

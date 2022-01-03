@@ -80,8 +80,8 @@ public class beheerCPU {
         priceColumn.setCellValueFactory(new PropertyValueFactory<CPU, Integer>("price"));
         threadsColumn.setCellValueFactory(new PropertyValueFactory<CPU, Integer>("threads"));
         coresColumn.setCellValueFactory(new PropertyValueFactory<CPU, Integer>("cores"));
-        clockSpeedColumn.setCellValueFactory(new PropertyValueFactory<CPU, Integer>("clock speed"));
-        powerUsageColumn.setCellValueFactory(new PropertyValueFactory<CPU, Integer>("power usage"));
+        clockSpeedColumn.setCellValueFactory(new PropertyValueFactory<CPU, Integer>("clockSpeed"));
+        powerUsageColumn.setCellValueFactory(new PropertyValueFactory<CPU, Integer>("powerUsage"));
 
 
 
