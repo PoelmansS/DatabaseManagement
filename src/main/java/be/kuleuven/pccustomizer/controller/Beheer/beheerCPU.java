@@ -56,11 +56,10 @@ public class beheerCPU {
         initTable();
         btnAdd.setOnAction(e -> {
             verifyInput();
-            addNewRow();
         });
         btnModify.setOnAction(e -> {
             verifyOneRowSelected();
-            modifyCurrentRow();
+            verifyModifyInput();
         });
         btnDelete.setOnAction(e -> {
             verifyOneRowSelected();
@@ -95,11 +94,11 @@ public class beheerCPU {
         tableView.setItems(CPUList);
     }
     private void addNewRow() {
-        CPU cpu = new CPU(addName.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addThreads.getText()),
-                Integer.parseInt(addCores.getText()), Integer.parseInt(addClockSpeed.getText()), Integer.parseInt(addPowerUsage.getText()));
-        ObservableList<CPU> CPUList = tableView.getItems();
-        CPUList.add(cpu);
-        tableView.setItems(CPUList);
+            CPU cpu = new CPU(addName.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addThreads.getText()),
+                    Integer.parseInt(addCores.getText()), Integer.parseInt(addClockSpeed.getText()), Integer.parseInt(addPowerUsage.getText()));
+            ObservableList<CPU> CPUList = tableView.getItems();
+            CPUList.add(cpu);
+            tableView.setItems(CPUList);
     }
 
     private void deleteCurrentRow() {
@@ -149,5 +148,11 @@ public class beheerCPU {
     }
 
     private void verifyInput() {
+        try { addNewRow(); }
+        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
+    }
+    private void verifyModifyInput() {
+        try { modifyCurrentRow(); }
+        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
     }
 }

@@ -46,11 +46,10 @@ public class beheerPSU {
         initTable();
         btnAdd.setOnAction(e -> {
             verifyInput();
-            addNewRow();
         });
         btnModify.setOnAction(e -> {
             verifyOneRowSelected();
-            modifyCurrentRow();
+            verifyModifyInput();
         });
         btnDelete.setOnAction(e -> {
             verifyOneRowSelected();
@@ -102,7 +101,7 @@ public class beheerPSU {
             PSU psu = tableView.getSelectionModel().getSelectedItem();
             addName.setText(psu.getName());
             addPrice.setText(String.valueOf(psu.getPrice()));
-            addPrice.setText(String.valueOf(psu.getWattage()));
+            addWattage.setText(String.valueOf(psu.getWattage()));
 
             modifiedPSU = new PSU(psu.getName(), psu.getPrice(),psu.getWattage());
         }
@@ -112,7 +111,7 @@ public class beheerPSU {
 
         modifiedPSU.setName(addName.getText());
         modifiedPSU.setPrice(Integer.parseInt(addPrice.getText()));
-        modifiedPSU.setPrice(Integer.parseInt(addWattage.getText()));
+        modifiedPSU.setWattage(Integer.parseInt(addWattage.getText()));
 
         ObservableList<PSU> PSUList = tableView.getItems();
         PSUList.set(selectedRow,modifiedPSU);
@@ -133,5 +132,11 @@ public class beheerPSU {
         }
     }
     private void verifyInput() {
+        try { addNewRow(); }
+        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
+    }
+    private void verifyModifyInput() {
+        try { modifyCurrentRow(); }
+        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
     }
 }

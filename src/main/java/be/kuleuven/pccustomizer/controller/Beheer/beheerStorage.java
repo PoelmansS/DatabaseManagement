@@ -7,7 +7,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import static java.lang.Integer.valueOf;
 
 public class beheerStorage {
     //buttons
@@ -58,12 +57,11 @@ public class beheerStorage {
     public void initialize() {
         initTable();
         btnAdd.setOnAction(e -> {
-            verifyInput();
-            addNewRow();
+            verifyADDInput();
         });
         btnModify.setOnAction(e -> {
             verifyOneRowSelected();
-            modifyCurrentRow();
+            verifyModifyInput();
         });
         btnDelete.setOnAction(e -> {
             verifyOneRowSelected();
@@ -158,7 +156,12 @@ public class beheerStorage {
         }
     }
 
-    private void verifyInput() {
-
+    private void verifyADDInput() {
+        try { addNewRow(); }
+        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
+    }
+    private void verifyModifyInput() {
+        try { modifyCurrentRow(); }
+        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
     }
 }

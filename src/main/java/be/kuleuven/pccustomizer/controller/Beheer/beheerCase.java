@@ -51,11 +51,10 @@ public class beheerCase {
         initTable();
         btnAdd.setOnAction(e -> {
             verifyInput();
-            addNewRow();
         });
         btnModify.setOnAction(e -> {
             verifyOneRowSelected();
-            modifyCurrentRow();
+            verifyModifyInput();
         });
         btnDelete.setOnAction(e -> {
             verifyOneRowSelected();
@@ -94,8 +93,6 @@ public class beheerCase {
         ObservableList<Case> caseList = tableView.getItems();
         caseList.add(cases);
         tableView.setItems(caseList);
-
-        System.out.println(addName.getText() + " " + addType.getText() +  " " + (addPrice.getText()) + " " +  addSize.getText());
     }
 
     private void deleteCurrentRow() {
@@ -140,8 +137,11 @@ public class beheerCase {
         }
     }
     private void verifyInput() {
-        if(addName.getText() == null || addType.getText() == null || addPrice.getText() == null || addSize.getText() == null) {
-            showAlert("Hela!", "Geen correcte input");
-        }
+        try { addNewRow(); }
+        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
+    }
+    private void verifyModifyInput() {
+        try { modifyCurrentRow(); }
+        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
     }
 }

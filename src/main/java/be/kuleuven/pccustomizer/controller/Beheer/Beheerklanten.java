@@ -1,8 +1,6 @@
-package be.kuleuven.pccustomizer.controller;
+package be.kuleuven.pccustomizer.controller.Beheer;
 
-import be.kuleuven.pccustomizer.controller.Klant;
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.collections.FXCollections;
+import be.kuleuven.pccustomizer.controller.Objects.Klant;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -65,11 +63,10 @@ public class Beheerklanten {
         initTable();
         btnAdd.setOnAction(e -> {
             verifyInput();
-            addNewRow();
         });
         btnModify.setOnAction(e -> {
             verifyOneRowSelected();
-            modifyCurrentRow();
+            verifyModifyInput();
         });
         btnDelete.setOnAction(e -> {
             verifyOneRowSelected();
@@ -94,9 +91,6 @@ public class Beheerklanten {
         phoneColumn.setCellValueFactory(new PropertyValueFactory<Klant, String>("phone"));
         mailColumn.setCellValueFactory(new PropertyValueFactory<Klant, String>("mail"));
 
-
-
-
         Klant klant1 = new Klant(1, "Baker","bob", 3600,"lange straat","245","+32 658 486 259" , "BB@gmail.com");
         Klant klant2 = new Klant(2, "Doe","John", 3700,"kortere straat","24","+32 658 457 542" , "JD@gmail.com");
         Klant klant3 = new Klant(3, "Dover","Ben", 2400,"korte straat","2","+32 659 629 411" , "BD@gmail.com");
@@ -109,9 +103,9 @@ public class Beheerklanten {
     private void addNewRow() {
         Klant cpu = new Klant(Integer.parseInt(addID.getText()),addLastName.getText(),addFirstName.getText(),Integer.parseInt(addPostalCode.getText()),
                 addStreet.getText(),addNR.getText(),addPhone.getText(),addMail.getText());
-        ObservableList<Klant> CPUList = tableView.getItems();
-        CPUList.add(cpu);
-        tableView.setItems(CPUList);
+        ObservableList<Klant> klantList = tableView.getItems();
+        klantList.add(cpu);
+        tableView.setItems(klantList);
     }
 
     private void deleteCurrentRow() {
@@ -168,5 +162,11 @@ public class Beheerklanten {
     }
 
     private void verifyInput() {
+        try { addNewRow(); }
+        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
+    }
+    private void verifyModifyInput() {
+        try { modifyCurrentRow(); }
+        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
     }
 }

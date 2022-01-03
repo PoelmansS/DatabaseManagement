@@ -70,4 +70,8 @@ public class beheerCooling {
             showAlert("Hela!", "Eerst een record selecteren hé.");
         }
     }
+    private void verifyModifyInput() {
+        try { modifyCurrentRow(); }
+        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
+    }
 }

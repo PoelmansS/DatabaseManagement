@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="356.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.pccustomizer.controller.Beheerklanten">
+<AnchorPane prefHeight="356.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.pccustomizer.controller.Beheer.Beheerklanten">
     <children>
       <ImageView fitHeight="429.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -17,11 +17,15 @@
                 <TableColumn fx:id="IDColumn" prefWidth="35.0" text="ID" />
                 <TableColumn fx:id="lastNameColumn" prefWidth="75.0" text="Last Name" />
                 <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="First Name" />
-                <TableColumn fx:id="postalCodeColumn" prefWidth="75.0" text="Postal Code" />
-                <TableColumn fx:id="streetColumn" prefWidth="75.0" text="Street" />
-                <TableColumn fx:id="NRColumn" prefWidth="35.0" text="NR" />
+            <TableColumn fx:id="mailColumn1" prefWidth="58.0" text="adress">
+               <columns>
+                      <TableColumn fx:id="postalCodeColumn" prefWidth="75.0" text="Postal Code" />
+                      <TableColumn fx:id="streetColumn" prefWidth="75.0" text="Street" />
+                      <TableColumn fx:id="NRColumn" prefWidth="35.0" text="NR" />
+               </columns>
+            </TableColumn>
                 <TableColumn fx:id="phoneColumn" prefWidth="75.0" text="Phone" />
-                <TableColumn fx:id="mailColumn" prefWidth="75.0" text="mail" />
+                <TableColumn fx:id="mailColumn" prefWidth="121.0" text="mail" />
             </columns>
         </TableView>
         <Text layoutX="9.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beheer Klanten" wrappingWidth="567.21875">

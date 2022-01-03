@@ -47,11 +47,10 @@ public class beheerExtra {
         initTable();
         btnAdd.setOnAction(e -> {
             verifyInput();
-            addNewRow();
         });
         btnModify.setOnAction(e -> {
             verifyOneRowSelected();
-            modifyCurrentRow();
+            verifyModifyInput();
         });
         btnDelete.setOnAction(e -> {
             verifyOneRowSelected();
@@ -135,6 +134,11 @@ public class beheerExtra {
         }
     }
     private void verifyInput() {
-
+        try { addNewRow(); }
+        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
+    }
+    private void verifyModifyInput() {
+        try { modifyCurrentRow(); }
+        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
     }
 }

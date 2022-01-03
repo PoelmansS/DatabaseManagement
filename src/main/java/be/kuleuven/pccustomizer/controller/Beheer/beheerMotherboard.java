@@ -61,11 +61,10 @@ public class beheerMotherboard {
         initTable();
         btnAdd.setOnAction(e -> {
             verifyInput();
-            addNewRow();
         });
         btnModify.setOnAction(e -> {
             verifyOneRowSelected();
-            modifyCurrentRow();
+            verifyModifyInput();
         });
         btnDelete.setOnAction(e -> {
             verifyOneRowSelected();
@@ -103,13 +102,11 @@ public class beheerMotherboard {
 
 
     private void addNewRow() {
-        MotherBoard motherBoard = new MotherBoard(addName.getText(),Boolean.parseBoolean(addHasWifi.getText()),Integer.parseInt(addPrice.getText()),
-                addCaseSize.getText(),Integer.parseInt(addRAMSlots.getText()),Integer.parseInt(addPCIESlots.getText()));
-        ObservableList<MotherBoard> MotherBoardList = tableView.getItems();
-        MotherBoardList.add(motherBoard);
-        tableView.setItems(MotherBoardList);
-
-
+            MotherBoard motherBoard = new MotherBoard(addName.getText(),Boolean.parseBoolean(addHasWifi.getText()),Integer.parseInt(addPrice.getText()),
+                    addCaseSize.getText(),Integer.parseInt(addRAMSlots.getText()),Integer.parseInt(addPCIESlots.getText()));
+            ObservableList<MotherBoard> MotherBoardList = tableView.getItems();
+            MotherBoardList.add(motherBoard);
+            tableView.setItems(MotherBoardList);
     }
 
     private void deleteCurrentRow() {
@@ -158,7 +155,13 @@ public class beheerMotherboard {
             showAlert("Hela!", "Eerst een record selecteren he.");
         }
     }
-    private void verifyInput() {
 
+    private void verifyInput() {
+        try { addNewRow(); }
+        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
+    }
+    private void verifyModifyInput() {
+        try { modifyCurrentRow(); }
+        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
     }
 }
