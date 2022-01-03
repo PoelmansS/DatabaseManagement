@@ -40,21 +40,10 @@ public class beheerCooling {
         tblConfigs.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         tblConfigs.getColumns().clear();
 
-        // TODO verwijderen en "echte data" toevoegen!
-        int colIndex = 0;
-        for(var colName : new String[]{"ID", "Voornaam", "Achternaam", "adres"}) {
-            TableColumn<ObservableList<String>, String> col = new TableColumn<>(colName);
-            final int finalColIndex = colIndex;
-            col.setCellValueFactory(f -> new ReadOnlyObjectWrapper<>(f.getValue().get(finalColIndex)));
-            tblConfigs.getColumns().add(col);
-            colIndex++;
-        }
 
 
-        for(int i = 0; i < 10; i++) {
 
-            tblConfigs.getItems().add(FXCollections.observableArrayList("15063","Bob","Baker","groenplaats 15c"));
-        }
+
     }
 
     private void addNewRow() {

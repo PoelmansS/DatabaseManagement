@@ -1,25 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="356.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.pccustomizer.controller.Beheerklanten">
     <children>
-        <TableView fx:id="tblConfigs" layoutX="14.0" layoutY="47.0" prefHeight="246.0" prefWidth="567.0">
+      <ImageView fitHeight="429.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../build/resources/main/_c_bg.png" />
+         </image>
+      </ImageView>
+        <TableView fx:id="tableView" layoutX="14.0" layoutY="47.0" prefHeight="246.0" prefWidth="567.0">
             <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="IDColumn" prefWidth="35.0" text="ID" />
+                <TableColumn fx:id="lastNameColumn" prefWidth="75.0" text="Last Name" />
+                <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="First Name" />
+                <TableColumn fx:id="postalCodeColumn" prefWidth="75.0" text="Postal Code" />
+                <TableColumn fx:id="streetColumn" prefWidth="75.0" text="Street" />
+                <TableColumn fx:id="NRColumn" prefWidth="35.0" text="NR" />
+                <TableColumn fx:id="phoneColumn" prefWidth="75.0" text="Phone" />
+                <TableColumn fx:id="mailColumn" prefWidth="75.0" text="mail" />
             </columns>
         </TableView>
-        <Text layoutX="16.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beheer Klanten" wrappingWidth="567.21875">
+        <Text layoutX="9.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beheer Klanten" wrappingWidth="567.21875">
             <font>
-                <Font name="System Bold Italic" size="13.0" />
+                <Font name="System Bold Italic" size="20.0" />
             </font>
         </Text>
-        <Button fx:id="btnAdd" layoutX="16.0" layoutY="304.0" mnemonicParsing="false" text="Voeg klant Toe" />
-        <Button fx:id="btnModify" layoutX="120.0" layoutY="304.0" mnemonicParsing="false" text="Bewerk" />
+        <Button fx:id="btnAdd" layoutX="16.0" layoutY="360.0" mnemonicParsing="false" text="Voeg Toe" />
+        <Button fx:id="btnModify" layoutX="64.0" layoutY="304.0" mnemonicParsing="false" text="Modify" />
         <Button fx:id="btnClose" layoutX="520.0" layoutY="304.0" mnemonicParsing="false" text="Sluiten" />
         <Button fx:id="btnDelete" layoutX="431.0" layoutY="304.0" mnemonicParsing="false" text="Verwijder" />
+        <Button fx:id="btnLoad" layoutX="16.0" layoutY="304.0" mnemonicParsing="false" text="Load" />
+
+        <TextField fx:id="addID" layoutX="91.0" layoutY="360.0" prefHeight="25.0" prefWidth="42.0" />
+        <TextField fx:id="addLastName" layoutX="133.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
+        <TextField fx:id="addFirstName" layoutX="206.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
+        <TextField fx:id="addPostalCode" layoutX="284.0" layoutY="360.0" prefHeight="25.0" prefWidth="63.0" />
+        <TextField fx:id="addStreet" layoutX="347.0" layoutY="360.0" prefHeight="25.0" prefWidth="57.0" />
+        <TextField fx:id="addNR" layoutX="404.0" layoutY="360.0" prefHeight="25.0" prefWidth="42.0" />
+        <TextField fx:id="addPhone" layoutX="446.0" layoutY="360.0" prefHeight="25.0" prefWidth="63.0" />
+        <TextField fx:id="addMail" layoutX="509.0" layoutY="360.0" prefHeight="25.0" prefWidth="84.0" />
+
+        <Text layoutX="91.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="53.0" />
+        <Text layoutX="133.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" wrappingWidth="92.0" />
+        <Text layoutX="199.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" />
+        <Text layoutX="282.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Postal Code" />
+        <Text layoutX="355.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Street" />
+        <Text layoutX="404.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NR" />
+        <Text layoutX="447.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone" />
+        <Text layoutX="509.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mail" />
+
     </children>
 </AnchorPane>

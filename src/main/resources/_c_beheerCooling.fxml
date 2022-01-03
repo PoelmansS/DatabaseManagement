@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="be.kuleuven.pccustomizer.controller.Beheer.beheerCooling"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.pccustomizer.controller.Beheer.beheerCooling">
     <children>
         <ImageView fitHeight="420.0" fitWidth="608.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -35,5 +27,10 @@
         <Button fx:id="btnModify" layoutX="120.0" layoutY="304.0" mnemonicParsing="false" text="Bewerk" />
         <Button fx:id="btnClose" layoutX="520.0" layoutY="304.0" mnemonicParsing="false" text="Sluiten" />
         <Button fx:id="btnDelete" layoutX="431.0" layoutY="304.0" mnemonicParsing="false" text="Verwijder" />
+      <Text layoutX="60.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNDER CONSTRUCTION" underline="true" wrappingWidth="317.13671875">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Text>
     </children>
 </AnchorPane>
