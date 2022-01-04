@@ -19,12 +19,15 @@ public class ProjectMainController {
     private Button btnConfigAttaches;
     @FXML
     private Button btnKlanten;
+    @FXML
+    private Button btnCart;
 
     public void initialize() {
         btnHwComponenten.setOnAction(e -> showBeheerScherm("hwcomponenten"));
         btnComputerConfigs.setOnAction(e -> showBeheerScherm("computerconfigs"));
         btnConfigAttaches.setOnAction(e -> showConfigScherm("Cpu"));
         btnKlanten.setOnAction(e -> showBeheerScherm("klanten"));
+        btnCart.setOnAction(e -> showBeheerScherm("cart"));
     }
 
     private void showBeheerScherm(String id) {
