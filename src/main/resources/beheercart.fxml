@@ -10,7 +10,7 @@
     <children>
         <ImageView fitHeight="432.0" fitWidth="905.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../build/resources/main/_cart_bg.png" />
+                <Image url="@../../../src/main/resources/_cart_bg.png" />
             </image>
         </ImageView>
         <TableView fx:id="tableView" layoutX="14.0" layoutY="47.0" prefHeight="246.0" prefWidth="862.0">

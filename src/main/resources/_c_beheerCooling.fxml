@@ -9,7 +9,7 @@
     <children>
         <ImageView fitHeight="420.0" fitWidth="608.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../build/resources/main/_c_bg.png" />
+                <Image url="@../../../src/main/resources/_c_bg.png" />
             </image>
         </ImageView>
         <TableView fx:id="tblConfigs" layoutX="14.0" layoutY="47.0" prefHeight="246.0" prefWidth="567.0">

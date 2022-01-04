@@ -9,7 +9,7 @@
    <children>
       <ImageView fitHeight="407.0" fitWidth="550.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../build/resources/main/_main_bg.png" />
+            <Image url="@../../../src/main/resources/_main_bg.png" />
          </image>
       </ImageView>
       <Text layoutX="115.0" layoutY="40.0" text="PC Builder Admin" textAlignment="CENTER" wrappingWidth="320.03125">
@@ -24,7 +24,7 @@
       <Button fx:id="btnCart" layoutX="487.0" layoutY="14.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="37.0">
          <graphic>
             <ImageView fitHeight="32.0" fitWidth="33.0">
-               <Image url="@../../../build/resources/main/_icon_cart_.png" />
+               <Image url="@../../../src/main/resources/_icon_cart_.png" />
             </ImageView>
          </graphic>
       </Button>
