@@ -89,7 +89,7 @@ public class beheerCase {
 
 
     private void addNewRow() {
-        Case cases = new Case(addName.getText(),addType.getText(),valueOf(addPrice.getText()),addSize.getText());
+        Case cases = new Case(addName.getText(),addType.getText(), Integer.parseInt(addPrice.getText()),addSize.getText());
         ObservableList<Case> caseList = tableView.getItems();
         caseList.add(cases);
         tableView.setItems(caseList);

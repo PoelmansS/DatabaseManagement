@@ -6,7 +6,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import static java.lang.Integer.valueOf;
 
 public class beheerRAM {
     //buttons

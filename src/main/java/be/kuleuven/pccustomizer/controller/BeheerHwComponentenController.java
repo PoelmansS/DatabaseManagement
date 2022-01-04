@@ -9,6 +9,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 import static com.sun.javafx.application.PlatformImpl.exit;
 
 public class BeheerHwComponentenController {
@@ -62,7 +64,7 @@ public class BeheerHwComponentenController {
     private void showMethod(String id, String resourceName) {
         try {
             var stage = new Stage();
-            var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));
+            var root = (AnchorPane) FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource(resourceName)));
             var scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("Admin " + id);

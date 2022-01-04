@@ -9,6 +9,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 public class ProjectMainController {
 
     @FXML
@@ -34,7 +36,7 @@ public class ProjectMainController {
         var resourceName = "beheer" + id + ".fxml";
         try {
             var stage = new Stage();
-            var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));
+            var root = (AnchorPane) FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource(resourceName)));
             var scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("Admin " + id);
@@ -50,7 +52,7 @@ public class ProjectMainController {
         var resourceName = "config" + id + ".fxml";
         try {
             var stage = new Stage();
-            var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));
+            var root = (AnchorPane) FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource(resourceName)));
             var scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("Admin " + id);

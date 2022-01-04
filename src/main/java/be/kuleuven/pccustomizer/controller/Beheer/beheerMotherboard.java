@@ -1,14 +1,11 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
 import be.kuleuven.pccustomizer.controller.Objects.MotherBoard;
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import static java.lang.Integer.valueOf;
 
 public class beheerMotherboard {
     //buttons

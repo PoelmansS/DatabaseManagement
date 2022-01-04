@@ -1,4 +1,5 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
+import be.kuleuven.pccustomizer.controller.Objects.Cooling;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +17,7 @@ public class beheerCooling {
     @FXML
     private Button btnClose;
     @FXML
-    private TableView tblConfigs;
+    private TableView<Cooling> tblConfigs;
 
     public void initialize() {
         initTable();

@@ -6,7 +6,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import static java.lang.Integer.valueOf;
 
 public class beheerExtra {
     //buttons
@@ -85,7 +84,7 @@ public class beheerExtra {
 
 
     private void addNewRow() {
-        Extra extra = new Extra(addName.getText(),addType.getText(),valueOf(addPrice.getText()));
+        Extra extra = new Extra(addName.getText(),addType.getText(), Integer.parseInt(addPrice.getText()));
         ObservableList<Extra> extraList = tableView.getItems();
         extraList.add(extra);
         tableView.setItems(extraList);
