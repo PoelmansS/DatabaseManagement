@@ -16,6 +16,7 @@ public class BeheerAttachesController {
 
     @FXML
     private TableView tblTips;
+    
 
     public void initialize() {
         initTable();
