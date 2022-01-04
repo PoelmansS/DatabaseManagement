@@ -8,21 +8,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 
-public class beheerStorage {
-    //buttons
+public class beheerCommonStorage extends _BeheerCommon {
     Storage modifiedCase;
-    int selectedRow;
 
-    @FXML
-    private Button btnDelete;
-    @FXML
-    private Button btnAdd;
-    @FXML
-    private Button btnModify;
-    @FXML
-    private Button btnClose;
-    @FXML
-    private Button btnLoad;
     //table
     @FXML
     private TableView<Storage> tableView;
@@ -53,19 +41,18 @@ public class beheerStorage {
     @FXML
     private TableColumn<Storage, Integer> writeSpeedColumn;
 
-
     public void initialize() {
         initTable();
         btnAdd.setOnAction(e -> {
-            verifyADDInput();
+            verifyInput();
         });
         btnModify.setOnAction(e -> {
-            verifyOneRowSelected();
+            verifyOneRowSelected(tableView);
             verifyModifyInput();
         });
         btnDelete.setOnAction(e -> {
-            verifyOneRowSelected();
-            deleteCurrentRow();
+            verifyOneRowSelected(tableView);
+            deleteCurrentRow(tableView);
         });
         btnLoad.setOnAction(e -> {
             LoadCurrentRow();
@@ -74,10 +61,9 @@ public class beheerStorage {
             var stage = (Stage) btnClose.getScene().getWindow();
             stage.close();
         });
-
     }
 
-    private void initTable() {
+    public void initTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<Storage, String>("name"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Storage, String>("type"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<Storage, Integer>("price"));
@@ -97,7 +83,7 @@ public class beheerStorage {
     }
 
 
-    private void addNewRow() {
+    public void addNewRow() {
         Storage cases = new Storage(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()),
                 Integer.parseInt(addSize.getText()), Integer.parseInt(addReadSpeed.getText()), Integer.parseInt(addWriteSpeed.getText()));
         ObservableList<Storage> storageList = tableView.getItems();
@@ -107,12 +93,7 @@ public class beheerStorage {
 
     }
 
-    private void deleteCurrentRow() {
-        selectedRow = tableView.getSelectionModel().getSelectedIndex();
-        tableView.getItems().remove(selectedRow);
-    }
-
-    private void LoadCurrentRow() {
+    public void LoadCurrentRow() {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             Storage storage = tableView.getSelectionModel().getSelectedItem();
             addName.setText(storage.getName());
@@ -126,7 +107,7 @@ public class beheerStorage {
         }
     }
 
-    private void modifyCurrentRow() {
+    public void modifyCurrentRow() {
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
 
         modifiedCase.setName(addName.getText());
@@ -140,28 +121,5 @@ public class beheerStorage {
         ObservableList<Storage> storageList = tableView.getItems();
         storageList.set(selectedRow, modifiedCase);
         tableView.setItems(storageList);
-    }
-
-    public void showAlert(String title, String content) {
-        var alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(title);
-        alert.setHeaderText(title);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
-
-    private void verifyOneRowSelected() {
-        if (tableView.getSelectionModel().getSelectedCells().size() == 0) {
-            showAlert("Hela!", "Eerst een record selecteren he.");
-        }
-    }
-
-    private void verifyADDInput() {
-        try { addNewRow(); }
-        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
-    }
-    private void verifyModifyInput() {
-        try { modifyCurrentRow(); }
-        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
     }
 }

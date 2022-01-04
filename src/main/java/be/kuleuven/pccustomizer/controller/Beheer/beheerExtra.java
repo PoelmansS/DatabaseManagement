@@ -7,21 +7,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 
-public class beheerExtra {
-    //buttons
+public class beheerExtra extends _BeheerCommon {
     Extra modifiedExtra;
-    int selectedRow;
 
-    @FXML
-    private Button btnDelete;
-    @FXML
-    private Button btnAdd;
-    @FXML
-    private Button btnModify;
-    @FXML
-    private Button btnClose;
-    @FXML
-    private Button btnLoad;
     //table
     @FXML
     private TableView<Extra> tableView;
@@ -40,20 +28,18 @@ public class beheerExtra {
     @FXML
     private TableColumn<Extra, Integer> priceColumn;
 
-
-
     public void initialize() {
         initTable();
         btnAdd.setOnAction(e -> {
             verifyInput();
         });
         btnModify.setOnAction(e -> {
-            verifyOneRowSelected();
+            verifyOneRowSelected(tableView);
             verifyModifyInput();
         });
         btnDelete.setOnAction(e -> {
-            verifyOneRowSelected();
-            deleteCurrentRow();
+            verifyOneRowSelected(tableView);
+            deleteCurrentRow(tableView);
         });
         btnLoad.setOnAction(e -> {
             LoadCurrentRow();
@@ -62,10 +48,9 @@ public class beheerExtra {
             var stage = (Stage) btnClose.getScene().getWindow();
             stage.close();
         });
-
     }
 
-    private void initTable() {
+    public void initTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<Extra, String>("name"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Extra, String>("type"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<Extra, Integer>("price"));
@@ -83,7 +68,7 @@ public class beheerExtra {
     }
 
 
-    private void addNewRow() {
+    public void addNewRow() {
         Extra extra = new Extra(addName.getText(),addType.getText(), Integer.parseInt(addPrice.getText()));
         ObservableList<Extra> extraList = tableView.getItems();
         extraList.add(extra);
@@ -91,12 +76,7 @@ public class beheerExtra {
 
     }
 
-    private void deleteCurrentRow() {
-        selectedRow = tableView.getSelectionModel().getSelectedIndex();
-        tableView.getItems().remove(selectedRow);
-    }
-
-    private void LoadCurrentRow() {
+    public void LoadCurrentRow() {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             Extra extra = tableView.getSelectionModel().getSelectedItem();
             addName.setText(extra.getName());
@@ -106,7 +86,7 @@ public class beheerExtra {
             modifiedExtra = new Extra(extra.getName(), extra.getType(),extra.getPrice());
         }
     }
-    private void modifyCurrentRow(){
+    public void modifyCurrentRow(){
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
 
         modifiedExtra.setName(addName.getText());
@@ -117,27 +97,5 @@ public class beheerExtra {
         ObservableList<Extra> extraList = tableView.getItems();
         extraList.set(selectedRow,modifiedExtra);
         tableView.setItems(extraList);
-    }
-
-    public void showAlert(String title, String content) {
-        var alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(title);
-        alert.setHeaderText(title);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
-
-    private void verifyOneRowSelected() {
-        if(tableView.getSelectionModel().getSelectedCells().size() == 0) {
-            showAlert("Hela!", "Eerst een record selecteren he.");
-        }
-    }
-    private void verifyInput() {
-        try { addNewRow(); }
-        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
-    }
-    private void verifyModifyInput() {
-        try { modifyCurrentRow(); }
-        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
     }
 }

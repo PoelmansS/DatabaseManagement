@@ -1,78 +1,44 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
 import be.kuleuven.pccustomizer.controller.Objects.Cooling;
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 
-public class beheerCooling {
-    @FXML
-    private Button btnDelete;
-    @FXML
-    private Button btnAdd;
-    @FXML
-    private Button btnModify;
-    @FXML
-    private Button btnClose;
-    @FXML
-    private TableView<Cooling> tblConfigs;
+public class beheerCooling extends _BeheerCommon {
+
+    private TableView<Cooling> tableView;
 
     public void initialize() {
-        initTable();
-        btnAdd.setOnAction(e -> addNewRow());
+      /*  initTable();
+        btnAdd.setOnAction(e -> {
+            verifyInput();
+        });
         btnModify.setOnAction(e -> {
-            verifyOneRowSelected();
-            modifyCurrentRow();
+            verifyOneRowSelected(tableView);
+            verifyModifyInput();
         });
         btnDelete.setOnAction(e -> {
-            verifyOneRowSelected();
-            deleteCurrentRow();
+            verifyOneRowSelected(tableView);
+            deleteCurrentRow(tableView);
         });
-
+        //btnLoad.setOnAction(e -> {
+            //LoadCurrentRow();
+        //});
         btnClose.setOnAction(e -> {
             var stage = (Stage) btnClose.getScene().getWindow();
             stage.close();
         });
+
+       */
     }
 
-    private void initTable() {
-        tblConfigs.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        tblConfigs.getColumns().clear();
-
-
-
-
-
+    public void initTable() {
+        tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        tableView.getColumns().clear();
     }
 
-    private void addNewRow() {
+    public void addNewRow() {
     }
 
-    private void deleteCurrentRow() {
-        int selectedRow = tblConfigs.getSelectionModel().getSelectedIndex();
-        tblConfigs.getItems().remove(selectedRow);
-    }
 
-    private void modifyCurrentRow() {
-    }
-
-    public void showAlert(String title, String content) {
-        var alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(title);
-        alert.setHeaderText(title);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
-
-    private void verifyOneRowSelected() {
-        if(tblConfigs.getSelectionModel().getSelectedCells().size() == 0) {
-            showAlert("Hela!", "Eerst een record selecteren hé.");
-        }
-    }
-    private void verifyModifyInput() {
-        try { modifyCurrentRow(); }
-        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
+    public void modifyCurrentRow() {
     }
 }

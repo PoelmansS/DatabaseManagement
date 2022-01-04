@@ -6,20 +6,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class beheerGPU {
+public class beheerGPU extends _BeheerCommon {
     GPU modifiedGPU;
-    int selectedRow;
 
-    @FXML
-    private Button btnDelete;
-    @FXML
-    private Button btnAdd;
-    @FXML
-    private Button btnModify;
-    @FXML
-    private Button btnClose;
-    @FXML
-    private Button btnLoad;
     //table
     @FXML
     private TableView<GPU> tableView;
@@ -48,12 +37,12 @@ public class beheerGPU {
             verifyInput();
         });
         btnModify.setOnAction(e -> {
-            verifyOneRowSelected();
+            verifyOneRowSelected(tableView);
             verifyModifyInput();
         });
         btnDelete.setOnAction(e -> {
-            verifyOneRowSelected();
-            deleteCurrentRow();
+            verifyOneRowSelected(tableView);
+            deleteCurrentRow(tableView);
         });
         btnLoad.setOnAction(e -> {
             LoadCurrentRow();
@@ -64,7 +53,7 @@ public class beheerGPU {
         });
     }
 
-    private void initTable() {
+    public void initTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<GPU, String>("name"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("price"));
         VRAMColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("VRAM"));
@@ -79,7 +68,7 @@ public class beheerGPU {
         GPUList.add(GPU3);
         tableView.setItems(GPUList);
     }
-    private void addNewRow() {
+    public void addNewRow() {
         GPU gpu = new GPU(addName.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addVRAM.getText()),
                  Integer.parseInt(addPowerUsage.getText()));
         ObservableList<GPU> GPUList = tableView.getItems();
@@ -87,12 +76,7 @@ public class beheerGPU {
         tableView.setItems(GPUList);
     }
 
-    private void deleteCurrentRow() {
-        selectedRow = tableView.getSelectionModel().getSelectedIndex();
-        tableView.getItems().remove(selectedRow);
-    }
-
-    private void LoadCurrentRow() {
+    public void LoadCurrentRow() {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             GPU gpu = tableView.getSelectionModel().getSelectedItem();
             addName.setText(gpu.getName());
@@ -102,7 +86,7 @@ public class beheerGPU {
             modifiedGPU = new GPU(gpu.getName(),gpu.getPrice(),gpu.getVRAM(),gpu.getPowerUsage());
         }
     }
-    private void modifyCurrentRow(){
+    public void modifyCurrentRow(){
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
 
         modifiedGPU.setName(addName.getText());
@@ -115,26 +99,6 @@ public class beheerGPU {
         tableView.setItems(GPUList);
     }
 
-    public void showAlert(String title, String content) {
-        var alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(title);
-        alert.setHeaderText(title);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
 
-    private void verifyOneRowSelected() {
-        if(tableView.getSelectionModel().getSelectedCells().size() == 0) {
-            showAlert("Hela!", "Eerst een record selecteren hé.");
-        }
-    }
 
-    private void verifyInput() {
-        try { addNewRow(); }
-        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
-    }
-    private void verifyModifyInput() {
-        try { modifyCurrentRow(); }
-        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
-    }
 }

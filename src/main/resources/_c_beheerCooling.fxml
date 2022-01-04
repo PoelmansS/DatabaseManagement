@@ -23,10 +23,11 @@
                 <Font name="System Bold Italic" size="20.0" />
             </font>
         </Text>
-        <Button fx:id="btnAdd" layoutX="16.0" layoutY="304.0" mnemonicParsing="false" text="Voeg Toe" />
-        <Button fx:id="btnModify" layoutX="120.0" layoutY="304.0" mnemonicParsing="false" text="Bewerk" />
+        <Button fx:id="btnAdd" layoutX="16.0" layoutY="360.0" mnemonicParsing="false" text="Voeg Toe" />
+        <Button fx:id="btnModify" layoutX="64.0" layoutY="304.0" mnemonicParsing="false" text="Modify" />
         <Button fx:id="btnClose" layoutX="520.0" layoutY="304.0" mnemonicParsing="false" text="Sluiten" />
         <Button fx:id="btnDelete" layoutX="431.0" layoutY="304.0" mnemonicParsing="false" text="Verwijder" />
+        <Button fx:id="btnLoad" layoutX="16.0" layoutY="304.0" mnemonicParsing="false" text="Load" />
       <Text layoutX="60.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNDER CONSTRUCTION" underline="true" wrappingWidth="317.13671875">
          <font>
             <Font size="21.0" />

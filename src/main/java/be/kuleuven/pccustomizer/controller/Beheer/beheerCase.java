@@ -9,21 +9,9 @@ import javafx.stage.Stage;
 import static java.lang.Integer.valueOf;
 
 
-public class beheerCase {
-    //buttons
+public class beheerCase extends _BeheerCommon {
     Case modifiedCase;
-    int selectedRow;
 
-    @FXML
-    private Button btnDelete;
-    @FXML
-    private Button btnAdd;
-    @FXML
-    private Button btnModify;
-    @FXML
-    private Button btnClose;
-    @FXML
-    private Button btnLoad;
     //table
     @FXML
     private TableView<Case> tableView;
@@ -46,19 +34,18 @@ public class beheerCase {
     @FXML
     private TableColumn<Case, String> sizeColumn;
 
-
     public void initialize() {
         initTable();
         btnAdd.setOnAction(e -> {
             verifyInput();
         });
         btnModify.setOnAction(e -> {
-            verifyOneRowSelected();
+            verifyOneRowSelected(tableView);
             verifyModifyInput();
         });
         btnDelete.setOnAction(e -> {
-            verifyOneRowSelected();
-            deleteCurrentRow();
+            verifyOneRowSelected(tableView);
+            deleteCurrentRow(tableView);
         });
         btnLoad.setOnAction(e -> {
             LoadCurrentRow();
@@ -67,10 +54,9 @@ public class beheerCase {
             var stage = (Stage) btnClose.getScene().getWindow();
             stage.close();
         });
-
     }
 
-    private void initTable() {
+    public void initTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<Case, String>("name"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Case, String>("type"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<Case, Integer>("price"));
@@ -88,19 +74,14 @@ public class beheerCase {
     }
 
 
-    private void addNewRow() {
+    public void addNewRow() {
         Case cases = new Case(addName.getText(),addType.getText(), Integer.parseInt(addPrice.getText()),addSize.getText());
         ObservableList<Case> caseList = tableView.getItems();
         caseList.add(cases);
         tableView.setItems(caseList);
     }
 
-    private void deleteCurrentRow() {
-        selectedRow = tableView.getSelectionModel().getSelectedIndex();
-        tableView.getItems().remove(selectedRow);
-    }
-
-    private void LoadCurrentRow() {
+    public void LoadCurrentRow() {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             Case cases = tableView.getSelectionModel().getSelectedItem();
             addName.setText(cases.getName());
@@ -110,7 +91,7 @@ public class beheerCase {
             modifiedCase = new Case(cases.getName(), cases.getType(),cases.getPrice(),cases.getSize());
         }
     }
-    private void modifyCurrentRow(){
+    public void modifyCurrentRow(){
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
 
         modifiedCase.setName(addName.getText());
@@ -123,25 +104,6 @@ public class beheerCase {
         tableView.setItems(caseList);
     }
 
-    public void showAlert(String title, String content) {
-        var alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(title);
-        alert.setHeaderText(title);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
 
-    private void verifyOneRowSelected() {
-        if(tableView.getSelectionModel().getSelectedCells().size() == 0) {
-            showAlert("Hela!", "Eerst een record selecteren he.");
-        }
-    }
-    private void verifyInput() {
-        try { addNewRow(); }
-        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
-    }
-    private void verifyModifyInput() {
-        try { modifyCurrentRow(); }
-        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
-    }
+
 }

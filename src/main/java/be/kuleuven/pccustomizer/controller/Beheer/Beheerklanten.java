@@ -7,20 +7,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class Beheerklanten {
+public class Beheerklanten extends _BeheerCommon {
     Klant modifiedKlant;
-    int selectedRow;
 
-    @FXML
-    private Button btnDelete;
-    @FXML
-    private Button btnAdd;
-    @FXML
-    private Button btnModify;
-    @FXML
-    private Button btnClose;
-    @FXML
-    private Button btnLoad;
     //table
     @FXML
     private TableView<Klant> tableView;
@@ -65,12 +54,12 @@ public class Beheerklanten {
             verifyInput();
         });
         btnModify.setOnAction(e -> {
-            verifyOneRowSelected();
+            verifyOneRowSelected(tableView);
             verifyModifyInput();
         });
         btnDelete.setOnAction(e -> {
-            verifyOneRowSelected();
-            deleteCurrentRow();
+            verifyOneRowSelected(tableView);
+            deleteCurrentRow(tableView);
         });
         btnLoad.setOnAction(e -> {
             LoadCurrentRow();
@@ -81,7 +70,7 @@ public class Beheerklanten {
         });
     }
 
-    private void initTable() {
+    public void initTable() {
         IDColumn.setCellValueFactory(new PropertyValueFactory<Klant, Integer>("ID"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<Klant, String>("lastName"));
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<Klant, String>("firstName"));
@@ -100,7 +89,7 @@ public class Beheerklanten {
         klantList.add(klant3);
         tableView.setItems(klantList);
     }
-    private void addNewRow() {
+    public void addNewRow() {
         Klant cpu = new Klant(Integer.parseInt(addID.getText()),addLastName.getText(),addFirstName.getText(),Integer.parseInt(addPostalCode.getText()),
                 addStreet.getText(),addNR.getText(),addPhone.getText(),addMail.getText());
         ObservableList<Klant> klantList = tableView.getItems();
@@ -108,12 +97,7 @@ public class Beheerklanten {
         tableView.setItems(klantList);
     }
 
-    private void deleteCurrentRow() {
-        selectedRow = tableView.getSelectionModel().getSelectedIndex();
-        tableView.getItems().remove(selectedRow);
-    }
-
-    private void LoadCurrentRow() {
+    public void LoadCurrentRow() {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             Klant klant = tableView.getSelectionModel().getSelectedItem();
 
@@ -130,7 +114,7 @@ public class Beheerklanten {
                     klant.getStreet(),klant.getNumber(),klant.getPhone(),klant.getMail());
         }
     }
-    private void modifyCurrentRow(){
+    public void modifyCurrentRow(){
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
 
         modifiedKlant.setID(Integer.parseInt(addID.getText()));
@@ -147,26 +131,5 @@ public class Beheerklanten {
         tableView.setItems(klantList);
     }
 
-    public void showAlert(String title, String content) {
-        var alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(title);
-        alert.setHeaderText(title);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
 
-    private void verifyOneRowSelected() {
-        if(tableView.getSelectionModel().getSelectedCells().size() == 0) {
-            showAlert("Hela!", "Eerst een record selecteren hé.");
-        }
-    }
-
-    private void verifyInput() {
-        try { addNewRow(); }
-        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
-    }
-    private void verifyModifyInput() {
-        try { modifyCurrentRow(); }
-        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
-    }
 }

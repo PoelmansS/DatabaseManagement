@@ -7,20 +7,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 
-public class beheerCPU {
+public class beheerCPU extends _BeheerCommon {
     CPU modifiedCPU;
-    int selectedRow;
 
-    @FXML
-    private Button btnDelete;
-    @FXML
-    private Button btnAdd;
-    @FXML
-    private Button btnModify;
-    @FXML
-    private Button btnClose;
-    @FXML
-    private Button btnLoad;
     //table
     @FXML
     private TableView<CPU> tableView;
@@ -57,12 +46,12 @@ public class beheerCPU {
             verifyInput();
         });
         btnModify.setOnAction(e -> {
-            verifyOneRowSelected();
+            verifyOneRowSelected(tableView);
             verifyModifyInput();
         });
         btnDelete.setOnAction(e -> {
-            verifyOneRowSelected();
-            deleteCurrentRow();
+            verifyOneRowSelected(tableView);
+            deleteCurrentRow(tableView);
         });
         btnLoad.setOnAction(e -> {
             LoadCurrentRow();
@@ -72,8 +61,7 @@ public class beheerCPU {
             stage.close();
         });
     }
-
-    private void initTable() {
+    public void initTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<CPU, String>("name"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<CPU, Integer>("price"));
         threadsColumn.setCellValueFactory(new PropertyValueFactory<CPU, Integer>("threads"));
@@ -92,7 +80,7 @@ public class beheerCPU {
         CPUList.add(CPU3);
         tableView.setItems(CPUList);
     }
-    private void addNewRow() {
+    public void addNewRow() {
             CPU cpu = new CPU(addName.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addThreads.getText()),
                     Integer.parseInt(addCores.getText()), Integer.parseInt(addClockSpeed.getText()), Integer.parseInt(addPowerUsage.getText()));
             ObservableList<CPU> CPUList = tableView.getItems();
@@ -100,12 +88,8 @@ public class beheerCPU {
             tableView.setItems(CPUList);
     }
 
-    private void deleteCurrentRow() {
-        selectedRow = tableView.getSelectionModel().getSelectedIndex();
-        tableView.getItems().remove(selectedRow);
-    }
 
-    private void LoadCurrentRow() {
+    public void LoadCurrentRow() {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             CPU cpu = tableView.getSelectionModel().getSelectedItem();
             addName.setText(cpu.getName());
@@ -117,7 +101,7 @@ public class beheerCPU {
             modifiedCPU = new CPU(cpu.getName(),cpu.getPrice(),cpu.getThreads(),cpu.getCores(),cpu.getClockSpeed(),cpu.getPowerUsage());
         }
     }
-    private void modifyCurrentRow(){
+    public void modifyCurrentRow(){
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
 
         modifiedCPU.setName(addName.getText());
@@ -132,26 +116,9 @@ public class beheerCPU {
         tableView.setItems(CPUList);
     }
 
-    public void showAlert(String title, String content) {
-        var alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(title);
-        alert.setHeaderText(title);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
 
-    private void verifyOneRowSelected() {
-        if(tableView.getSelectionModel().getSelectedCells().size() == 0) {
-            showAlert("Hela!", "Eerst een record selecteren hé.");
-        }
-    }
 
-    private void verifyInput() {
-        try { addNewRow(); }
-        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
-    }
-    private void verifyModifyInput() {
-        try { modifyCurrentRow(); }
-        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
-    }
+
+
+
 }

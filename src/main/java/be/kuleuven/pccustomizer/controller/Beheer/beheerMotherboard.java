@@ -7,21 +7,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 
-public class beheerMotherboard {
-    //buttons
+public class beheerMotherboard extends _BeheerCommon {
     MotherBoard modifiedMotherboard;
-    int selectedRow;
 
-    @FXML
-    private Button btnDelete;
-    @FXML
-    private Button btnAdd;
-    @FXML
-    private Button btnModify;
-    @FXML
-    private Button btnClose;
-    @FXML
-    private Button btnLoad;
     //table
     @FXML
     private TableView<MotherBoard> tableView;
@@ -52,20 +40,18 @@ public class beheerMotherboard {
     @FXML
     private TableColumn<MotherBoard, Integer> PCIESlotsColumn;
 
-
-
     public void initialize() {
         initTable();
         btnAdd.setOnAction(e -> {
             verifyInput();
         });
         btnModify.setOnAction(e -> {
-            verifyOneRowSelected();
+            verifyOneRowSelected(tableView);
             verifyModifyInput();
         });
         btnDelete.setOnAction(e -> {
-            verifyOneRowSelected();
-            deleteCurrentRow();
+            verifyOneRowSelected(tableView);
+            deleteCurrentRow(tableView);
         });
         btnLoad.setOnAction(e -> {
             LoadCurrentRow();
@@ -74,10 +60,9 @@ public class beheerMotherboard {
             var stage = (Stage) btnClose.getScene().getWindow();
             stage.close();
         });
-
     }
 
-    private void initTable() {
+    public void initTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<MotherBoard, String>("name"));
         hasWifiColumn.setCellValueFactory(new PropertyValueFactory<MotherBoard, Boolean>("hasWifi"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<MotherBoard, Integer>("price"));
@@ -98,7 +83,7 @@ public class beheerMotherboard {
     }
 
 
-    private void addNewRow() {
+    public void addNewRow() {
             MotherBoard motherBoard = new MotherBoard(addName.getText(),Boolean.parseBoolean(addHasWifi.getText()),Integer.parseInt(addPrice.getText()),
                     addCaseSize.getText(),Integer.parseInt(addRAMSlots.getText()),Integer.parseInt(addPCIESlots.getText()));
             ObservableList<MotherBoard> MotherBoardList = tableView.getItems();
@@ -106,12 +91,7 @@ public class beheerMotherboard {
             tableView.setItems(MotherBoardList);
     }
 
-    private void deleteCurrentRow() {
-        selectedRow = tableView.getSelectionModel().getSelectedIndex();
-        tableView.getItems().remove(selectedRow);
-    }
-
-    private void LoadCurrentRow() {
+    public void LoadCurrentRow() {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             MotherBoard motherBoard = tableView.getSelectionModel().getSelectedItem();
             addName.setText(motherBoard.getName());
@@ -124,7 +104,7 @@ public class beheerMotherboard {
                     motherBoard.getCaseSize(), motherBoard.getRAMSlots(),motherBoard.getPCIESlots());
         }
     }
-    private void modifyCurrentRow(){
+    public void modifyCurrentRow(){
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
 
         modifiedMotherboard.setName(addName.getText());
@@ -139,26 +119,6 @@ public class beheerMotherboard {
         tableView.setItems(MotherBoardList);
     }
 
-    public void showAlert(String title, String content) {
-        var alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(title);
-        alert.setHeaderText(title);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
 
-    private void verifyOneRowSelected() {
-        if(tableView.getSelectionModel().getSelectedCells().size() == 0) {
-            showAlert("Hela!", "Eerst een record selecteren he.");
-        }
-    }
 
-    private void verifyInput() {
-        try { addNewRow(); }
-        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
-    }
-    private void verifyModifyInput() {
-        try { modifyCurrentRow(); }
-        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
-    }
 }
