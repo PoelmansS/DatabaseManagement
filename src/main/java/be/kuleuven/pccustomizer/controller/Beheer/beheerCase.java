@@ -85,12 +85,13 @@ public class beheerCase extends _BeheerCommon {
 
     }
 
-    Jdbi jdbi = Jdbi.create("");
-
-
     public void addNewRow() {
         Case cases = new Case(addName.getText(),addType.getText(), Integer.parseInt(addPrice.getText()),addSize.getText());
-        jdbi.useHandle(handle -> { handle.execute("insert into PcCase (Name, Type, Price, Size) values (?, ?, ?, ?)",cases.getName(),cases.getType(),cases.getPrice(),cases.getSize()); });
+        String name = cases.getName();
+        String type = cases.getType();
+        Integer price = cases.getPrice();
+        String size = cases.getSize();
+        jdbi.useHandle(handle -> { handle.execute("insert into PcCase (Name, Type, Price, Size) values (?, ?, ?, ?)", name,type,price,size); });
         ObservableList<Case> caseList = tableView.getItems();
         caseList.add(cases);
         tableView.setItems(caseList);

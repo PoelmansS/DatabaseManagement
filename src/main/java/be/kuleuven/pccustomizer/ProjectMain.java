@@ -44,6 +44,7 @@ public class ProjectMain extends Application {
     public static void main(String[] args) {
         SQLiteClient client = new SQLiteClient();
         client.voorbeeldFunctieVullen();
+        client.correctVoorbeeldFunctie("DVD speler", 300, "SONY");
         //client.voegToeVoorbeeldFunctie("cd speler apple", "cd speler", 100);
         //List<String> cpus = Collections.emptyList();
         //client.getCollomS("CPU", "Computer", cpus);

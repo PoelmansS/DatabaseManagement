@@ -77,4 +77,10 @@ public class SQLiteClient {
             handle.execute("insert into Extra (Name, Type, Price) values (?, ?, ?)", name, type, price);
         });
     }
+
+    public void correctVoorbeeldFunctie(String type , Integer price, String name){
+        jdbi.useHandle(handle -> {
+            handle.execute("UPDATE Extra SET Type = ?, Price = ? WHERE Name = ?", type, price, name);
+        });
+    }
 }
