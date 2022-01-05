@@ -69,10 +69,10 @@ public class beheerCPU extends _BeheerCommon {
     public void ReadFromDB(){
         List<String> names = readDBstring("CPU","Name");
         List<Integer> prices =  readDBint("CPU","Price");
-        List<Integer> threads =  readDBint("CPU","Thread");
-        List<Integer> cores =  readDBint("CPU","Core");
-        List<Integer> clockSpeeds =  readDBint("CPU","Clock Speed");
-        List<Integer> powerUsages =  readDBint("CPU","Power Usage");
+        List<Integer> threads =  readDBint("CPU","Threads");
+        List<Integer> cores =  readDBint("CPU","Cores");
+        List<Integer> clockSpeeds =  readDBint("CPU","Clock_speed");
+        List<Integer> powerUsages =  readDBint("CPU","Power_usage");
 
         for(int i = 0; i < names.size(); i++){
             cpus.add(new CPU(names.get(i), prices.get(i), threads.get(i),cores.get(i), clockSpeeds.get(i),powerUsages.get(i)));

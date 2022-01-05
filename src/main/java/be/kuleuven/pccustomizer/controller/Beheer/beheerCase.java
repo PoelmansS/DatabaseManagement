@@ -63,10 +63,10 @@ public class beheerCase extends _BeheerCommon {
     }
 
     public void ReadFromDB(){
-        List<String> names = readDBstring("Case","Name");
-        List<String> types =  readDBstring("Case","Type");
-        List<Integer> prices =  readDBint("Case","Price");
-        List<String> sizes =  readDBstring("Case","Size");
+        List<String> names = readDBstring("PcCase","Name");
+        List<String> types =  readDBstring("PcCase","Type");
+        List<Integer> prices =  readDBint("PcCase","Price");
+        List<String> sizes =  readDBstring("PcCase","Size");
 
         for(int i = 0; i < names.size(); i++){
             cases.add(new Case(names.get(i), types.get(i), prices.get(i), sizes.get(i)));

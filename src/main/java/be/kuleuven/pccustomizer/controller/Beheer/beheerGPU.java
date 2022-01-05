@@ -61,8 +61,8 @@ public class beheerGPU extends _BeheerCommon {
     public void ReadFromDB(){
         List<String> names = readDBstring("GPU","Name");
         List<Integer> prices =  readDBint("GPU","Price");
-        List<Integer> vrams =  readDBint("GPU","VRAM");
-        List<Integer> powerUsages =  readDBint("GPU","Power Usage");
+        List<Integer> vrams =  readDBint("GPU","Vram_size");
+        List<Integer> powerUsages =  readDBint("GPU","Power_Usage");
 
         for(int i = 0; i < names.size(); i++){
             gpus.add(new GPU(names.get(i), prices.get(i), vrams.get(i), powerUsages.get(i)));

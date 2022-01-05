@@ -67,12 +67,12 @@ public class beheerMotherboard extends _BeheerCommon {
         });
     }
     public void ReadFromDB(){
-        List<String> names = readDBstring("MotherBoard","Name");
-        List<Boolean> hasWifis =  readDBbool("MotherBoard","HasWifi");
-        List<Integer> prices =  readDBint("MotherBoard","Price");
-        List<String> caseSizes =  readDBstring("MotherBoard","Case Size");
-        List<Integer> ramSlots =  readDBint("MotherBoard","RAM Slots");
-        List<Integer> pcieSlots =  readDBint("MotherBoard","PCIE Slots");
+        List<String> names = readDBstring("MotherBord","Name");
+        List<Boolean> hasWifis =  readDBbool("MotherBord","Wifi");
+        List<Integer> prices =  readDBint("MotherBord","Price");
+        List<String> caseSizes =  readDBstring("MotherBord","Required_case_size");
+        List<Integer> ramSlots =  readDBint("MotherBord","RAM_slots");
+        List<Integer> pcieSlots =  readDBint("MotherBord","PCI_express_slots");
 
         for(int i = 0; i < names.size(); i++){
             motherBoards.add(new MotherBoard(names.get(i), hasWifis.get(i), prices.get(i), caseSizes.get(i),

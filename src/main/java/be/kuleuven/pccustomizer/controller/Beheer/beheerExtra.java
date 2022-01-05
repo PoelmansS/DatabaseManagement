@@ -66,9 +66,9 @@ public class beheerExtra extends _BeheerCommon {
     }
 
     public void initTable() {
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Extra, String>("name"));
-        typeColumn.setCellValueFactory(new PropertyValueFactory<Extra, String>("type"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<Extra, Integer>("price"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<Extra, String>("Name"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<Extra, String>("Type"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<Extra, Integer>("Price"));
 
         ObservableList<Extra> extraList = tableView.getItems();
         extraList.addAll(extras);

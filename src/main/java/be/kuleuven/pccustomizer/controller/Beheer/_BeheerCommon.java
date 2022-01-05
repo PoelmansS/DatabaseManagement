@@ -1,5 +1,6 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
 
+import be.kuleuven.pccustomizer.controller.SQLiteClient;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -11,18 +12,8 @@ import java.util.List;
 
 public class _BeheerCommon {
     int selectedRow;
-
-    private static final String ConnectionString = "jdbc:sqlite:SanderPoelmans_DamianusWakker.db";
-    public Jdbi jdbi;
-
-
-
-    //TODO sqlite client moet nog worgen gefixt
-    public void SQLiteClient(){
-        jdbi = Jdbi.create(ConnectionString);
-        jdbi.installPlugin(new SqlObjectPlugin());
-    }
-
+    SQLiteClient client = new SQLiteClient();
+    Jdbi jdbi = client.getJdbi();
 
     @FXML
     public Button btnDelete;

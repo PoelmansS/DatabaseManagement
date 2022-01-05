@@ -64,6 +64,7 @@ public class beheerRAM extends _BeheerCommon {
         List<String> types =  readDBstring("RAM","Type");
         List<Integer> prices =  readDBint("RAM","Price");
         List<Integer> sizes =  readDBint("RAM","Size");
+
         for(int i = 0; i < names.size(); i++){
             rams.add(new RAM(names.get(i), types.get(i), prices.get(i), sizes.get(i)));
         }

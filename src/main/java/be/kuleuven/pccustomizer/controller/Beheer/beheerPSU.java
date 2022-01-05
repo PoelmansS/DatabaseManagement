@@ -57,9 +57,9 @@ public class beheerPSU extends _BeheerCommon {
     }
 
     public void ReadFromDB(){
-        List<String> names = readDBstring("PSU","Name");
-        List<Integer> prices =  readDBint("PSU","Price");
-        List<Integer> wattages =  readDBint("PSU","Wattage");
+        List<String> names = readDBstring("Power_supply","Name");
+        List<Integer> prices =  readDBint("Power_supply","Price");
+        List<Integer> wattages =  readDBint("Power_supply","Wattage");
         for(int i = 0; i < names.size(); i++){
             psus.add(new PSU(names.get(i), prices.get(i), wattages.get(i)));
         }
