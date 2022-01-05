@@ -27,7 +27,7 @@ public class SQLiteClient {
     }
 
     //functie om te testen
-    public void voorbeeldFunctie(){
+    public void voorbeeldFunctieVullen(){
         List<Extra> extras = new ArrayList<Extra>();
         List<String> names = jdbi.withHandle(handle ->
                 handle.createQuery("SELECT Name FROM Cooling")
@@ -49,9 +49,11 @@ public class SQLiteClient {
         System.out.println(names);
         System.out.println(types);
         System.out.println(prices);
-        System.out.println(extras);
+        System.out.println(extras.get(1).getPrice());
         //System.out.println("het bevat: " + x);
     }
+
+
 
     //simpelen functie om een volledige kollom op te vragen van Strings
     public void getCollomS(String collom, String tabel, List<String> col){
@@ -68,5 +70,11 @@ public class SQLiteClient {
                 handle.createQuery(s)
                         .mapTo(Integer.class)
                         .list());
+    }
+
+    public void voegToeVoorbeeldFunctie(String name, String type, Integer price){
+        jdbi.useHandle(handle -> {
+            handle.execute("insert into Extra (Name, Type, Price) values (?, ?, ?)", name, type, price);
+        });
     }
 }
