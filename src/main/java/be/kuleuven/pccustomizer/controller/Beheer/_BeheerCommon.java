@@ -4,9 +4,25 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import org.jdbi.v3.core.Jdbi;
+import org.jdbi.v3.sqlobject.SqlObjectPlugin;
+
+import java.util.List;
 
 public class _BeheerCommon {
     int selectedRow;
+
+    private static final String ConnectionString = "jdbc:sqlite:SanderPoelmans_DamianusWakker.db";
+    public Jdbi jdbi;
+
+
+
+    //TODO sqlite client moet nog worgen gefixt
+    public void SQLiteClient(){
+        jdbi = Jdbi.create(ConnectionString);
+        jdbi.installPlugin(new SqlObjectPlugin());
+    }
+
 
     @FXML
     public Button btnDelete;
@@ -18,6 +34,26 @@ public class _BeheerCommon {
     public Button btnClose;
     @FXML
     public Button btnLoad;
+
+    public List<String> readDBstring(String clas, String columnName){
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT " + columnName + " FROM " + clas)
+                        .mapTo(String.class)
+                        .list());
+    }
+    public List<Integer> readDBint(String clas, String columnName){
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT " + columnName + " FROM " + clas)
+                        .mapTo(Integer.class)
+                        .list());
+    }
+    public List<Boolean> readDBbool(String clas, String columnName){
+        List<Boolean> list = jdbi.withHandle(handle ->
+                handle.createQuery("SELECT " + columnName + " FROM " + clas)
+                        .mapTo(Boolean.class)
+                        .list());
+        return list;
+    }
 
     public void deleteCurrentRow(TableView tbl) {
         selectedRow = tbl.getSelectionModel().getSelectedIndex();

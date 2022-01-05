@@ -6,9 +6,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class beheerExtra extends _BeheerCommon {
     Extra modifiedExtra;
+    List<Extra> extras = new ArrayList<Extra>();
 
     //table
     @FXML
@@ -29,6 +33,7 @@ public class beheerExtra extends _BeheerCommon {
     private TableColumn<Extra, Integer> priceColumn;
 
     public void initialize() {
+        ReadFromDB();
         initTable();
         btnAdd.setOnAction(e -> {
             verifyInput();
@@ -50,23 +55,25 @@ public class beheerExtra extends _BeheerCommon {
         });
     }
 
+    public void ReadFromDB(){
+        List<String> names = readDBstring("Extra","Name");
+        List<String> types =  readDBstring("Extra","Type");
+        List<Integer> prices =  readDBint("Extra","Price");
+
+        for(int i = 0; i < names.size(); i++){
+            extras.add(new Extra(names.get(i), types.get(i), prices.get(i)));
+        }
+    }
+
     public void initTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<Extra, String>("name"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Extra, String>("type"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<Extra, Integer>("price"));
 
-
-        Extra extra1 = new Extra("extra1","wifi card",50);
-        Extra extra2 = new Extra("extra2","cd burner",80);
-        Extra extra3 = new Extra("extra1","external ssd",350);
         ObservableList<Extra> extraList = tableView.getItems();
-        extraList.add(extra1);
-        extraList.add(extra2);
-        extraList.add(extra3);
+        extraList.addAll(extras);
         tableView.setItems(extraList);
-
     }
-
 
     public void addNewRow() {
         Extra extra = new Extra(addName.getText(),addType.getText(), Integer.parseInt(addPrice.getText()));

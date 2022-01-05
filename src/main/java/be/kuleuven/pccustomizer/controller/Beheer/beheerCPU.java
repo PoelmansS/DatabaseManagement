@@ -1,15 +1,19 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
 import be.kuleuven.pccustomizer.controller.Objects.CPU;
+import be.kuleuven.pccustomizer.controller.Objects.Extra;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class beheerCPU extends _BeheerCommon {
     CPU modifiedCPU;
-
+    List<CPU> cpus = new ArrayList<CPU>();
     //table
     @FXML
     private TableView<CPU> tableView;
@@ -41,6 +45,7 @@ public class beheerCPU extends _BeheerCommon {
     private TableColumn<CPU, Integer> powerUsageColumn;
 
     public void initialize() {
+        ReadFromDB();
         initTable();
         btnAdd.setOnAction(e -> {
             verifyInput();
@@ -61,6 +66,19 @@ public class beheerCPU extends _BeheerCommon {
             stage.close();
         });
     }
+    public void ReadFromDB(){
+        List<String> names = readDBstring("CPU","Name");
+        List<Integer> prices =  readDBint("CPU","Price");
+        List<Integer> threads =  readDBint("CPU","Thread");
+        List<Integer> cores =  readDBint("CPU","Core");
+        List<Integer> clockSpeeds =  readDBint("CPU","Clock Speed");
+        List<Integer> powerUsages =  readDBint("CPU","Power Usage");
+
+        for(int i = 0; i < names.size(); i++){
+            cpus.add(new CPU(names.get(i), prices.get(i), threads.get(i),cores.get(i), clockSpeeds.get(i),powerUsages.get(i)));
+        }
+    }
+
     public void initTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<CPU, String>("name"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<CPU, Integer>("price"));
@@ -69,15 +87,8 @@ public class beheerCPU extends _BeheerCommon {
         clockSpeedColumn.setCellValueFactory(new PropertyValueFactory<CPU, Integer>("clockSpeed"));
         powerUsageColumn.setCellValueFactory(new PropertyValueFactory<CPU, Integer>("powerUsage"));
 
-
-
-        CPU CPU1 = new CPU("i5",200,6,4,6,100);
-        CPU CPU2 = new CPU("i7",300,8,6,6,200);
-        CPU CPU3 = new CPU("i9",400,12,8,6,300);
         ObservableList<CPU> CPUList = tableView.getItems();
-        CPUList.add(CPU1);
-        CPUList.add(CPU2);
-        CPUList.add(CPU3);
+        CPUList.addAll(cpus);
         tableView.setItems(CPUList);
     }
     public void addNewRow() {

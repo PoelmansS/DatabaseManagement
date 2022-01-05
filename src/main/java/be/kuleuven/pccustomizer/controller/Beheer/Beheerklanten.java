@@ -1,5 +1,6 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
 
+import be.kuleuven.pccustomizer.controller.Objects.Extra;
 import be.kuleuven.pccustomizer.controller.Objects.Klant;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -7,8 +8,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Beheerklanten extends _BeheerCommon {
     Klant modifiedKlant;
+    List<Klant> klanten = new ArrayList<Klant>();
 
     //table
     @FXML
@@ -49,6 +54,7 @@ public class Beheerklanten extends _BeheerCommon {
     private TableColumn<Klant, String> mailColumn;
 
     public void initialize() {
+        ReadFromDB();
         initTable();
         btnAdd.setOnAction(e -> {
             verifyInput();
@@ -69,6 +75,21 @@ public class Beheerklanten extends _BeheerCommon {
             stage.close();
         });
     }
+    public void ReadFromDB(){
+        List<Integer> ids = readDBint("Klant","ID");
+        List<String> lastNames =  readDBstring("Klant","LastName");
+        List<String> firstNames =  readDBstring("Klant","FirstName");
+        List<Integer> postalCodes =  readDBint("Klant","PostalCode");
+        List<String> streets =  readDBstring("Klant","Street");
+        List<String> numbers =  readDBstring("Klant","Number");
+        List<String> phones =  readDBstring("Klant","Phone");
+        List<String> mails =  readDBstring("Klant","Mail");
+
+        for(int i = 0; i < ids.size(); i++){
+            klanten.add(new Klant(ids.get(i), lastNames.get(i), firstNames.get(i), postalCodes.get(i), streets.get(i),
+                    numbers.get(i), phones.get(i), mails.get(i)));
+        }
+    }
 
     public void initTable() {
         IDColumn.setCellValueFactory(new PropertyValueFactory<Klant, Integer>("ID"));
@@ -80,13 +101,9 @@ public class Beheerklanten extends _BeheerCommon {
         phoneColumn.setCellValueFactory(new PropertyValueFactory<Klant, String>("phone"));
         mailColumn.setCellValueFactory(new PropertyValueFactory<Klant, String>("mail"));
 
-        Klant klant1 = new Klant(1, "Baker","bob", 3600,"lange straat","245","+32 658 486 259" , "BB@gmail.com");
-        Klant klant2 = new Klant(2, "Doe","John", 3700,"kortere straat","24","+32 658 457 542" , "JD@gmail.com");
-        Klant klant3 = new Klant(3, "Dover","Ben", 2400,"korte straat","2","+32 659 629 411" , "BD@gmail.com");
+
         ObservableList<Klant> klantList = tableView.getItems();
-        klantList.add(klant1);
-        klantList.add(klant3);
-        klantList.add(klant3);
+        klantList.addAll(klanten);
         tableView.setItems(klantList);
     }
     public void addNewRow() {

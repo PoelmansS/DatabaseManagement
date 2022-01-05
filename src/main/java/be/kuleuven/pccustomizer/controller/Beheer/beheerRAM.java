@@ -1,4 +1,5 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
+import be.kuleuven.pccustomizer.controller.Objects.Extra;
 import be.kuleuven.pccustomizer.controller.Objects.RAM;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -6,10 +7,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class beheerRAM extends _BeheerCommon {
     RAM modifiedRAM;
-
+    List<RAM> rams = new ArrayList<RAM>();
     //table
     @FXML
     private TableView<RAM> tableView;
@@ -33,6 +37,7 @@ public class beheerRAM extends _BeheerCommon {
     private TableColumn<RAM, Integer> sizeColumn;
 
     public void initialize() {
+        ReadFromDB();
         initTable();
         btnAdd.setOnAction(e -> {
             verifyInput();
@@ -54,19 +59,24 @@ public class beheerRAM extends _BeheerCommon {
         });
     }
 
+    public void ReadFromDB(){
+        List<String> names = readDBstring("RAM","Name");
+        List<String> types =  readDBstring("RAM","Type");
+        List<Integer> prices =  readDBint("RAM","Price");
+        List<Integer> sizes =  readDBint("RAM","Size");
+        for(int i = 0; i < names.size(); i++){
+            rams.add(new RAM(names.get(i), types.get(i), prices.get(i), sizes.get(i)));
+        }
+    }
+
     public void initTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<RAM, String>("name"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<RAM, String>("type"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<RAM, Integer>("price"));
         sizeColumn.setCellValueFactory(new PropertyValueFactory<RAM, Integer>("size"));
 
-        RAM case1 = new RAM("RAM1","DDR4",50,16);
-        RAM case2 = new RAM("RAM2","DDR5",80,32);
-        RAM case3 = new RAM("RAM3","DDR5",350,64);
         ObservableList<RAM> RAMList = tableView.getItems();
-        RAMList.add(case1);
-        RAMList.add(case2);
-        RAMList.add(case3);
+        RAMList.addAll(rams);
         tableView.setItems(RAMList);
 
     }

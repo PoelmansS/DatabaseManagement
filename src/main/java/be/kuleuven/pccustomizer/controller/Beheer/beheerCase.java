@@ -1,5 +1,6 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
 import be.kuleuven.pccustomizer.controller.Objects.Case;
+import be.kuleuven.pccustomizer.controller.Objects.Extra;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -7,12 +8,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.jdbi.v3.core.Jdbi;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static java.lang.Integer.valueOf;
 
 
 public class beheerCase extends _BeheerCommon {
     Case modifiedCase;
-
+    List<Case> cases = new ArrayList<Case>();
     //table
     @FXML
     private TableView<Case> tableView;
@@ -36,6 +40,7 @@ public class beheerCase extends _BeheerCommon {
     private TableColumn<Case, String> sizeColumn;
 
     public void initialize() {
+        ReadFromDB();
         initTable();
         btnAdd.setOnAction(e -> {
             verifyInput();
@@ -57,19 +62,25 @@ public class beheerCase extends _BeheerCommon {
         });
     }
 
+    public void ReadFromDB(){
+        List<String> names = readDBstring("Case","Name");
+        List<String> types =  readDBstring("Case","Type");
+        List<Integer> prices =  readDBint("Case","Price");
+        List<String> sizes =  readDBstring("Case","Size");
+
+        for(int i = 0; i < names.size(); i++){
+            cases.add(new Case(names.get(i), types.get(i), prices.get(i), sizes.get(i)));
+        }
+    }
+
     public void initTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<Case, String>("name"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Case, String>("type"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<Case, Integer>("price"));
         sizeColumn.setCellValueFactory(new PropertyValueFactory<Case, String>("size"));
 
-        Case case1 = new Case("Case1","pc",50,"small");
-        Case case2 = new Case("Case2","pc",80,"large");
-        Case case3 = new Case("Case3","server",350,"large");
         ObservableList<Case> caseList = tableView.getItems();
-        caseList.add(case1);
-        caseList.add(case2);
-        caseList.add(case3);
+        caseList.addAll(cases);
         tableView.setItems(caseList);
 
     }

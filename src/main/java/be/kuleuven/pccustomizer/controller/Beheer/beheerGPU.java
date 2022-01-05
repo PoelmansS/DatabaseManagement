@@ -1,4 +1,5 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
+import be.kuleuven.pccustomizer.controller.Objects.Extra;
 import be.kuleuven.pccustomizer.controller.Objects.GPU;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -6,9 +7,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class beheerGPU extends _BeheerCommon {
     GPU modifiedGPU;
-
+    List<GPU> gpus = new ArrayList<GPU>();
     //table
     @FXML
     private TableView<GPU> tableView;
@@ -32,6 +36,7 @@ public class beheerGPU extends _BeheerCommon {
     private TableColumn<GPU, Integer> powerUsageColumn;
 
     public void initialize() {
+        ReadFromDB();
         initTable();
         btnAdd.setOnAction(e -> {
             verifyInput();
@@ -53,19 +58,25 @@ public class beheerGPU extends _BeheerCommon {
         });
     }
 
+    public void ReadFromDB(){
+        List<String> names = readDBstring("GPU","Name");
+        List<Integer> prices =  readDBint("GPU","Price");
+        List<Integer> vrams =  readDBint("GPU","VRAM");
+        List<Integer> powerUsages =  readDBint("GPU","Power Usage");
+
+        for(int i = 0; i < names.size(); i++){
+            gpus.add(new GPU(names.get(i), prices.get(i), vrams.get(i), powerUsages.get(i)));
+        }
+    }
+
     public void initTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<GPU, String>("name"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("price"));
         VRAMColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("VRAM"));
         powerUsageColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("powerUsage"));
 
-        GPU GPU1 = new GPU("3060",600,8,200);
-        GPU GPU2 = new GPU("3070",1000,16,400);
-        GPU GPU3 = new GPU("3080",1500,24,600);
         ObservableList<GPU> GPUList = tableView.getItems();
-        GPUList.add(GPU1);
-        GPUList.add(GPU2);
-        GPUList.add(GPU3);
+        GPUList.addAll(gpus);
         tableView.setItems(GPUList);
     }
     public void addNewRow() {

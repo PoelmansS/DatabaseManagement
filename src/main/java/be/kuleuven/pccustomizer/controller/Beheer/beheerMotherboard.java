@@ -1,4 +1,5 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
+import be.kuleuven.pccustomizer.controller.Objects.Extra;
 import be.kuleuven.pccustomizer.controller.Objects.MotherBoard;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -6,10 +7,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class beheerMotherboard extends _BeheerCommon {
     MotherBoard modifiedMotherboard;
-
+    List<MotherBoard> motherBoards = new ArrayList<MotherBoard>();
     //table
     @FXML
     private TableView<MotherBoard> tableView;
@@ -41,6 +45,7 @@ public class beheerMotherboard extends _BeheerCommon {
     private TableColumn<MotherBoard, Integer> PCIESlotsColumn;
 
     public void initialize() {
+        ReadFromDB();
         initTable();
         btnAdd.setOnAction(e -> {
             verifyInput();
@@ -61,6 +66,19 @@ public class beheerMotherboard extends _BeheerCommon {
             stage.close();
         });
     }
+    public void ReadFromDB(){
+        List<String> names = readDBstring("MotherBoard","Name");
+        List<Boolean> hasWifis =  readDBbool("MotherBoard","HasWifi");
+        List<Integer> prices =  readDBint("MotherBoard","Price");
+        List<String> caseSizes =  readDBstring("MotherBoard","Case Size");
+        List<Integer> ramSlots =  readDBint("MotherBoard","RAM Slots");
+        List<Integer> pcieSlots =  readDBint("MotherBoard","PCIE Slots");
+
+        for(int i = 0; i < names.size(); i++){
+            motherBoards.add(new MotherBoard(names.get(i), hasWifis.get(i), prices.get(i), caseSizes.get(i),
+                    ramSlots.get(i), pcieSlots.get(i)));
+        }
+    }
 
     public void initTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<MotherBoard, String>("name"));
@@ -70,14 +88,8 @@ public class beheerMotherboard extends _BeheerCommon {
         RAMSlotsColumn.setCellValueFactory(new PropertyValueFactory<MotherBoard, Integer>("RAMSlots"));
         PCIESlotsColumn.setCellValueFactory(new PropertyValueFactory<MotherBoard, Integer>("PCIESlots"));
 
-
-        MotherBoard motherBoard1 = new MotherBoard("motherboard1",true,150,"small",2,1);
-        MotherBoard motherBoard2 = new MotherBoard("motherboard2",false,250,"medium",4,2);
-        MotherBoard motherBoard3 = new MotherBoard("motherboard3",true,350,"large",8,4);
         ObservableList<MotherBoard> MotherBoardList = tableView.getItems();
-        MotherBoardList.add(motherBoard1);
-        MotherBoardList.add(motherBoard2);
-        MotherBoardList.add(motherBoard3);
+        MotherBoardList.addAll(motherBoards);
         tableView.setItems(MotherBoardList);
 
     }

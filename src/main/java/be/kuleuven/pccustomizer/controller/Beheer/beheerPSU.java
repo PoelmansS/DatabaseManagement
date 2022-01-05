@@ -1,4 +1,5 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
+import be.kuleuven.pccustomizer.controller.Objects.Extra;
 import be.kuleuven.pccustomizer.controller.Objects.PSU;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -6,10 +7,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class beheerPSU extends _BeheerCommon {
     PSU modifiedPSU;
-
+    List<PSU> psus = new ArrayList<PSU>();
     //table
     @FXML
     private TableView<PSU> tableView;
@@ -30,6 +34,7 @@ public class beheerPSU extends _BeheerCommon {
     private TableColumn<PSU, Integer> priceColumn;
 
     public void initialize() {
+        ReadFromDB();
         initTable();
         btnAdd.setOnAction(e -> {
             verifyInput();
@@ -51,18 +56,22 @@ public class beheerPSU extends _BeheerCommon {
         });
     }
 
+    public void ReadFromDB(){
+        List<String> names = readDBstring("PSU","Name");
+        List<Integer> prices =  readDBint("PSU","Price");
+        List<Integer> wattages =  readDBint("PSU","Wattage");
+        for(int i = 0; i < names.size(); i++){
+            psus.add(new PSU(names.get(i), prices.get(i), wattages.get(i)));
+        }
+    }
+
     public void initTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<PSU, String>("name"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<PSU, Integer>("price"));
         wattageColumn.setCellValueFactory(new PropertyValueFactory<PSU, Integer>("wattage"));
 
-        PSU PSU1 = new PSU("PSU1",50,250);
-        PSU PSU2 = new PSU("PSU2",60,300);
-        PSU PSU3 = new PSU("PSU3",120,500);
         ObservableList<PSU> PSUList = tableView.getItems();
-        PSUList.add(PSU1);
-        PSUList.add(PSU2);
-        PSUList.add(PSU3);
+        PSUList.addAll(psus);
         tableView.setItems(PSUList);
 
     }
