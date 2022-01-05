@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.jdbi.v3.core.Jdbi;
 
 import static java.lang.Integer.valueOf;
 
@@ -72,6 +73,8 @@ public class beheerCase extends _BeheerCommon {
         tableView.setItems(caseList);
 
     }
+
+    Jdbi jdbi = Jdbi.create("");
 
 
     public void addNewRow() {

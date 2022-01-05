@@ -1,12 +1,15 @@
 package be.kuleuven.pccustomizer;
 
+import be.kuleuven.pccustomizer.controller.SQLiteClient;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Collections;
 import java.util.Objects;
+import java.util.List;
 
 /**
  * DB Taak 2021-2022: PC Customizer concept
@@ -39,6 +42,11 @@ public class ProjectMain extends Application {
     }
 
     public static void main(String[] args) {
+        SQLiteClient client = new SQLiteClient();
+        client.voorbeeldFunctie();
+        //List<String> cpus = Collections.emptyList();
+        //client.getCollomS("CPU", "Computer", cpus);
+        //System.out.println(cpus);
         launch();
     }
 }
