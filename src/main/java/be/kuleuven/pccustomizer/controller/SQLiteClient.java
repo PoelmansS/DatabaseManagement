@@ -83,4 +83,10 @@ public class SQLiteClient {
             handle.execute("UPDATE Extra SET Type = ?, Price = ? WHERE Name = ?", type, price, name);
         });
     }
+
+    public void deleteVoorbeeldDFunctie(String name){
+        jdbi.useHandle(handle -> {
+            handle.execute("DELETE FROM Extra WHERE Name = ?", name);
+        });
+    }
 }
