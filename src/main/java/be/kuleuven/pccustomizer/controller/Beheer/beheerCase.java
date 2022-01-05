@@ -90,10 +90,13 @@ public class beheerCase extends _BeheerCommon {
 
     public void addNewRow() {
         Case cases = new Case(addName.getText(),addType.getText(), Integer.parseInt(addPrice.getText()),addSize.getText());
+        jdbi.useHandle(handle -> { handle.execute("insert into PcCase (Name, Type, Price, Size) values (?, ?, ?, ?)",cases.getName(),cases.getType(),cases.getPrice(),cases.getSize()); });
         ObservableList<Case> caseList = tableView.getItems();
         caseList.add(cases);
         tableView.setItems(caseList);
     }
+
+
 
     public void LoadCurrentRow() {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
