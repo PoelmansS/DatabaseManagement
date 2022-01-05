@@ -1,4 +1,5 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
+import be.kuleuven.pccustomizer.controller.Objects.CPU;
 import be.kuleuven.pccustomizer.controller.Objects.Extra;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -44,7 +45,7 @@ public class beheerExtra extends _BeheerCommon {
         });
         btnDelete.setOnAction(e -> {
             verifyOneRowSelected(tableView);
-            deleteCurrentRow(tableView);
+            deleteCurrentRow();
         });
         btnLoad.setOnAction(e -> {
             LoadCurrentRow();
@@ -73,6 +74,14 @@ public class beheerExtra extends _BeheerCommon {
         ObservableList<Extra> extraList = tableView.getItems();
         extraList.addAll(extras);
         tableView.setItems(extraList);
+    }
+    public void deleteCurrentRow() {
+        ObservableList<Extra> extraList = tableView.getItems();
+        selectedRow = tableView.getSelectionModel().getSelectedIndex();
+        jdbi.useHandle(handle -> {
+            handle.execute("DELETE FROM Extra WHERE Name = ?", extraList.get(0).getName());
+        });
+        tableView.getItems().remove(selectedRow);
     }
 
     public void addNewRow() {

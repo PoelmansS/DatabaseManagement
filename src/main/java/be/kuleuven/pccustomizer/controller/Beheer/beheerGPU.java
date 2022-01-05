@@ -1,4 +1,5 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
+import be.kuleuven.pccustomizer.controller.Objects.CPU;
 import be.kuleuven.pccustomizer.controller.Objects.Extra;
 import be.kuleuven.pccustomizer.controller.Objects.GPU;
 import javafx.collections.ObservableList;
@@ -47,7 +48,7 @@ public class beheerGPU extends _BeheerCommon {
         });
         btnDelete.setOnAction(e -> {
             verifyOneRowSelected(tableView);
-            deleteCurrentRow(tableView);
+            deleteCurrentRow();
         });
         btnLoad.setOnAction(e -> {
             LoadCurrentRow();
@@ -79,6 +80,16 @@ public class beheerGPU extends _BeheerCommon {
         GPUList.addAll(gpus);
         tableView.setItems(GPUList);
     }
+
+    public void deleteCurrentRow() {
+        ObservableList<GPU> GPUList = tableView.getItems();
+        selectedRow = tableView.getSelectionModel().getSelectedIndex();
+        jdbi.useHandle(handle -> {
+            handle.execute("DELETE FROM GPU WHERE Name = ?", GPUList.get(0).getName());
+        });
+        tableView.getItems().remove(selectedRow);
+    }
+
     public void addNewRow() {
         GPU gpu = new GPU(addName.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addVRAM.getText()),
                  Integer.parseInt(addPowerUsage.getText()));

@@ -1,4 +1,5 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
+import be.kuleuven.pccustomizer.controller.Objects.CPU;
 import be.kuleuven.pccustomizer.controller.Objects.Extra;
 import be.kuleuven.pccustomizer.controller.Objects.MotherBoard;
 import javafx.collections.ObservableList;
@@ -56,7 +57,7 @@ public class beheerMotherboard extends _BeheerCommon {
         });
         btnDelete.setOnAction(e -> {
             verifyOneRowSelected(tableView);
-            deleteCurrentRow(tableView);
+            deleteCurrentRow();
         });
         btnLoad.setOnAction(e -> {
             LoadCurrentRow();
@@ -94,6 +95,14 @@ public class beheerMotherboard extends _BeheerCommon {
 
     }
 
+    public void deleteCurrentRow() {
+        ObservableList<MotherBoard> motherBoardList = tableView.getItems();
+        selectedRow = tableView.getSelectionModel().getSelectedIndex();
+        jdbi.useHandle(handle -> {
+            handle.execute("DELETE FROM Motherbord WHERE Name = ?", motherBoardList.get(0).getName());
+        });
+        tableView.getItems().remove(selectedRow);
+    }
 
     public void addNewRow() {
             MotherBoard motherBoard = new MotherBoard(addName.getText(),Boolean.parseBoolean(addHasWifi.getText()),Integer.parseInt(addPrice.getText()),

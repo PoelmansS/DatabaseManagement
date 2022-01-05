@@ -1,4 +1,5 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
+import be.kuleuven.pccustomizer.controller.Objects.CPU;
 import be.kuleuven.pccustomizer.controller.Objects.Extra;
 import be.kuleuven.pccustomizer.controller.Objects.PSU;
 import javafx.collections.ObservableList;
@@ -45,7 +46,7 @@ public class beheerPSU extends _BeheerCommon {
         });
         btnDelete.setOnAction(e -> {
             verifyOneRowSelected(tableView);
-            deleteCurrentRow(tableView);
+            deleteCurrentRow();
         });
         btnLoad.setOnAction(e -> {
             LoadCurrentRow();
@@ -76,6 +77,14 @@ public class beheerPSU extends _BeheerCommon {
 
     }
 
+    public void deleteCurrentRow() {
+        ObservableList<PSU> PSUList = tableView.getItems();
+        selectedRow = tableView.getSelectionModel().getSelectedIndex();
+        jdbi.useHandle(handle -> {
+            handle.execute("DELETE FROM Power_supply WHERE Name = ?", PSUList.get(0).getName());
+        });
+        tableView.getItems().remove(selectedRow);
+    }
 
     public void addNewRow() {
         PSU psu = new PSU(addName.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addWattage.getText()));

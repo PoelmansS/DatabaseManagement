@@ -1,4 +1,5 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
+import be.kuleuven.pccustomizer.controller.Objects.CPU;
 import be.kuleuven.pccustomizer.controller.Objects.Extra;
 import be.kuleuven.pccustomizer.controller.Objects.RAM;
 import javafx.collections.ObservableList;
@@ -48,7 +49,7 @@ public class beheerRAM extends _BeheerCommon {
         });
         btnDelete.setOnAction(e -> {
             verifyOneRowSelected(tableView);
-            deleteCurrentRow(tableView);
+            deleteCurrentRow();
         });
         btnLoad.setOnAction(e -> {
             LoadCurrentRow();
@@ -82,6 +83,14 @@ public class beheerRAM extends _BeheerCommon {
 
     }
 
+    public void deleteCurrentRow() {
+        ObservableList<RAM> RAMList = tableView.getItems();
+        selectedRow = tableView.getSelectionModel().getSelectedIndex();
+        jdbi.useHandle(handle -> {
+            handle.execute("DELETE FROM RAM WHERE Name = ?", RAMList.get(0).getName());
+        });
+        tableView.getItems().remove(selectedRow);
+    }
 
     public void addNewRow() {
         RAM ram = new RAM(addName.getText(),addType.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addSize.getText()));

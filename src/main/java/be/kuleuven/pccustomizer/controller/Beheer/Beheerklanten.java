@@ -65,7 +65,7 @@ public class Beheerklanten extends _BeheerCommon {
         });
         btnDelete.setOnAction(e -> {
             verifyOneRowSelected(tableView);
-            deleteCurrentRow(tableView);
+            //deleteCurrentRow();
         });
         btnLoad.setOnAction(e -> {
             LoadCurrentRow();

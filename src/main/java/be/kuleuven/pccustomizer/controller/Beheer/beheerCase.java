@@ -51,7 +51,7 @@ public class beheerCase extends _BeheerCommon {
         });
         btnDelete.setOnAction(e -> {
             verifyOneRowSelected(tableView);
-            deleteCurrentRow(tableView);
+            deleteCurrentRow();
         });
         btnLoad.setOnAction(e -> {
             LoadCurrentRow();
@@ -85,18 +85,24 @@ public class beheerCase extends _BeheerCommon {
 
     }
 
-    Jdbi jdbi = Jdbi.create("");
-
+    public void deleteCurrentRow() {
+        ObservableList<Case> caseList = tableView.getItems();
+        selectedRow = tableView.getSelectionModel().getSelectedIndex();
+        jdbi.useHandle(handle -> {
+            handle.execute("DELETE FROM PcCase WHERE Name = ?", caseList.get(0).getName());
+        });
+        tableView.getItems().remove(selectedRow);
+    }
 
     public void addNewRow() {
         Case cases = new Case(addName.getText(),addType.getText(), Integer.parseInt(addPrice.getText()),addSize.getText());
-        jdbi.useHandle(handle -> { handle.execute("insert into PcCase (Name, Type, Price, Size) values (?, ?, ?, ?)",cases.getName(),cases.getType(),cases.getPrice(),cases.getSize()); });
+        jdbi.useHandle(handle -> { handle.execute("insert into PcCase (Name, Type, Price, Size) values (?, ?, ?, ?)",
+                cases.getName(),cases.getType(),cases.getPrice(),cases.getSize()); });
+
         ObservableList<Case> caseList = tableView.getItems();
         caseList.add(cases);
         tableView.setItems(caseList);
     }
-
-
 
     public void LoadCurrentRow() {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
@@ -116,6 +122,10 @@ public class beheerCase extends _BeheerCommon {
         modifiedCase.setPrice(Integer.parseInt(addPrice.getText()));
         modifiedCase.setSize(addSize.getText());
 
+        jdbi.useHandle(handle -> {
+            handle.execute("UPDATE PcCase SET Name = ? ,Type = ?, Price = ? , Size = ? WHERE Name = ?",
+                    modifiedCase.getName(), modifiedCase.getType(), modifiedCase.getPrice(), modifiedCase.getSize());
+        });
         ObservableList<Case> caseList = tableView.getItems();
         caseList.set(selectedRow,modifiedCase);
         tableView.setItems(caseList);

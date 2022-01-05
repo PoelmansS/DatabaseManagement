@@ -45,11 +45,6 @@ public class _BeheerCommon {
                         .list());
         return list;
     }
-
-    public void deleteCurrentRow(TableView tbl) {
-        selectedRow = tbl.getSelectionModel().getSelectedIndex();
-        tbl.getItems().remove(selectedRow);
-    }
     public void showAlert(String title, String content) {
         var alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(title);

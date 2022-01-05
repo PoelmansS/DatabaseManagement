@@ -1,5 +1,6 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
 
+import be.kuleuven.pccustomizer.controller.Objects.Case;
 import be.kuleuven.pccustomizer.controller.Objects.Storage;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,7 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 
-public class beheerCommonStorage extends _BeheerCommon {
+public class beheerStorage extends _BeheerCommon {
     Storage modifiedCase;
 
     //table
@@ -52,7 +53,7 @@ public class beheerCommonStorage extends _BeheerCommon {
         });
         btnDelete.setOnAction(e -> {
             verifyOneRowSelected(tableView);
-            deleteCurrentRow(tableView);
+            deleteCurrentRow();
         });
         btnLoad.setOnAction(e -> {
             LoadCurrentRow();
@@ -82,6 +83,14 @@ public class beheerCommonStorage extends _BeheerCommon {
 
     }
 
+    public void deleteCurrentRow() {
+        ObservableList<Storage> storageList = tableView.getItems();
+        selectedRow = tableView.getSelectionModel().getSelectedIndex();
+        jdbi.useHandle(handle -> {
+            handle.execute("DELETE FROM Storage WHERE Name = ?", storageList.get(0).getName());
+        });
+        tableView.getItems().remove(selectedRow);
+    }
 
     public void addNewRow() {
         Storage cases = new Storage(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()),
