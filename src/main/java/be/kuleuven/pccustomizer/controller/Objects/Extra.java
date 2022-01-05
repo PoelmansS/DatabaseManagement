@@ -5,6 +5,8 @@ public class Extra {
     String type;
     int price;
 
+    public Extra(){}
+
     public Extra(String name, String type, int price) {
         this.name = name;
         this.type = type;

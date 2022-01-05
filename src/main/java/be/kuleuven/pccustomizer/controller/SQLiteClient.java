@@ -1,5 +1,6 @@
 package be.kuleuven.pccustomizer.controller;
 
+import be.kuleuven.pccustomizer.controller.Objects.Extra;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 import org.sqlite.SQLiteDataSource;
@@ -8,6 +9,8 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SQLiteClient {
@@ -25,13 +28,29 @@ public class SQLiteClient {
 
     //functie om te testen
     public void voorbeeldFunctie(){
+        List<Extra> extras = new ArrayList<Extra>();
         List<String> names = jdbi.withHandle(handle ->
-                handle.createQuery("select Name, CPU, Cooling, Extra from Computer")
+                handle.createQuery("SELECT Name FROM Cooling")
                         .mapTo(String.class)
                         .list());
+        List<String> types = jdbi.withHandle(handle ->
+                handle.createQuery("SELECT Type FROM Cooling")
+                        .mapTo(String.class)
+                        .list());
+        List<Integer> prices = jdbi.withHandle(handle ->
+                handle.createQuery("SELECT Price FROM Cooling")
+                        .mapTo(Integer.class)
+                        .list());
+        for(int i = 0; i < names.size(); i++){
+            extras.add(new Extra(names.get(i), types.get(i), prices.get(i)));
+        }
+
         //boolean x = names.contains("high end");
-        //System.out.println(names);
-        System.out.println("het bevat: " + x);
+        System.out.println(names);
+        System.out.println(types);
+        System.out.println(prices);
+        System.out.println(extras);
+        //System.out.println("het bevat: " + x);
     }
 
     //simpelen functie om een volledige kollom op te vragen van Strings
