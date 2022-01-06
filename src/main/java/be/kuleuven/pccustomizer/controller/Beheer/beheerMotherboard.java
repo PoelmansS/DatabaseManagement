@@ -109,7 +109,7 @@ public class beheerMotherboard extends _BeheerCommon {
                     addCaseSize.getText(),Integer.parseInt(addRAMSlots.getText()),Integer.parseInt(addPCIESlots.getText()));
               jdbi.useHandle(handle -> { handle.execute("insert into Motherbord (Name, Wifi ,Price, Required_case_size, RAM_slots, PCI_express_slots) values (?, ?, ?, ?,?,?)",
                       motherBoard.getName(),motherBoard.isHasWifi() ,motherBoard.getPrice(),
-                      motherBoard.getCaseSize(), motherBoard.getRAMSlots(), motherBoard.getPCIESlots());});
+                      motherBoard.getCaseSize(), motherBoard.getRAMSlots(), motherBoard.getPCIESlots(), modifiedMotherboard.getName());});
             ObservableList<MotherBoard> MotherBoardList = tableView.getItems();
             MotherBoardList.add(motherBoard);
             tableView.setItems(MotherBoardList);

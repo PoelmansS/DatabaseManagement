@@ -47,6 +47,7 @@ public class beheerCase extends _BeheerCommon {
         });
         btnModify.setOnAction(e -> {
             verifyOneRowSelected(tableView);
+            modifyCurrentRow();
             verifyModifyInput();
         });
         btnDelete.setOnAction(e -> {
@@ -124,7 +125,7 @@ public class beheerCase extends _BeheerCommon {
 
         jdbi.useHandle(handle -> {
             handle.execute("UPDATE PcCase SET Name = ? ,Type = ?, Price = ? , Size = ? WHERE Name = ?",
-                    modifiedCase.getName(), modifiedCase.getType(), modifiedCase.getPrice(), modifiedCase.getSize());
+                    modifiedCase.getName(), modifiedCase.getType(), modifiedCase.getPrice(), modifiedCase.getSize(), modifiedCase.getName());
         });
         ObservableList<Case> caseList = tableView.getItems();
         caseList.set(selectedRow,modifiedCase);

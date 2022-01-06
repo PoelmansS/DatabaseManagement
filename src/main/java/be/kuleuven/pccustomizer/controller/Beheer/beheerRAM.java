@@ -95,7 +95,7 @@ public class beheerRAM extends _BeheerCommon {
     public void addNewRow() {
         RAM ram = new RAM(addName.getText(),addType.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addSize.getText()));
         jdbi.useHandle(handle -> { handle.execute("insert into RAM (Name, Type ,Price, Size) values (?, ?, ?, ?)",
-                ram.getName(), ram.getType() ,ram.getPrice(), ram.getSize());});
+                ram.getName(), ram.getType() ,ram.getPrice(), ram.getSize(), modifiedRAM.getName());});
 
         ObservableList<RAM> RAMList = tableView.getItems();
         RAMList.add(ram);

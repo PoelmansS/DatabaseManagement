@@ -121,7 +121,7 @@ public class beheerGPU extends _BeheerCommon {
         jdbi.useHandle(handle -> {
             handle.execute("UPDATE GPU SET Name = ? ,Price = ?, Vram_size = ? , Power_usage = ? WHERE Name = ?",
                     modifiedGPU.getName(), modifiedGPU.getPrice(), modifiedGPU.getVRAM(),
-                    modifiedGPU.getPowerUsage());
+                    modifiedGPU.getPowerUsage(), modifiedGPU.getName());
         });
 
         ObservableList<GPU> GPUList = tableView.getItems();
