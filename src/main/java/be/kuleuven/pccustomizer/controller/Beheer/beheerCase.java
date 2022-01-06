@@ -47,7 +47,6 @@ public class beheerCase extends _BeheerCommon {
         });
         btnModify.setOnAction(e -> {
             verifyOneRowSelected(tableView);
-            modifyCurrentRow();
             verifyModifyInput();
         });
         btnDelete.setOnAction(e -> {
