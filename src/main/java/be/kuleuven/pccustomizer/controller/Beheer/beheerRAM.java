@@ -94,11 +94,12 @@ public class beheerRAM extends _BeheerCommon {
 
     public void addNewRow() {
         RAM ram = new RAM(addName.getText(),addType.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addSize.getText()));
+        jdbi.useHandle(handle -> { handle.execute("insert into RAM (Name, Type ,Price, Size) values (?, ?, ?, ?)",
+                ram.getName(), ram.getType() ,ram.getPrice(), ram.getSize());});
+
         ObservableList<RAM> RAMList = tableView.getItems();
         RAMList.add(ram);
         tableView.setItems(RAMList);
-
-        System.out.println(addName.getText() + " " + addType.getText() +  " " + (addPrice.getText()) + " " +  addSize.getText());
     }
 
     public void LoadCurrentRow() {
@@ -118,6 +119,11 @@ public class beheerRAM extends _BeheerCommon {
         modifiedRAM.setType(addType.getText());
         modifiedRAM.setPrice(Integer.parseInt(addPrice.getText()));
         modifiedRAM.setSize(Integer.parseInt(addSize.getText()));
+
+        jdbi.useHandle(handle -> {
+            handle.execute("UPDATE RAM SET Name = ?, Type = ? , Price = ?, Size = ? WHERE Name = ?",
+                    modifiedRAM.getName(), modifiedRAM.getType(), modifiedRAM.getPrice(), modifiedRAM.getSize());
+        });
 
         ObservableList<RAM> RAMList = tableView.getItems();
         RAMList.set(selectedRow,modifiedRAM);

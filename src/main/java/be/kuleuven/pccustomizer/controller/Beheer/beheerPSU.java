@@ -88,6 +88,9 @@ public class beheerPSU extends _BeheerCommon {
 
     public void addNewRow() {
         PSU psu = new PSU(addName.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addWattage.getText()));
+        jdbi.useHandle(handle -> { handle.execute("insert into Power_supply (Name ,Price, Wattage) values (?, ?, ?)",
+                psu.getName(),psu.getPrice(), psu.getWattage());});
+
         ObservableList<PSU> PSUList = tableView.getItems();
         PSUList.add(psu);
         tableView.setItems(PSUList);
@@ -109,6 +112,11 @@ public class beheerPSU extends _BeheerCommon {
         modifiedPSU.setName(addName.getText());
         modifiedPSU.setPrice(Integer.parseInt(addPrice.getText()));
         modifiedPSU.setWattage(Integer.parseInt(addWattage.getText()));
+
+        jdbi.useHandle(handle -> {
+            handle.execute("UPDATE Power_supply SET Name = ? , Price = ?, Wattage = ? WHERE Name = ?",
+                    modifiedPSU.getName(), modifiedPSU.getPrice(), modifiedPSU.getWattage());
+        });
 
         ObservableList<PSU> PSUList = tableView.getItems();
         PSUList.set(selectedRow,modifiedPSU);

@@ -86,6 +86,9 @@ public class beheerExtra extends _BeheerCommon {
 
     public void addNewRow() {
         Extra extra = new Extra(addName.getText(),addType.getText(), Integer.parseInt(addPrice.getText()));
+        jdbi.useHandle(handle -> { handle.execute("insert into Extra (Name,Type,  Price) values (?, ?, ?)",
+                extra.getName(),extra.getType(),extra.getPrice());});
+
         ObservableList<Extra> extraList = tableView.getItems();
         extraList.add(extra);
         tableView.setItems(extraList);
@@ -109,6 +112,10 @@ public class beheerExtra extends _BeheerCommon {
         modifiedExtra.setType(addType.getText());
         modifiedExtra.setPrice(Integer.parseInt(addPrice.getText()));
 
+        jdbi.useHandle(handle -> {
+            handle.execute("UPDATE Extra SET Name = ?, Type = ? ,Price = ? WHERE Name = ?",
+                    modifiedExtra.getName(), modifiedExtra.getType(), modifiedExtra.getPrice());
+        });
 
         ObservableList<Extra> extraList = tableView.getItems();
         extraList.set(selectedRow,modifiedExtra);

@@ -110,6 +110,7 @@ public class Beheerklanten extends _BeheerCommon {
     public void addNewRow() {
         Klant cpu = new Klant(Integer.parseInt(addID.getText()),addLastName.getText(),addFirstName.getText(),Integer.parseInt(addPostalCode.getText()),
                 addStreet.getText(),addNR.getText(),addPhone.getText(),addMail.getText());
+
         ObservableList<Klant> klantList = tableView.getItems();
         klantList.add(cpu);
         tableView.setItems(klantList);

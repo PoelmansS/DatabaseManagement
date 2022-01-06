@@ -105,6 +105,8 @@ public class beheerCPU extends _BeheerCommon {
     public void addNewRow() {
             CPU cpu = new CPU(addName.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addThreads.getText()),
                     Integer.parseInt(addCores.getText()), Integer.parseInt(addClockSpeed.getText()), Integer.parseInt(addPowerUsage.getText()));
+            jdbi.useHandle(handle -> { handle.execute("insert into CPU (Name, Price, Threads, Cores, Clock_speed, Power_usage) values (?, ?, ?, ?, ?, ?)",
+                    cpu.getName(),cpu.getPrice(),cpu.getThreads(), cpu.getCores(), cpu.getClockSpeed(), cpu.getPowerUsage()); });
             ObservableList<CPU> CPUList = tableView.getItems();
             CPUList.add(cpu);
             tableView.setItems(CPUList);
@@ -132,6 +134,12 @@ public class beheerCPU extends _BeheerCommon {
         modifiedCPU.setCores(Integer.parseInt(addCores.getText()));
         modifiedCPU.setClockSpeed(Integer.parseInt(addClockSpeed.getText()));
         modifiedCPU.setPowerUsage(Integer.parseInt(addPowerUsage.getText()));
+
+        jdbi.useHandle(handle -> {
+            handle.execute("UPDATE CPU SET Name = ? ,Price = ?, Threads = ? , Cores = ? , Clock_speed = ? , Power_usage = ? WHERE Name = ?",
+                    modifiedCPU.getName(), modifiedCPU.getPrice(), modifiedCPU.getThreads(),
+                    modifiedCPU.getCores(), modifiedCPU.getClockSpeed() , modifiedCPU.getPowerUsage());
+        });
 
         ObservableList<CPU> CPUList = tableView.getItems();
         CPUList.set(selectedRow,modifiedCPU);

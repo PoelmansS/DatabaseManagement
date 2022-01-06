@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 
 public class beheerStorage extends _BeheerCommon {
-    Storage modifiedCase;
+    Storage modifiedStorage;
 
     //table
     @FXML
@@ -93,10 +93,13 @@ public class beheerStorage extends _BeheerCommon {
     }
 
     public void addNewRow() {
-        Storage cases = new Storage(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()),
+        Storage storage = new Storage(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()),
                 Integer.parseInt(addSize.getText()), Integer.parseInt(addReadSpeed.getText()), Integer.parseInt(addWriteSpeed.getText()));
+        jdbi.useHandle(handle -> { handle.execute("insert into Storage (Name, Type, Price, Size, Read_speed, Write_speed) values (?, ?, ?, ?, ?, ?)",
+                storage.getName(),storage.getType(),storage.getPrice(),storage.getSize(), storage.getReadSpeed(), storage.getWriteSpeed()); });
+
         ObservableList<Storage> storageList = tableView.getItems();
-        storageList.add(cases);
+        storageList.add(storage);
         tableView.setItems(storageList);
 
 
@@ -111,7 +114,7 @@ public class beheerStorage extends _BeheerCommon {
             addSize.setText(String.valueOf(storage.getSize()));
             addReadSpeed.setText(String.valueOf(storage.getReadSpeed()));
             addWriteSpeed.setText(String.valueOf(storage.getWriteSpeed()));
-            modifiedCase = new Storage(storage.getName(), storage.getType(), storage.getPrice(), storage.getSize(),
+            modifiedStorage = new Storage(storage.getName(), storage.getType(), storage.getPrice(), storage.getSize(),
                     storage.getReadSpeed(), storage.getWriteSpeed());
         }
     }
@@ -119,16 +122,20 @@ public class beheerStorage extends _BeheerCommon {
     public void modifyCurrentRow() {
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
 
-        modifiedCase.setName(addName.getText());
-        modifiedCase.setType(addType.getText());
-        modifiedCase.setPrice(Integer.parseInt(addPrice.getText()));
-        modifiedCase.setSize(Integer.parseInt(addSize.getText()));
-        modifiedCase.setReadSpeed(Integer.parseInt(addReadSpeed.getText()));
-        modifiedCase.setWriteSpeed(Integer.parseInt(addWriteSpeed.getText()));
-
+        modifiedStorage.setName(addName.getText());
+        modifiedStorage.setType(addType.getText());
+        modifiedStorage.setPrice(Integer.parseInt(addPrice.getText()));
+        modifiedStorage.setSize(Integer.parseInt(addSize.getText()));
+        modifiedStorage.setReadSpeed(Integer.parseInt(addReadSpeed.getText()));
+        modifiedStorage.setWriteSpeed(Integer.parseInt(addWriteSpeed.getText()));
+        jdbi.useHandle(handle -> {
+            handle.execute("UPDATE Storage SET Name = ? ,Type = ?, Price = ? , Size = ? , Read_speed = ? , Write_speed = ? WHERE Name = ?",
+                    modifiedStorage.getName(), modifiedStorage.getType(), modifiedStorage.getPrice(),
+                    modifiedStorage.getSize(), modifiedStorage.getWriteSpeed() , modifiedStorage.getReadSpeed());
+        });
 
         ObservableList<Storage> storageList = tableView.getItems();
-        storageList.set(selectedRow, modifiedCase);
+        storageList.set(selectedRow, modifiedStorage);
         tableView.setItems(storageList);
     }
 }
