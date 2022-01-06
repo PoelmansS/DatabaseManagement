@@ -1,5 +1,6 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
 
+import be.kuleuven.pccustomizer.controller.Objects.CPU;
 import be.kuleuven.pccustomizer.controller.Objects.Extra;
 import be.kuleuven.pccustomizer.controller.Objects.Klant;
 import javafx.collections.ObservableList;
@@ -65,7 +66,7 @@ public class Beheerklanten extends _BeheerCommon {
         });
         btnDelete.setOnAction(e -> {
             verifyOneRowSelected(tableView);
-            //deleteCurrentRow();
+            deleteCurrentRow();
         });
         btnLoad.setOnAction(e -> {
             LoadCurrentRow();
@@ -82,7 +83,7 @@ public class Beheerklanten extends _BeheerCommon {
         List<String> firstNames =  readDBstring("Klant","FirstName");
         List<Integer> postalCodes =  readDBint("Klant","PostalCode");
         List<String> streets =  readDBstring("Klant","Street");
-        List<String> numbers =  readDBstring("Klant","Number");
+        List<String> numbers =  readDBstring("Klant","NR");
         List<String> phones =  readDBstring("Klant","Phone");
         List<String> mails =  readDBstring("Klant","Mail");
 
@@ -91,6 +92,16 @@ public class Beheerklanten extends _BeheerCommon {
                     numbers.get(i), phones.get(i), mails.get(i)));
         }
     }
+
+    public void deleteCurrentRow() {
+        ObservableList<Klant> KlantList = tableView.getItems();
+        selectedRow = tableView.getSelectionModel().getSelectedIndex();
+        jdbi.useHandle(handle -> {
+            handle.execute("DELETE FROM Klant WHERE ID = ?", KlantList.get(0).getID());
+        });
+        tableView.getItems().remove(selectedRow);
+    }
+
 
     public void initTable() {
         IDColumn.setCellValueFactory(new PropertyValueFactory<Klant, Integer>("ID"));
@@ -108,11 +119,13 @@ public class Beheerklanten extends _BeheerCommon {
         tableView.setItems(klantList);
     }
     public void addNewRow() {
-        Klant cpu = new Klant(Integer.parseInt(addID.getText()),addLastName.getText(),addFirstName.getText(),Integer.parseInt(addPostalCode.getText()),
+        Klant klant = new Klant(Integer.parseInt(addID.getText()),addLastName.getText(),addFirstName.getText(),Integer.parseInt(addPostalCode.getText()),
                 addStreet.getText(),addNR.getText(),addPhone.getText(),addMail.getText());
-
+        jdbi.useHandle(handle -> { handle.execute("insert into Klant (ID, LastName,FirstName,PostalCode,Street,NR ,Phone,Mail ) values (?, ?, ?, ?, ?, ?,?,?)",
+                klant.getID(),klant.getLastName(),klant.getFirstName(),klant.getPostalCode(),
+                klant.getStreet(),klant.getNumber(),klant.getPhone(),klant.getMail()); });
         ObservableList<Klant> klantList = tableView.getItems();
-        klantList.add(cpu);
+        klantList.add(klant);
         tableView.setItems(klantList);
     }
 
@@ -144,6 +157,13 @@ public class Beheerklanten extends _BeheerCommon {
         modifiedKlant.setNumber(addNR.getText());
         modifiedKlant.setPhone(addPhone.getText());
         modifiedKlant.setMail(addMail.getText());
+
+        jdbi.useHandle(handle -> {
+            handle.execute("UPDATE Klant SET ID = ?,LastName = ?,FirstName = ?,PostalCode = ?,Street = ?,NR = ?,Phone = ?,Mail =? WHERE ID = ?",
+                    modifiedKlant.getID(),modifiedKlant.getLastName(),modifiedKlant.getFirstName(),
+                    modifiedKlant.getPostalCode(),modifiedKlant.getStreet(),modifiedKlant.getNumber(),
+                    modifiedKlant.getPhone(),modifiedKlant.getMail(),modifiedKlant.getID());
+        });
 
         ObservableList<Klant> klantList = tableView.getItems();
         klantList.set(selectedRow,modifiedKlant);
