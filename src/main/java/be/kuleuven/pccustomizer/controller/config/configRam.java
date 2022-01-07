@@ -1,28 +1,43 @@
 package be.kuleuven.pccustomizer.controller.config;
 
+import be.kuleuven.pccustomizer.controller.Objects.RAM;
 import be.kuleuven.pccustomizer.ProjectMain;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class configRam {
+import java.util.ArrayList;
+import java.util.List;
+
+public class configRam extends _beheerConfig {
+    List<RAM> rams = new ArrayList<RAM>();
+    //table
     @FXML
-    private Button btnAdd;
+    private TableView<RAM> tableView;
+
     @FXML
-    private Button btnClose;
+    private TableColumn<RAM, String> nameColumn;
     @FXML
-    private TableView tblComp;
+    private TableColumn<RAM, String> typeColumn;
     @FXML
-    private ListView lstComp;
+    private TableColumn<RAM, Integer> priceColumn;
+    @FXML
+    private TableColumn<RAM, Integer> sizeColumn;
+
 
 
     public void initialize() {
+        ReadFromDB();
+        initTable();
         btnAdd.setOnAction(e -> showBeheerScherm("Storage"));
         btnClose.setOnAction(e -> {
             var stage = (Stage) btnClose.getScene().getWindow();
@@ -47,5 +62,27 @@ public class configRam {
         } catch (Exception e) {
             throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
         }
+    }
+
+    public void ReadFromDB(){
+        List<String> names = readDBstring("RAM","Name");
+        List<String> types =  readDBstring("RAM","Type");
+        List<Integer> prices =  readDBint("RAM","Price");
+        List<Integer> sizes =  readDBint("RAM","Size");
+
+        for(int i = 0; i < names.size(); i++){
+            rams.add(new RAM(names.get(i), types.get(i), prices.get(i), sizes.get(i)));
+        }
+    }
+
+    public void initTable() {
+        nameColumn.setCellValueFactory(new PropertyValueFactory<RAM, String>("name"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<RAM, String>("type"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<RAM, Integer>("price"));
+        sizeColumn.setCellValueFactory(new PropertyValueFactory<RAM, Integer>("size"));
+
+        ObservableList<RAM> RAMList = tableView.getItems();
+        RAMList.addAll(rams);
+        tableView.setItems(RAMList);
     }
 }

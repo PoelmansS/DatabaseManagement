@@ -15,19 +15,21 @@
         </ImageView>
         <Button fx:id="btnAdd" layoutX="465.0" layoutY="349.0" mnemonicParsing="false" text="add component" />
         <Button fx:id="btnClose" layoutX="31.0" layoutY="349.0" mnemonicParsing="false" text="end config" />
-        <TableView fx:id="tblComp" layoutX="212.0" layoutY="58.0" prefHeight="266.0" prefWidth="356.0">
+        <TableView fx:id="tableView" layoutX="212.0" layoutY="58.0" prefHeight="266.0" prefWidth="356.0">
             <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="nameColumn" prefWidth="150.0" text="Name" />
+                <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
+                <TableColumn fx:id="VRAMColumn" prefWidth="75.0" text="VRAM" />
+                <TableColumn fx:id="powerUsageColumn" prefWidth="75" text="PowerUsage" />
             </columns>
         </TableView>
         <Label layoutX="24.0" layoutY="7.0" prefHeight="30.0" prefWidth="101.0" text="GPU">
             <font>
                 <Font name="System Bold Italic" size="20.0" />
             </font></Label>
-        <TableView layoutX="34.0" layoutY="58.0" prefHeight="266.0" prefWidth="140.0">
+        <TableView fx:id="componentView" layoutX="34.0" layoutY="58.0" prefHeight="266.0" prefWidth="140.0">
             <columns>
-                <TableColumn prefWidth="141.0" text="componenten" />
+                <TableColumn fx:id="componentCollum" prefWidth="141.0" text="componenten" />
             </columns>
         </TableView>
       <Button fx:id="btnSkip" layoutX="347.0" layoutY="349.0" mnemonicParsing="false" text="skip component" />
