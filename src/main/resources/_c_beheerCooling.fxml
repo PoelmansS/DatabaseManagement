@@ -12,10 +12,12 @@
                 <Image url="@../../../src/main/resources/_c_bg.png" />
             </image>
         </ImageView>
-        <TableView fx:id="tblConfigs" layoutX="14.0" layoutY="47.0" prefHeight="246.0" prefWidth="567.0">
+        <TableView fx:id="tableView" layoutX="14.0" layoutY="47.0" prefHeight="246.0" prefWidth="567.0">
             <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="nameColumn" prefWidth="150.0" text="Name" />
+                <TableColumn fx:id="typeColumn" prefWidth="75.0" text="Type" />
+                <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
+                <TableColumn fx:id="wattageColumn" prefWidth="75.0" text="Size" />
             </columns>
         </TableView>
         <Text layoutX="9.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beheer Cooling" wrappingWidth="567.21875">
@@ -28,10 +30,16 @@
         <Button fx:id="btnClose" layoutX="520.0" layoutY="304.0" mnemonicParsing="false" text="Sluiten" />
         <Button fx:id="btnDelete" layoutX="431.0" layoutY="304.0" mnemonicParsing="false" text="Verwijder" />
         <Button fx:id="btnLoad" layoutX="16.0" layoutY="304.0" mnemonicParsing="false" text="Load" />
-      <Text layoutX="60.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNDER CONSTRUCTION" underline="true" wrappingWidth="317.13671875">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Text>
+
+        <TextField fx:id="addName" layoutX="91.0" layoutY="360.0" prefHeight="25.0" prefWidth="67.0" />
+        <TextField fx:id="addType" layoutX="167.0" layoutY="360.0" prefHeight="25.0" prefWidth="92.0" />
+        <TextField fx:id="addPrice" layoutX="267.0" layoutY="360.0" prefHeight="25.0" prefWidth="85.0" />
+        <TextField fx:id="addWattage" layoutX="362.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
+
+        <Text layoutX="91.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="53.0" />
+        <Text layoutX="167.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" wrappingWidth="92.0" />
+        <Text layoutX="267.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" />
+        <Text layoutX="362.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wattage" />
+
     </children>
 </AnchorPane>

@@ -1,5 +1,6 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
 import be.kuleuven.pccustomizer.controller.Objects.Bestelling;
+import be.kuleuven.pccustomizer.controller.Objects.CustomPC;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -14,6 +15,7 @@ import java.util.List;
 public class beheerBestelling extends _BeheerCommon {
     Bestelling modifiedBestelling;
     List<Bestelling> bestellingen = new ArrayList<Bestelling>();
+    String comp ;
     //table
     @FXML
     private TableView<Bestelling> tableView;
@@ -91,9 +93,31 @@ public class beheerBestelling extends _BeheerCommon {
         tableView.getItems().remove(selectedRow);
     }
 
+
+    private  List<CustomPC> readPC(){
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT Motherbord, CPU, GPU, PcCase, RAM, Power_supply, Extra, Cooling FROM Computer WHERE Name LIKE "+ comp  +";")
+                        .mapTo(CustomPC.class)
+                        .list());
+    }
+
+
     public void addNewRow() {
-        Bestelling bestelling = new Bestelling(Integer.parseInt(addID.getText()),Integer.parseInt(addKlant.getText())
-                , addComputer.getText(),Integer.parseInt(addPrice.getText()));
+        String comp = addComputer.getText();
+        int price = 0;
+        List<CustomPC> pc = readPC();
+        System.out.println(pc);
+        //TODO
+        //make it so the price gets calculated based on the price of all the components in computer
+
+        jdbi.useHandle(handle -> { handle.execute(
+                "SELECT Motherbord, CPU, GPU, PcCase, RAM, Power_supply, Extra, Cooling FROM Computer WHERE Name LIKE "+ comp  +";"
+
+
+        ); });
+
+        Bestelling bestelling = new Bestelling(Integer.parseInt(addID.getText()),Integer.parseInt(addKlant.getText()),comp ,price);
+
         jdbi.useHandle(handle -> { handle.execute("insert into Bestelling (ID,Klant,Computer,Price) values (?, ?, ?, ?)",
                 bestelling.getID(),bestelling.getKlant(),bestelling.getComputer(),bestelling.getPrice()); });
 
