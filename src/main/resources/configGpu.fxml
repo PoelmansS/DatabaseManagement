@@ -21,7 +21,7 @@
                 <TableColumn prefWidth="75.0" text="C2" />
             </columns>
         </TableView>
-        <Label layoutX="24.0" layoutY="7.0" prefHeight="30.0" prefWidth="101.0" text="Case">
+        <Label layoutX="24.0" layoutY="7.0" prefHeight="30.0" prefWidth="101.0" text="GPU">
             <font>
                 <Font name="System Bold Italic" size="20.0" />
             </font></Label>

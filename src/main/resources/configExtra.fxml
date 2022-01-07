@@ -21,8 +21,7 @@
                 <TableColumn prefWidth="75.0" text="C2" />
             </columns>
         </TableView>
-        <TextField layoutX="30.0" layoutY="14.0" prefHeight="25.0" prefWidth="39.0" text="Extra" />
-        <Label layoutX="24.0" layoutY="7.0" prefHeight="30.0" prefWidth="101.0" text="Case">
+        <Label layoutX="24.0" layoutY="7.0" prefHeight="30.0" prefWidth="101.0" text="Extra">
             <font>
                 <Font name="System Bold Italic" size="20.0" />
             </font></Label>
