@@ -1,6 +1,7 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
 
 import be.kuleuven.pccustomizer.controller.Objects.Case;
+import be.kuleuven.pccustomizer.controller.Objects.RAM;
 import be.kuleuven.pccustomizer.controller.Objects.Storage;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,10 +9,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class beheerStorage extends _BeheerCommon {
     Storage modifiedStorage;
-
+    List<Storage> storages = new ArrayList<Storage>();
     //table
     @FXML
     private TableView<Storage> tableView;
@@ -43,6 +47,7 @@ public class beheerStorage extends _BeheerCommon {
     private TableColumn<Storage, Integer> writeSpeedColumn;
 
     public void initialize() {
+        ReadFromDB();
         initTable();
         btnAdd.setOnAction(e -> {
             verifyInput();
@@ -63,7 +68,18 @@ public class beheerStorage extends _BeheerCommon {
             stage.close();
         });
     }
+    public void ReadFromDB(){
+        List<String> names = readDBstring("Storage","Name");
+        List<String> types =  readDBstring("Storage","Type");
+        List<Integer> prices =  readDBint("Storage","Price");
+        List<Integer> sizes =  readDBint("Storage","Size");
+        List<Integer> readSpeeds =  readDBint("Storage","Read_speed");
+        List<Integer> writeSpeeds =  readDBint("Storage","Write_speed");
 
+        for(int i = 0; i < names.size(); i++){
+            storages.add(new Storage(names.get(i), types.get(i), prices.get(i), sizes.get(i), readSpeeds.get(i), writeSpeeds.get(i)));
+        }
+    }
     public void initTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<Storage, String>("name"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Storage, String>("type"));
@@ -72,13 +88,8 @@ public class beheerStorage extends _BeheerCommon {
         readSpeedColumn.setCellValueFactory(new PropertyValueFactory<Storage, Integer>("readSpeed"));
         writeSpeedColumn.setCellValueFactory(new PropertyValueFactory<Storage, Integer>("writeSpeed"));
 
-        Storage storage1 = new Storage("storage1", "HDD", 50, 5,300,100);
-        Storage storage2 = new Storage("storage2", "SSD", 100, 1 , 800, 300);
-        Storage storage3 = new Storage("storage3", "SSD", 350, 3, 800, 300);
         ObservableList<Storage> storageList = tableView.getItems();
-        storageList.add(storage1);
-        storageList.add(storage2);
-        storageList.add(storage3);
+        storageList.addAll(storages);
         tableView.setItems(storageList);
 
     }
