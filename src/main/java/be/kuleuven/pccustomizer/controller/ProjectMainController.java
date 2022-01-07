@@ -23,6 +23,8 @@ public class ProjectMainController {
     private Button btnKlanten;
     @FXML
     private Button btnCart;
+    @FXML
+    private Button btnBestellingen;
 
     public void initialize() {
         btnHwComponenten.setOnAction(e -> showBeheerScherm("hwcomponenten"));
@@ -30,6 +32,7 @@ public class ProjectMainController {
         btnConfigAttaches.setOnAction(e -> showConfigScherm("Cpu"));
         btnKlanten.setOnAction(e -> showBeheerScherm("klanten"));
         btnCart.setOnAction(e -> showBeheerScherm("cart"));
+        btnBestellingen.setOnAction(e -> showBeheerScherm("bestelling"));
     }
 
     private void showBeheerScherm(String id) {

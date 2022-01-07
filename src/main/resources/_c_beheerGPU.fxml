@@ -14,10 +14,10 @@
         </ImageView>
         <TableView fx:id="tableView" layoutX="14.0" layoutY="47.0" prefHeight="246.0" prefWidth="567.0">
             <columns>
-                <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
+                <TableColumn fx:id="nameColumn" prefWidth="150.0" text="Name" />
                 <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
                 <TableColumn fx:id="VRAMColumn" prefWidth="75.0" text="VRAM" />
-                <TableColumn fx:id="powerUsageColumn" prefWidth="100" text="PowerUsage" />
+                <TableColumn fx:id="powerUsageColumn" prefWidth="75" text="PowerUsage" />
             </columns>
         </TableView>
         <Text layoutX="9.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beheer GPU" wrappingWidth="567.21875">

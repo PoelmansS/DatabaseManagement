@@ -14,12 +14,12 @@
         </ImageView>
         <TableView fx:id="tableView" layoutX="14.0" layoutY="47.0" prefHeight="246.0" prefWidth="567.0">
             <columns>
-                <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
+                <TableColumn fx:id="nameColumn" prefWidth="150.0" text="Name" />
                 <TableColumn fx:id="typeColumn" prefWidth="75.0" text="Type" />
                 <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
                 <TableColumn fx:id="sizeColumn" prefWidth="75.0" text="Size" />
-                <TableColumn fx:id="readSpeedColumn" prefWidth="100.0" text="Read Speed" />
-                <TableColumn fx:id="writeSpeedColumn" prefWidth="100.0" text="Write Speed" />
+                <TableColumn fx:id="readSpeedColumn" prefWidth="75.0" text="Read Speed" />
+                <TableColumn fx:id="writeSpeedColumn" prefWidth="75.0" text="Write Speed" />
             </columns>
         </TableView>
         <Text layoutX="9.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beheer Storage" wrappingWidth="567.21875">
