@@ -1,8 +1,11 @@
 package be.kuleuven.pccustomizer.controller.config;
 
 import be.kuleuven.pccustomizer.controller.Objects.GPU;
+import be.kuleuven.pccustomizer.controller.Objects.Component;
 import be.kuleuven.pccustomizer.ProjectMain;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configGpu extends _beheerConfig{
+    Component component = new Component();
     List<GPU> gpus = new ArrayList<GPU>();
     //table
     @FXML
@@ -37,18 +41,22 @@ public class configGpu extends _beheerConfig{
 
 
     public void initialize() {
-        System.out.println(componenten);
-        ObservableList<String> oComponenten = componentView.getItems();
-        oComponenten.addAll(componenten);
-        componentView.setItems(oComponenten);
+        initTableComponenten();
         ReadFromDB();
         initTable();
-        btnAdd.setOnAction(e -> showBeheerScherm("Ram"));
+        btnAdd.setOnAction(e -> {
+            if (tableView.getSelectionModel().getSelectedItem() != null) {
+                addComponent();
+                showBeheerScherm("Ram");
+            }});
         btnClose.setOnAction(e -> {
             var stage = (Stage) btnClose.getScene().getWindow();
             stage.close();
         });
-        btnSkip.setOnAction(e -> showBeheerScherm("Ram"));
+        btnSkip.setOnAction(e -> {
+            skipComponent();
+            showBeheerScherm("Ram");
+        });
     }
 
     private void showBeheerScherm(String id) {
@@ -90,5 +98,27 @@ public class configGpu extends _beheerConfig{
         ObservableList<GPU> GPUList = tableView.getItems();
         GPUList.addAll(gpus);
         tableView.setItems(GPUList);
+    }
+
+    private void addComponent(){
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            GPU gpu = tableView.getSelectionModel().getSelectedItem();
+            component.setName(gpu.getName());
+            componenten.add(component);
+        }
+    }
+
+    private void skipComponent(){
+        GPU gpu = tableView.getSelectionModel().getSelectedItem();
+        component.setName("");
+        componenten.add(component);
+    }
+
+    public void initTableComponenten() {
+        componentColumn.setCellValueFactory(new PropertyValueFactory<Component, String>("name"));
+        ObservableList<Component> viewComponenten = FXCollections.observableArrayList();
+        viewComponenten.addAll(componenten);
+        System.out.println(viewComponenten);
+        componentView.setItems(viewComponenten);
     }
 }

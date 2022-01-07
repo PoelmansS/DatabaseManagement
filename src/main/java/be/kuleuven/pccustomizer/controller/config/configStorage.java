@@ -1,7 +1,9 @@
 package be.kuleuven.pccustomizer.controller.config;
 
+import be.kuleuven.pccustomizer.controller.Objects.Component;
 import be.kuleuven.pccustomizer.controller.Objects.Storage;
 import be.kuleuven.pccustomizer.ProjectMain;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configStorage extends _beheerConfig {
+    Component component = new Component();
     List<Storage> storages = new ArrayList<Storage>();
     //table
     @FXML
@@ -38,9 +41,14 @@ public class configStorage extends _beheerConfig {
     private TableColumn<Storage, Integer> writeSpeedColumn;
 
     public void initialize() {
+        initTableComponenten();
         ReadFromDB();
         initTable();
-        btnAdd.setOnAction(e -> showBeheerScherm("Motherboard"));
+        btnAdd.setOnAction(e -> {
+            if (tableView.getSelectionModel().getSelectedItem() != null) {
+                addComponent();
+                showBeheerScherm("Motherboard");
+            }});
         btnClose.setOnAction(e -> {
             var stage = (Stage) btnClose.getScene().getWindow();
             stage.close();
@@ -89,5 +97,21 @@ public class configStorage extends _beheerConfig {
         ObservableList<Storage> storageList = tableView.getItems();
         storageList.addAll(storages);
         tableView.setItems(storageList);
+    }
+
+    private void addComponent(){
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            Storage storage = tableView.getSelectionModel().getSelectedItem();
+            component.setName(storage.getName());
+            componenten.add(component);
+        }
+    }
+
+    public void initTableComponenten() {
+        componentColumn.setCellValueFactory(new PropertyValueFactory<Component, String>("name"));
+        ObservableList<Component> viewComponenten = FXCollections.observableArrayList();
+        viewComponenten.addAll(componenten);
+        System.out.println(viewComponenten);
+        componentView.setItems(viewComponenten);
     }
 }

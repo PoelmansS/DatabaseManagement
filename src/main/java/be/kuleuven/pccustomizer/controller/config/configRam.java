@@ -1,7 +1,9 @@
 package be.kuleuven.pccustomizer.controller.config;
 
+import be.kuleuven.pccustomizer.controller.Objects.Component;
 import be.kuleuven.pccustomizer.controller.Objects.RAM;
 import be.kuleuven.pccustomizer.ProjectMain;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configRam extends _beheerConfig {
+    Component component = new Component();
     List<RAM> rams = new ArrayList<RAM>();
     //table
     @FXML
@@ -36,9 +39,14 @@ public class configRam extends _beheerConfig {
 
 
     public void initialize() {
+        initTableComponenten();
         ReadFromDB();
         initTable();
-        btnAdd.setOnAction(e -> showBeheerScherm("Storage"));
+        btnAdd.setOnAction(e -> {
+            if (tableView.getSelectionModel().getSelectedItem() != null) {
+                addComponent();
+                showBeheerScherm("Storage");
+            }});
         btnClose.setOnAction(e -> {
             var stage = (Stage) btnClose.getScene().getWindow();
             stage.close();
@@ -84,5 +92,21 @@ public class configRam extends _beheerConfig {
         ObservableList<RAM> RAMList = tableView.getItems();
         RAMList.addAll(rams);
         tableView.setItems(RAMList);
+    }
+
+    private void addComponent(){
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            RAM ram = tableView.getSelectionModel().getSelectedItem();
+            component.setName(ram.getName());
+            componenten.add(component);
+        }
+    }
+
+    public void initTableComponenten() {
+        componentColumn.setCellValueFactory(new PropertyValueFactory<Component, String>("name"));
+        ObservableList<Component> viewComponenten = FXCollections.observableArrayList();
+        viewComponenten.addAll(componenten);
+        System.out.println(viewComponenten);
+        componentView.setItems(viewComponenten);
     }
 }

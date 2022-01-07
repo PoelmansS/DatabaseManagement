@@ -1,6 +1,7 @@
 package be.kuleuven.pccustomizer.controller.config;
 
 import be.kuleuven.pccustomizer.controller.Objects.CPU;
+import be.kuleuven.pccustomizer.controller.Objects.Component;
 import be.kuleuven.pccustomizer.ProjectMain;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configCpu  extends _beheerConfig{
+    Component component = new Component();
     List<CPU> cpus = new ArrayList<CPU>();
     @FXML
     private TableView<CPU> tableView;
@@ -38,6 +40,7 @@ public class configCpu  extends _beheerConfig{
     private TableColumn<CPU, Integer> powerUsageColumn;
 
     public void initialize() {
+        componenten.clear();
         ReadFromDB();
         initTable();
         btnAdd.setOnAction(e -> {
@@ -66,7 +69,8 @@ public class configCpu  extends _beheerConfig{
             stage.initModality(Modality.WINDOW_MODAL);
             stage.show();
 
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
         }
     }
@@ -100,14 +104,8 @@ public class configCpu  extends _beheerConfig{
     private void addComponent(){
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             CPU cpu = tableView.getSelectionModel().getSelectedItem();
-            System.out.println(cpu.getName());
-            String c = cpu.getName();
-            componenten.add(c);
-            /*
-            componenten = componentView.getItems();
-            componenten.addAll(cpu.getName());
-            componentView.setItems(componenten);
-           */
+            component.setName(cpu.getName());
+            componenten.add(component);
         }
     }
 

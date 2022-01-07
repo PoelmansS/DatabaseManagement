@@ -2,6 +2,8 @@ package be.kuleuven.pccustomizer.controller.config;
 
 import be.kuleuven.pccustomizer.controller.Objects.Case;
 import be.kuleuven.pccustomizer.ProjectMain;
+import be.kuleuven.pccustomizer.controller.Objects.Component;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configCase extends _beheerConfig{
+    Component component = new Component();
     List<Case> cases = new ArrayList<Case>();
 
     @FXML
@@ -35,9 +38,15 @@ public class configCase extends _beheerConfig{
     private TableColumn<Case, String> sizeColumn;
 
     public void initialize() {
+        Component component = new Component();
+        initTableComponenten();
         ReadFromDB();
         initTable();
-        btnAdd.setOnAction(e -> showBeheerScherm("Extra"));
+        btnAdd.setOnAction(e -> {
+            if (tableView.getSelectionModel().getSelectedItem() != null) {
+                addComponent();
+                showBeheerScherm("Extra");
+            }});
         btnClose.setOnAction(e -> {
             var stage = (Stage) btnClose.getScene().getWindow();
             stage.close();
@@ -84,5 +93,21 @@ public class configCase extends _beheerConfig{
         caseList.addAll(cases);
         tableView.setItems(caseList);
 
+    }
+
+    private void addComponent(){
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            Case cases = tableView.getSelectionModel().getSelectedItem();
+            component.setName(cases.getName());
+            componenten.add(component);
+        }
+    }
+
+    public void initTableComponenten() {
+        componentColumn.setCellValueFactory(new PropertyValueFactory<Component, String>("name"));
+        ObservableList<Component> viewComponenten = FXCollections.observableArrayList();
+        viewComponenten.addAll(componenten);
+        System.out.println(viewComponenten);
+        componentView.setItems(viewComponenten);
     }
 }

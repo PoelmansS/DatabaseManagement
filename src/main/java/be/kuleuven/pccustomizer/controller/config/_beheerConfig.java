@@ -1,6 +1,7 @@
 package be.kuleuven.pccustomizer.controller.config;
 
 import be.kuleuven.pccustomizer.controller.SQLiteClient;
+import be.kuleuven.pccustomizer.controller.Objects.Component;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -14,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class _beheerConfig {
-    public List<String> componenten = new ArrayList();
-    
+    public static List<Component> componenten = new ArrayList();
+
     int selectedRow;
     SQLiteClient client = new SQLiteClient();
     Jdbi jdbi = client.getJdbi();
@@ -25,9 +26,9 @@ public class _beheerConfig {
     @FXML
     public Button btnClose;
     @FXML
-    public TableView<String> componentView;
+    public TableView<Component> componentView;
     @FXML
-    public TableColumn<String, String> componentCollum;
+    public TableColumn<Component, String> componentColumn;
 
 
     public List<String> readDBstring(String clas, String columnName){

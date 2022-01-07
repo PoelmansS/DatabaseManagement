@@ -1,7 +1,9 @@
 package be.kuleuven.pccustomizer.controller.config;
 
+import be.kuleuven.pccustomizer.controller.Objects.Component;
 import be.kuleuven.pccustomizer.controller.Objects.MotherBoard;
 import be.kuleuven.pccustomizer.ProjectMain;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configMotherboard extends _beheerConfig {
+    Component component = new Component();
     List<MotherBoard> motherBoards = new ArrayList<MotherBoard>();
     //table
     @FXML
@@ -38,9 +41,14 @@ public class configMotherboard extends _beheerConfig {
     private TableColumn<MotherBoard, Integer> PCIESlotsColumn;
 
     public void initialize() {
+        initTableComponenten();
         ReadFromDB();
         initTable();
-        btnAdd.setOnAction(e -> showBeheerScherm("Cooling"));
+        btnAdd.setOnAction(e -> {
+            if (tableView.getSelectionModel().getSelectedItem() != null) {
+                addComponent();
+                showBeheerScherm("Cooling");
+            }});
         btnClose.setOnAction(e -> {
             var stage = (Stage) btnClose.getScene().getWindow();
             stage.close();
@@ -91,5 +99,21 @@ public class configMotherboard extends _beheerConfig {
         ObservableList<MotherBoard> MotherBoardList = tableView.getItems();
         MotherBoardList.addAll(motherBoards);
         tableView.setItems(MotherBoardList);
+    }
+
+    private void addComponent(){
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            MotherBoard motherBoard = tableView.getSelectionModel().getSelectedItem();
+            component.setName(motherBoard.getName());
+            componenten.add(component);
+        }
+    }
+
+    public void initTableComponenten() {
+        componentColumn.setCellValueFactory(new PropertyValueFactory<Component, String>("name"));
+        ObservableList<Component> viewComponenten = FXCollections.observableArrayList();
+        viewComponenten.addAll(componenten);
+        System.out.println(viewComponenten);
+        componentView.setItems(viewComponenten);
     }
 }
