@@ -1,7 +1,4 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
-
-import be.kuleuven.pccustomizer.controller.Beheer._BeheerCommon;
-import be.kuleuven.pccustomizer.controller.Beheer._BeheerCommon.*;
 import be.kuleuven.pccustomizer.controller.Objects.Bestelling;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -123,10 +120,8 @@ public class beheerBestelling extends _BeheerCommon {
         modifiedBestelling.setComputer(addComputer.getText());
         modifiedBestelling.setPrice(Integer.parseInt(addPrice.getText()));
 
-        jdbi.useHandle(handle -> {
-            handle.execute("UPDATE Bestelling SET ID = ? ,Klant = ?, Computer = ? , Price = ? WHERE ID = ?",
-                    modifiedBestelling.getID(), modifiedBestelling.getKlant(), modifiedBestelling.getComputer(), modifiedBestelling.getPrice(), modifiedBestelling.getID());
-        });
+        jdbi.useHandle(handle -> handle.execute("UPDATE Bestelling SET ID = ? ,Klant = ?, Computer = ? , Price = ? WHERE ID = ?",
+                modifiedBestelling.getID(), modifiedBestelling.getKlant(), modifiedBestelling.getComputer(), modifiedBestelling.getPrice(), modifiedBestelling.getID()));
         ObservableList<Bestelling> bestellingList = tableView.getItems();
         bestellingList.set(selectedRow,modifiedBestelling);
         tableView.setItems(bestellingList);
