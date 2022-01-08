@@ -1,13 +1,19 @@
 package be.kuleuven.pccustomizer.controller.config;
 
+import be.kuleuven.pccustomizer.ProjectMain;
 import be.kuleuven.pccustomizer.controller.SQLiteClient;
 import be.kuleuven.pccustomizer.controller.Objects.Component;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 
@@ -17,7 +23,6 @@ import java.util.List;
 public class _beheerConfig {
     public static List<Component> componenten = new ArrayList();
 
-    int selectedRow;
     SQLiteClient client = new SQLiteClient();
     Jdbi jdbi = client.getJdbi();
 
@@ -61,30 +66,23 @@ public class _beheerConfig {
         return list;
     }
 
-    public void showAlert(String title, String content) {
-        var alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(title);
-        alert.setHeaderText(title);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
+    public void showBeheerScherm(String id) {
+        var resourceName = "config" + id + ".fxml";
+        try {
+            var stageCur = (Stage) btnClose.getScene().getWindow();
+            stageCur.close();
+            var stage = new Stage();
+            var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));
+            var scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Admin " + id);
+            stage.initOwner(ProjectMain.getRootStage());
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.show();
 
-    public void verifyOneRowSelected(TableView tbl) {
-        if(tbl.getSelectionModel().getSelectedCells().size() == 0) {
-            showAlert("Hela!", "Eerst een record selecteren hé.");
+        } catch (Exception e) {
+            throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
         }
     }
 
-    void addNewRow(){}
-    void modifyCurrentRow(){}
-
-    public void verifyInput() {
-        try { addNewRow(); }
-        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
-    }
-
-    public void verifyModifyInput() {
-        try { modifyCurrentRow(); }
-        catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
-    }
 }

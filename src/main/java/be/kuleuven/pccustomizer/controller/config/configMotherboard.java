@@ -55,24 +55,6 @@ public class configMotherboard extends _beheerConfig {
         });
     }
 
-    private void showBeheerScherm(String id) {
-        var resourceName = "config" + id + ".fxml";
-        try {
-            var stageCur = (Stage) btnClose.getScene().getWindow();
-            stageCur.close();
-            var stage = new Stage();
-            var root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource(resourceName));
-            var scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Admin " + id);
-            stage.initOwner(ProjectMain.getRootStage());
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.show();
-
-        } catch (Exception e) {
-            throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
-        }
-    }
 
     public void ReadFromDB(){
         List<String> names = readDBstring("MotherBord","Name");
