@@ -6,16 +6,18 @@ public class CustomPC {
     String name;
     String type;
     int price;
-    MotherBoard motherBoard;
-    CPU cpu;
-    GPU gpu;
-    RAM ram;
-    Case cases;
-    PSU psu;
-    Storage storage;
-    Cooling cooling;
+    String motherBoard;
+    String cpu;
+    String gpu;
+    String ram;
+    String cases;
+    String psu;
+    String storage;
+    String cooling;
+    String extra;
+    public CustomPC(){}
 
-    public CustomPC(String name, String type, int price, MotherBoard motherBoard, CPU cpu, GPU gpu, RAM ram, Case cases, PSU psu, Storage storage, Cooling cooling) {
+    public CustomPC(String name, String type, int price, String motherBoard, String cpu, String gpu, String ram, String cases, String psu, String storage, String cooling, String extra) {
         this.name = name;
         this.type = type;
         this.price = price;
@@ -27,8 +29,8 @@ public class CustomPC {
         this.psu = psu;
         this.storage = storage;
         this.cooling = cooling;
+        this.extra = extra;
     }
-
 
     public String getName() {
         return name;
@@ -50,78 +52,80 @@ public class CustomPC {
         return price;
     }
 
-    public void setPrice() {
-        this.price = motherBoard.getPrice() +
-                cpu.getPrice() +
-                gpu.getPrice() +
-                ram.getPrice() +
-                cases.getPrice() +
-                psu.getPrice() +
-                storage.getPrice() +
-                cooling.getPrice();
-    }
 
-    public MotherBoard getMotherBoard() {
+    public String getMotherBoard() {
         return motherBoard;
     }
 
-    public void setMotherBoard(MotherBoard motherBoard) {
+    public void setMotherBoard(String motherBoard) {
         this.motherBoard = motherBoard;
     }
 
-    public CPU getCpu() {
+    public String getCpu() {
         return cpu;
     }
 
-    public void setCpu(CPU cpu) {
+    public void setCpu(String cpu) {
         this.cpu = cpu;
     }
 
-    public GPU getGpu() {
+    public String getGpu() {
         return gpu;
     }
 
-    public void setGpu(GPU gpu) {
+    public void setGpu(String gpu) {
         this.gpu = gpu;
     }
 
-    public RAM getRam() {
+    public String getRam() {
         return ram;
     }
 
-    public void setRam(RAM ram) {
+    public void setRam(String ram) {
         this.ram = ram;
     }
 
-    public Case getCases() {
+    public String getCases() {
         return cases;
     }
 
-    public void setCases(Case cases) {
+    public void setCases(String cases) {
         this.cases = cases;
     }
 
-    public PSU getPsu() {
+    public String getPsu() {
         return psu;
     }
 
-    public void setPsu(PSU psu) {
+    public void setPsu(String psu) {
         this.psu = psu;
     }
 
-    public Storage getStorage() {
+    public String getStorage() {
         return storage;
     }
 
-    public void setStorage(Storage storage) {
+    public void setStorage(String storage) {
         this.storage = storage;
     }
 
-    public Cooling getCooling() {
+    public String getCooling() {
         return cooling;
     }
 
-    public void setCooling(Cooling cooling) {
+    public void setCooling(String cooling) {
         this.cooling = cooling;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public String getExtra() {
+        return extra;
+    }
+
+    public void setExtra(String extra) {
+        this.extra = extra;
     }
 }

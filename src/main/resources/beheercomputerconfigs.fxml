@@ -5,17 +5,27 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="356.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.pccustomizer.controller.BeheerComputerConfigsController">
+<AnchorPane prefHeight="356.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.pccustomizer.controller.Beheer.BeheerComputerConfigs">
    <children>
       <ImageView fitHeight="422.0" fitWidth="612.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../src/main/resources/_c_bg.png" />
          </image>
       </ImageView>
-      <TableView fx:id="tblConfigs" layoutX="14.0" layoutY="47.0" prefHeight="246.0" prefWidth="567.0">
+      <TableView fx:id="tableView" layoutX="14.0" layoutY="47.0" prefHeight="246.0" prefWidth="567.0">
         <columns>
-          <TableColumn prefWidth="75.0" />
-          <TableColumn prefWidth="75.0" />
+           <TableColumn fx:id="nameColumn" prefWidth="100.0" text="Name" />
+           <TableColumn fx:id="typeColumn" prefWidth="75.0" text="Type" />
+           <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
+           <TableColumn fx:id="motherBoardColumn" prefWidth="75.0" text="Motherboard" />
+           <TableColumn fx:id="cpuColumn" prefWidth="75.0" text="CPU" />
+           <TableColumn fx:id="gpuColumn" prefWidth="75.0" text="GPU" />
+           <TableColumn fx:id="ramColumn" prefWidth="75.0" text="RAM" />
+           <TableColumn fx:id="casesColumn" prefWidth="75.0" text="Case" />
+           <TableColumn fx:id="psuColumn" prefWidth="75.0" text="PSU" />
+           <TableColumn fx:id="storageColumn" prefWidth="75.0" text="Storage" />
+           <TableColumn fx:id="coolingColumn" prefWidth="75.0" text="Cooling" />
+           <TableColumn fx:id="extraColumn" prefWidth="75.0" text="Extra" />
         </columns>
       </TableView>
       <Text layoutX="16.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beheer computer configs" wrappingWidth="567.21875">
@@ -23,8 +33,6 @@
             <Font name="System Bold Italic" size="13.0" />
          </font>
       </Text>
-      <Button fx:id="btnAdd" layoutX="16.0" layoutY="304.0" mnemonicParsing="false" text="Voeg Toe" />
-      <Button fx:id="btnModify" layoutX="104.0" layoutY="304.0" mnemonicParsing="false" text="Bewerk" />
       <Button fx:id="btnClose" layoutX="520.0" layoutY="304.0" mnemonicParsing="false" text="Sluiten" />
       <Button fx:id="btnDelete" layoutX="431.0" layoutY="304.0" mnemonicParsing="false" text="Verwijder" />
    </children>

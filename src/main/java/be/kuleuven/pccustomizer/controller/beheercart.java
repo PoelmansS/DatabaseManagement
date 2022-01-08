@@ -186,7 +186,7 @@ public class beheercart {
 
         modifiedCustomPC.setName(addName.getText());
         modifiedCustomPC.setType(addType.getText());
-        modifiedCustomPC.setPrice();
+        //modifiedCustomPC.setPrice();
         //TODO fix
 
         ObservableList<CustomPC> CustomPCList = tableView.getItems();

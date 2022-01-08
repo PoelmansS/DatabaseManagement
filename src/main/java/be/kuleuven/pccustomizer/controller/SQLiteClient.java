@@ -89,4 +89,24 @@ public class SQLiteClient {
             handle.execute("DELETE FROM Extra WHERE Name = ?", name);
         });
     }
+
+    public Integer readAndCalculateDBint(String clas, String columnName, String item){
+        Integer i = jdbi.withHandle(handle ->
+                handle.createQuery("SELECT " + columnName + " FROM " + clas + " WHERE Name = :Name")
+                        .bind("Name", item)
+                        .mapTo(Integer.class)
+                        .one());
+        System.out.println(i);
+        return i;
+    }
+
+    public Integer readAndCalculateDBintV(String name){
+        Integer i = jdbi.withHandle(handle ->
+                handle.createQuery("SELECT Price FROM CPU WHERE Name = :Name")
+                        .bind("Name", name)
+                        .mapTo(Integer.class)
+                        .one());
+        System.out.println(i);
+        return i;
+    }
 }
