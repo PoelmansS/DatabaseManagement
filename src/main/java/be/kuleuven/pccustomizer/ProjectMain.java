@@ -42,13 +42,6 @@ public class ProjectMain extends Application {
     }
 
     public static void main(String[] args) {
-        SQLiteClient client = new SQLiteClient();
-        client.voorbeeldFunctieVullen();
-        client.deleteVoorbeeldDFunctie("cd speler apple");
-        //client.voegToeVoorbeeldFunctie("cd speler apple", "cd speler", 100);
-        //List<String> cpus = Collections.emptyList();
-        //client.getCollomS("CPU", "Computer", cpus);
-        //System.out.println(cpus);
         launch();
     }
 }

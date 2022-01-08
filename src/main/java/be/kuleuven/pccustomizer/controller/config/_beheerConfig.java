@@ -37,18 +37,22 @@ public class _beheerConfig {
                         .mapTo(String.class)
                         .list());
     }
+
     public List<Integer> readDBint(String clas, String columnName){
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT " + columnName + " FROM " + clas)
                         .mapTo(Integer.class)
                         .list());
     }
+
     public Integer readAndCalculateDBint(String clas, String columnName, String item){
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT " + columnName + " FROM " + clas + " WHERE Name = " + item)
+                handle.createQuery("SELECT " + columnName + " FROM " + clas + " WHERE Name = :Name")
+                        .bind("Name", item)
                         .mapTo(Integer.class)
                         .one());
     }
+
     public List<Boolean> readDBbool(String clas, String columnName){
         List<Boolean> list = jdbi.withHandle(handle ->
                 handle.createQuery("SELECT " + columnName + " FROM " + clas)
@@ -56,6 +60,7 @@ public class _beheerConfig {
                         .list());
         return list;
     }
+
     public void showAlert(String title, String content) {
         var alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(title);
@@ -77,6 +82,7 @@ public class _beheerConfig {
         try { addNewRow(); }
         catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
     }
+
     public void verifyModifyInput() {
         try { modifyCurrentRow(); }
         catch (Exception e){ showAlert("Unseported Entry","You tried entering an incorrect value"); }
