@@ -72,7 +72,6 @@ public class configGPU extends _ConfigCommon {
     }
 
     private void skipComponent(){
-        GPU gpu = tableView.getSelectionModel().getSelectedItem();
         component.setName("");
         componenten.add(component);
     }

@@ -73,10 +73,8 @@ public class BeheerComputerConfigs extends _BeheerCommon {
         List<String> extras =   readDBstring("Computer","Extra");
 
         for(int i = 0; i < names.size(); i++){
-            System.out.println(i);
             customPCs.add(new CustomPC(names.get(i),types.get(i),prices.get(i), motherboards.get(i),cpus.get(i),
                     gpus.get(i), rams.get(i), cases.get(i), psus.get(i), storages.get(i),coolings.get(i), extras.get(i)));
-            System.out.println(customPCs.get(i));
         }
     }
 

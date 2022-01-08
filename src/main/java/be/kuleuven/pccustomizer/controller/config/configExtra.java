@@ -34,8 +34,7 @@ public class configExtra extends _ConfigCommon {
         init(tableView, "Checkout");
         btnSkip.setOnAction(e -> {
             skipComponent();
-            var stage = (Stage) btnClose.getScene().getWindow();
-            stage.close();
+            showBeheerScherm("Checkout");
         });
     }
 
@@ -70,7 +69,6 @@ public class configExtra extends _ConfigCommon {
     }
 
     private void skipComponent(){
-        Extra extra = tableView.getSelectionModel().getSelectedItem();
         component.setName("");
         componenten.add(component);
     }
