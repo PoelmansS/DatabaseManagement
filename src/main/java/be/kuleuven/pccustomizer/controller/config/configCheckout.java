@@ -114,6 +114,7 @@ public class configCheckout extends _beheerConfig{
     }
 
     private void calculatePriceFromDB(){
+        totalPrice = 0;
         totalPrice = totalPrice + readAndCalculateDBint("CPU", "Price", componenten.get(0).getName());
         totalPrice = totalPrice + readAndCalculateDBint("GPU", "Price", componenten.get(1).getName());
         totalPrice = totalPrice + readAndCalculateDBint("RAM", "Price", componenten.get(2).getName());
