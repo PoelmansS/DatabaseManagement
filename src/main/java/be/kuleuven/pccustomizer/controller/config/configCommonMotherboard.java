@@ -2,25 +2,17 @@ package be.kuleuven.pccustomizer.controller.config;
 
 import be.kuleuven.pccustomizer.controller.Objects.Component;
 import be.kuleuven.pccustomizer.controller.Objects.MotherBoard;
-import be.kuleuven.pccustomizer.ProjectMain;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class configMotherboard extends _beheerConfig {
+public class configCommonMotherboard extends _ConfigCommon {
     Component component = new Component();
     List<MotherBoard> motherBoards = new ArrayList<MotherBoard>();
     //table
@@ -41,18 +33,7 @@ public class configMotherboard extends _beheerConfig {
     private TableColumn<MotherBoard, Integer> PCIESlotsColumn;
 
     public void initialize() {
-        initTableComponenten();
-        ReadFromDB();
-        initTable();
-        btnAdd.setOnAction(e -> {
-            if (tableView.getSelectionModel().getSelectedItem() != null) {
-                addComponent();
-                showBeheerScherm("Cooling");
-            }});
-        btnClose.setOnAction(e -> {
-            var stage = (Stage) btnClose.getScene().getWindow();
-            stage.close();
-        });
+        init(tableView, "Cooling");
     }
 
 
@@ -83,7 +64,7 @@ public class configMotherboard extends _beheerConfig {
         tableView.setItems(MotherBoardList);
     }
 
-    private void addComponent(){
+    public void addComponent(){
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             MotherBoard motherBoard = tableView.getSelectionModel().getSelectedItem();
             component.setName(motherBoard.getName());

@@ -1,27 +1,17 @@
 package be.kuleuven.pccustomizer.controller.config;
-
 import be.kuleuven.pccustomizer.controller.Objects.Case;
-import be.kuleuven.pccustomizer.ProjectMain;
 import be.kuleuven.pccustomizer.controller.Objects.Component;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import org.jdbi.v3.core.Jdbi;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class configCase extends _beheerConfig{
+public class configCommonCase extends _ConfigCommon {
     Component component = new Component();
     List<Case> cases = new ArrayList<Case>();
 
@@ -38,23 +28,8 @@ public class configCase extends _beheerConfig{
     private TableColumn<Case, String> sizeColumn;
 
     public void initialize() {
-        Component component = new Component();
-        initTableComponenten();
-        ReadFromDB();
-        initTable();
-        btnAdd.setOnAction(e -> {
-            if (tableView.getSelectionModel().getSelectedItem() != null) {
-                addComponent();
-                showBeheerScherm("Extra");
-            }});
-        btnClose.setOnAction(e -> {
-            var stage = (Stage) btnClose.getScene().getWindow();
-            stage.close();
-        });
+        init(tableView, "Extra");
     }
-
-
-
 
     public void ReadFromDB(){
         List<String> names = readDBstring("PcCase","Name");
@@ -76,10 +51,9 @@ public class configCase extends _beheerConfig{
         ObservableList<Case> caseList = tableView.getItems();
         caseList.addAll(cases);
         tableView.setItems(caseList);
-
     }
 
-    private void addComponent(){
+    public void addComponent(){
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             Case cases = tableView.getSelectionModel().getSelectedItem();
             component.setName(cases.getName());

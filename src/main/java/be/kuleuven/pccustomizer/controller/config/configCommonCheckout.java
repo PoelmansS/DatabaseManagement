@@ -1,24 +1,19 @@
 package be.kuleuven.pccustomizer.controller.config;
 
-import be.kuleuven.pccustomizer.ProjectMain;
 import be.kuleuven.pccustomizer.controller.Objects.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class configCheckout extends _beheerConfig{
+public class configCommonCheckout extends _ConfigCommon {
     private String name;
     private CustomPC costumPc = new CustomPC();
     private int totalPrice = 0;
@@ -80,7 +75,7 @@ public class configCheckout extends _beheerConfig{
         });
     }
 
-    private void ReadFromDB(){
+    public void ReadFromDB(){
         List<Integer> ids = readDBint("Klant","ID");
         List<String> lastNames =  readDBstring("Klant","LastName");
         List<String> firstNames =  readDBstring("Klant","FirstName");
@@ -164,7 +159,7 @@ public class configCheckout extends _beheerConfig{
                 id, klant.getID(), name, totalPrice);});
     }
 
-    private void initTableComponenten() {
+    public void initTableComponenten() {
         componentColumn.setCellValueFactory(new PropertyValueFactory<Component, String>("name"));
         ObservableList<Component> viewComponenten = FXCollections.observableArrayList();
         viewComponenten.addAll(componenten);

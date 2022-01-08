@@ -25,7 +25,7 @@ public class SQLiteClient {
     public Jdbi getJdbi() {
         return jdbi;
     }
-
+    /*
     //functie om te testen
     public void voorbeeldFunctieVullen(){
         List<Extra> extras = new ArrayList<Extra>();
@@ -53,7 +53,9 @@ public class SQLiteClient {
         //System.out.println("het bevat: " + x);
     }
 
+     */
 
+    /*
 
     //simpelen functie om een volledige kollom op te vragen van Strings
     public void getCollomS(String collom, String tabel, List<String> col){
@@ -109,4 +111,7 @@ public class SQLiteClient {
         System.out.println(i);
         return i;
     }
+
+
+     */
 }

@@ -2,25 +2,17 @@ package be.kuleuven.pccustomizer.controller.config;
 
 import be.kuleuven.pccustomizer.controller.Objects.Component;
 import be.kuleuven.pccustomizer.controller.Objects.Storage;
-import be.kuleuven.pccustomizer.ProjectMain;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class configStorage extends _beheerConfig {
+public class configCommonStorage extends _ConfigCommon {
     Component component = new Component();
     List<Storage> storages = new ArrayList<Storage>();
     //table
@@ -41,20 +33,8 @@ public class configStorage extends _beheerConfig {
     private TableColumn<Storage, Integer> writeSpeedColumn;
 
     public void initialize() {
-        initTableComponenten();
-        ReadFromDB();
-        initTable();
-        btnAdd.setOnAction(e -> {
-            if (tableView.getSelectionModel().getSelectedItem() != null) {
-                addComponent();
-                showBeheerScherm("Motherboard");
-            }});
-        btnClose.setOnAction(e -> {
-            var stage = (Stage) btnClose.getScene().getWindow();
-            stage.close();
-        });
+        init(tableView, "Motherboard");
     }
-
 
     public void ReadFromDB(){
         List<String> names = readDBstring("Storage","Name");
@@ -81,7 +61,7 @@ public class configStorage extends _beheerConfig {
         tableView.setItems(storageList);
     }
 
-    private void addComponent(){
+    public void addComponent(){
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             Storage storage = tableView.getSelectionModel().getSelectedItem();
             component.setName(storage.getName());

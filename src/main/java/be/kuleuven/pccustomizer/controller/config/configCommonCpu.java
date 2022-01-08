@@ -2,25 +2,16 @@ package be.kuleuven.pccustomizer.controller.config;
 
 import be.kuleuven.pccustomizer.controller.Objects.CPU;
 import be.kuleuven.pccustomizer.controller.Objects.Component;
-import be.kuleuven.pccustomizer.ProjectMain;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import org.jdbi.v3.core.Jdbi;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class configCpu  extends _beheerConfig{
+public class configCommonCpu extends _ConfigCommon {
     Component component = new Component();
     List<CPU> cpus = new ArrayList<CPU>();
     @FXML
@@ -40,23 +31,11 @@ public class configCpu  extends _beheerConfig{
     private TableColumn<CPU, Integer> powerUsageColumn;
 
     public void initialize() {
-        componenten.clear();
-        ReadFromDB();
-        initTable();
-        btnAdd.setOnAction(e -> {
-            if (tableView.getSelectionModel().getSelectedItem() != null) {
-                addComponent();
-                showBeheerScherm("Gpu");
-            }
-        });
-        btnClose.setOnAction(e -> {
-            var stage = (Stage) btnClose.getScene().getWindow();
-            stage.close();
-        });
+        init(tableView, "Gpu");
     }
 
 
-    private void ReadFromDB() {
+    public void ReadFromDB() {
         List<String> names = readDBstring("CPU", "Name");
         List<Integer> prices = readDBint("CPU", "Price");
         List<Integer> threads = readDBint("CPU", "Threads");
@@ -69,7 +48,7 @@ public class configCpu  extends _beheerConfig{
         }
     }
 
-    private void initTable() {
+    public void initTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<CPU, String>("name"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<CPU, Integer>("price"));
         threadsColumn.setCellValueFactory(new PropertyValueFactory<CPU, Integer>("threads"));
@@ -82,13 +61,11 @@ public class configCpu  extends _beheerConfig{
         tableView.setItems(CPUList);
     }
 
-    private void addComponent(){
+    public void addComponent(){
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             CPU cpu = tableView.getSelectionModel().getSelectedItem();
             component.setName(cpu.getName());
             componenten.add(component);
         }
     }
-
-
 }

@@ -2,26 +2,18 @@ package be.kuleuven.pccustomizer.controller.config;
 
 import be.kuleuven.pccustomizer.controller.Objects.GPU;
 import be.kuleuven.pccustomizer.controller.Objects.Component;
-import be.kuleuven.pccustomizer.ProjectMain;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class configGpu extends _beheerConfig{
+public class configCommonGpu extends _ConfigCommon {
     Component component = new Component();
     List<GPU> gpus = new ArrayList<GPU>();
     //table
@@ -41,18 +33,7 @@ public class configGpu extends _beheerConfig{
 
 
     public void initialize() {
-        initTableComponenten();
-        ReadFromDB();
-        initTable();
-        btnAdd.setOnAction(e -> {
-            if (tableView.getSelectionModel().getSelectedItem() != null) {
-                addComponent();
-                showBeheerScherm("Ram");
-            }});
-        btnClose.setOnAction(e -> {
-            var stage = (Stage) btnClose.getScene().getWindow();
-            stage.close();
-        });
+        init(tableView, "Ram");
         btnSkip.setOnAction(e -> {
             skipComponent();
             showBeheerScherm("Ram");
@@ -82,7 +63,7 @@ public class configGpu extends _beheerConfig{
         tableView.setItems(GPUList);
     }
 
-    private void addComponent(){
+    public void addComponent(){
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             GPU gpu = tableView.getSelectionModel().getSelectedItem();
             component.setName(gpu.getName());

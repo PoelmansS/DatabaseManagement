@@ -12,7 +12,6 @@ public class beheercart {
     CustomPC modifiedCustomPC;
     int selectedRow;
 
-
     @FXML
     private Button btnDelete;
     @FXML
