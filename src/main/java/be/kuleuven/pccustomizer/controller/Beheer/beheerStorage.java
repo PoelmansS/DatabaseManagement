@@ -1,7 +1,4 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
-
-import be.kuleuven.pccustomizer.controller.Objects.Case;
-import be.kuleuven.pccustomizer.controller.Objects.RAM;
 import be.kuleuven.pccustomizer.controller.Objects.Storage;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,14 +9,13 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class beheerStorage extends _BeheerCommon {
-    Storage modifiedStorage;
-    List<Storage> storages = new ArrayList<Storage>();
-    //table
+    private Storage modifiedStorage;
+    private final List<Storage> storages = new ArrayList<Storage>();
+
     @FXML
     private TableView<Storage> tableView;
-    //input text fields
+
     @FXML
     private TextField addName;
     @FXML
@@ -47,26 +43,7 @@ public class beheerStorage extends _BeheerCommon {
     private TableColumn<Storage, Integer> writeSpeedColumn;
 
     public void initialize() {
-        ReadFromDB();
-        initTable();
-        btnAdd.setOnAction(e -> {
-            verifyInput();
-        });
-        btnModify.setOnAction(e -> {
-            verifyOneRowSelected(tableView);
-            verifyModifyInput();
-        });
-        btnDelete.setOnAction(e -> {
-            verifyOneRowSelected(tableView);
-            deleteCurrentRow();
-        });
-        btnLoad.setOnAction(e -> {
-            LoadCurrentRow();
-        });
-        btnClose.setOnAction(e -> {
-            var stage = (Stage) btnClose.getScene().getWindow();
-            stage.close();
-        });
+        init(tableView);
     }
     public void ReadFromDB(){
         List<String> names = readDBstring("Storage","Name");

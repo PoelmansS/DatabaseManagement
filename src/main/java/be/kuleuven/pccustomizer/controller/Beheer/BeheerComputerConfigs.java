@@ -1,10 +1,5 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
-
-import be.kuleuven.pccustomizer.controller.Objects.Bestelling;
 import be.kuleuven.pccustomizer.controller.Objects.CustomPC;
-import be.kuleuven.pccustomizer.controller.config._beheerConfig;
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -15,8 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BeheerComputerConfigs extends _BeheerCommon {
-    List<CustomPC> customPCs = new ArrayList<CustomPC>();
-
+    private final List<CustomPC> customPCs = new ArrayList<CustomPC>();
 
     @FXML
     private Button btnDelete;
@@ -51,8 +45,6 @@ public class BeheerComputerConfigs extends _BeheerCommon {
     @FXML
     private TableColumn<CustomPC, String> extraColumn;
 
-
-
     public void initialize() {
         ReadFromDB();
         initTable();
@@ -60,7 +52,6 @@ public class BeheerComputerConfigs extends _BeheerCommon {
             verifyOneRowSelected(tableView);
             deleteCurrentRow();
         });
-        
         btnClose.setOnAction(e -> {
             var stage = (Stage) btnClose.getScene().getWindow();
             stage.close();
@@ -68,18 +59,18 @@ public class BeheerComputerConfigs extends _BeheerCommon {
     }
 
     public void ReadFromDB(){
-        List<String> names =        readDBstring("Computer","Name");
-        List<String> types =        readDBstring("Computer","Type");
+        List<String> names = readDBstring("Computer","Name");
+        List<String> types = readDBstring("Computer","Type");
         List<Integer> prices =  readDBint("Computer","Price");
         List<String>  motherboards = readDBstring("Computer","Motherbord");
-        List<String> cpus =          readDBstring("Computer","CPU");
-        List<String> gpus =         readDBstring("Computer","GPU");
-        List<String> rams =         readDBstring("Computer","RAM");
-        List<String> cases =        readDBstring("Computer","PcCase");
-        List<String> psus =         readDBstring("Computer","Power_supply");
-        List<String> storages =     readDBstring("Computer","Storage");
-        List<String> coolings =     readDBstring("Computer","Cooling");
-        List<String> extras =       readDBstring("Computer","Extra");
+        List<String> cpus = readDBstring("Computer","CPU");
+        List<String> gpus = readDBstring("Computer","GPU");
+        List<String> rams = readDBstring("Computer","RAM");
+        List<String> cases= readDBstring("Computer","PcCase");
+        List<String> psus =  readDBstring("Computer","Power_supply");
+        List<String> storages = readDBstring("Computer","Storage");
+        List<String> coolings = readDBstring("Computer","Cooling");
+        List<String> extras =   readDBstring("Computer","Extra");
 
         for(int i = 0; i < names.size(); i++){
             System.out.println(i);
@@ -106,9 +97,7 @@ public class BeheerComputerConfigs extends _BeheerCommon {
         ObservableList<CustomPC> customPCList = tableView.getItems();
         customPCList.addAll(customPCs);
         tableView.setItems(customPCList);
-
     }
-
 
 
     public void deleteCurrentRow() {
@@ -119,9 +108,4 @@ public class BeheerComputerConfigs extends _BeheerCommon {
         });
         tableView.getItems().remove(selectedRow);
     }
-
-
-
-
-
 }

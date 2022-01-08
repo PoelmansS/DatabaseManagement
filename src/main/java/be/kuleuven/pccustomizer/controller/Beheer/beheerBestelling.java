@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class beheerBestelling extends _BeheerCommon {
-    Bestelling modifiedBestelling;
-    List<Bestelling> bestellingen = new ArrayList<Bestelling>();
+    private Bestelling modifiedBestelling;
+    private final List<Bestelling> bestellingen = new ArrayList<Bestelling>();
     String comp ;
     //table
     @FXML
@@ -94,19 +94,11 @@ public class beheerBestelling extends _BeheerCommon {
     }
 
 
-    private  List<CustomPC> readPC(){
-        return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT Motherbord, CPU, GPU, PcCase, RAM, Power_supply, Extra, Cooling FROM Computer WHERE Name LIKE "+ comp  +";")
-                        .mapTo(CustomPC.class)
-                        .list());
-    }
-
 
     public void addNewRow() {
         String comp = addComputer.getText();
         int price = 0;
-        List<CustomPC> pc = readPC();
-        System.out.println(pc);
+        List<CustomPC> pc;
         //TODO
         //make it so the price gets calculated based on the price of all the components in computer
 

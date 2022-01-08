@@ -1,5 +1,4 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
-import be.kuleuven.pccustomizer.controller.Objects.CPU;
 import be.kuleuven.pccustomizer.controller.Objects.Extra;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,10 +9,9 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class beheerExtra extends _BeheerCommon {
-    Extra modifiedExtra;
-    List<Extra> extras = new ArrayList<Extra>();
+    private Extra modifiedExtra;
+    private final List<Extra> extras = new ArrayList<Extra>();
 
     //table
     @FXML
@@ -34,26 +32,7 @@ public class beheerExtra extends _BeheerCommon {
     private TableColumn<Extra, Integer> priceColumn;
 
     public void initialize() {
-        ReadFromDB();
-        initTable();
-        btnAdd.setOnAction(e -> {
-            verifyInput();
-        });
-        btnModify.setOnAction(e -> {
-            verifyOneRowSelected(tableView);
-            verifyModifyInput();
-        });
-        btnDelete.setOnAction(e -> {
-            verifyOneRowSelected(tableView);
-            deleteCurrentRow();
-        });
-        btnLoad.setOnAction(e -> {
-            LoadCurrentRow();
-        });
-        btnClose.setOnAction(e -> {
-            var stage = (Stage) btnClose.getScene().getWindow();
-            stage.close();
-        });
+        init(tableView);
     }
 
     public void ReadFromDB(){

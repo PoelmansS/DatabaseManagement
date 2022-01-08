@@ -13,10 +13,9 @@ import java.util.List;
 
 import static java.lang.Integer.valueOf;
 
-
 public class beheerCase extends _BeheerCommon {
-    Case modifiedCase;
-    List<Case> cases = new ArrayList<Case>();
+    private Case modifiedCase;
+    private final List<Case> cases = new ArrayList<Case>();
     //table
     @FXML
     private TableView<Case> tableView;
@@ -82,22 +81,21 @@ public class beheerCase extends _BeheerCommon {
         ObservableList<Case> caseList = tableView.getItems();
         caseList.addAll(cases);
         tableView.setItems(caseList);
-
     }
 
     public void deleteCurrentRow() {
         ObservableList<Case> caseList = tableView.getItems();
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
         jdbi.useHandle(handle -> {
-            handle.execute("DELETE FROM PcCase WHERE Name = ?", caseList.get(0).getName());
-        });
+            handle.execute("DELETE FROM PcCase WHERE Name = ?", caseList.get(0).getName()); });
         tableView.getItems().remove(selectedRow);
     }
 
     public void addNewRow() {
         Case cases = new Case(addName.getText(),addType.getText(), Integer.parseInt(addPrice.getText()),addSize.getText());
-        jdbi.useHandle(handle -> { handle.execute("insert into PcCase (Name, Type, Price, Size) values (?, ?, ?, ?)",
-                cases.getName(),cases.getType(),cases.getPrice(),cases.getSize()); });
+        jdbi.useHandle(handle -> {
+            handle.execute("insert into PcCase (Name, Type, Price, Size) values (?, ?, ?, ?)",
+                    cases.getName(),cases.getType(),cases.getPrice(),cases.getSize()); });
 
         ObservableList<Case> caseList = tableView.getItems();
         caseList.add(cases);

@@ -1,6 +1,4 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
-import be.kuleuven.pccustomizer.controller.Objects.CPU;
-import be.kuleuven.pccustomizer.controller.Objects.Extra;
 import be.kuleuven.pccustomizer.controller.Objects.GPU;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,12 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class beheerGPU extends _BeheerCommon {
-    GPU modifiedGPU;
-    List<GPU> gpus = new ArrayList<GPU>();
-    //table
+    private GPU modifiedGPU;
+    private final List<GPU> gpus = new ArrayList<GPU>();
+
     @FXML
     private TableView<GPU> tableView;
-    //input text fields
+
     @FXML
     private TextField addName;
     @FXML
@@ -37,26 +35,7 @@ public class beheerGPU extends _BeheerCommon {
     private TableColumn<GPU, Integer> powerUsageColumn;
 
     public void initialize() {
-        ReadFromDB();
-        initTable();
-        btnAdd.setOnAction(e -> {
-            verifyInput();
-        });
-        btnModify.setOnAction(e -> {
-            verifyOneRowSelected(tableView);
-            verifyModifyInput();
-        });
-        btnDelete.setOnAction(e -> {
-            verifyOneRowSelected(tableView);
-            deleteCurrentRow();
-        });
-        btnLoad.setOnAction(e -> {
-            LoadCurrentRow();
-        });
-        btnClose.setOnAction(e -> {
-            var stage = (Stage) btnClose.getScene().getWindow();
-            stage.close();
-        });
+        init(tableView);
     }
 
     public void ReadFromDB(){
@@ -128,7 +107,4 @@ public class beheerGPU extends _BeheerCommon {
         GPUList.set(selectedRow,modifiedGPU);
         tableView.setItems(GPUList);
     }
-
-
-
 }

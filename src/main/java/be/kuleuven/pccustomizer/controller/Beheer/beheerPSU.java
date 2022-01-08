@@ -13,19 +13,18 @@ import java.util.List;
 
 
 public class beheerPSU extends _BeheerCommon {
-    PSU modifiedPSU;
-    List<PSU> psus = new ArrayList<PSU>();
-    //table
+    private PSU modifiedPSU;
+    private final List<PSU> psus = new ArrayList<PSU>();
+
     @FXML
     private TableView<PSU> tableView;
-    //input text fields
+
     @FXML
     private TextField addName;
     @FXML
     private TextField addPrice;
     @FXML
     private TextField addWattage;
-
 
     @FXML
     private TableColumn<PSU, String> nameColumn;
@@ -35,26 +34,7 @@ public class beheerPSU extends _BeheerCommon {
     private TableColumn<PSU, Integer> priceColumn;
 
     public void initialize() {
-        ReadFromDB();
-        initTable();
-        btnAdd.setOnAction(e -> {
-            verifyInput();
-        });
-        btnModify.setOnAction(e -> {
-            verifyOneRowSelected(tableView);
-            verifyModifyInput();
-        });
-        btnDelete.setOnAction(e -> {
-            verifyOneRowSelected(tableView);
-            deleteCurrentRow();
-        });
-        btnLoad.setOnAction(e -> {
-            LoadCurrentRow();
-        });
-        btnClose.setOnAction(e -> {
-            var stage = (Stage) btnClose.getScene().getWindow();
-            stage.close();
-        });
+        init(tableView);
     }
 
     public void ReadFromDB(){

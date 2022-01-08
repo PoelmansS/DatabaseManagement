@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 
@@ -45,6 +46,37 @@ public class _BeheerCommon {
                         .list());
         return list;
     }
+
+
+    public void ReadFromDB(){}
+    public void initTable() {}
+    public void deleteCurrentRow(){}
+    public void LoadCurrentRow(){}
+    public void init(TableView tableView){
+        ReadFromDB();
+        initTable();
+        btnAdd.setOnAction(e -> {
+            verifyInput();
+        });
+        btnModify.setOnAction(e -> {
+            verifyOneRowSelected(tableView);
+            verifyModifyInput();
+        });
+        btnDelete.setOnAction(e -> {
+            verifyOneRowSelected(tableView);
+            deleteCurrentRow();
+        });
+        btnLoad.setOnAction(e -> {
+            LoadCurrentRow();
+        });
+        btnClose.setOnAction(e -> {
+            var stage = (Stage) btnClose.getScene().getWindow();
+            stage.close();
+        });
+
+    }
+
+
     public void showAlert(String title, String content) {
         var alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(title);

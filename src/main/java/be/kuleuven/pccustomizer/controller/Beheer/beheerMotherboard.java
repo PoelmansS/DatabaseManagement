@@ -1,6 +1,4 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
-import be.kuleuven.pccustomizer.controller.Objects.CPU;
-import be.kuleuven.pccustomizer.controller.Objects.Extra;
 import be.kuleuven.pccustomizer.controller.Objects.MotherBoard;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,10 +9,9 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class beheerMotherboard extends _BeheerCommon {
-    MotherBoard modifiedMotherboard;
-    List<MotherBoard> motherBoards = new ArrayList<MotherBoard>();
+    private MotherBoard modifiedMotherboard;
+    private final List<MotherBoard> motherBoards = new ArrayList<MotherBoard>();
     //table
     @FXML
     private TableView<MotherBoard> tableView;
@@ -46,26 +43,7 @@ public class beheerMotherboard extends _BeheerCommon {
     private TableColumn<MotherBoard, Integer> PCIESlotsColumn;
 
     public void initialize() {
-        ReadFromDB();
-        initTable();
-        btnAdd.setOnAction(e -> {
-            verifyInput();
-        });
-        btnModify.setOnAction(e -> {
-            verifyOneRowSelected(tableView);
-            verifyModifyInput();
-        });
-        btnDelete.setOnAction(e -> {
-            verifyOneRowSelected(tableView);
-            deleteCurrentRow();
-        });
-        btnLoad.setOnAction(e -> {
-            LoadCurrentRow();
-        });
-        btnClose.setOnAction(e -> {
-            var stage = (Stage) btnClose.getScene().getWindow();
-            stage.close();
-        });
+        init(tableView);
     }
     public void ReadFromDB(){
         List<String> names = readDBstring("MotherBord","Name");

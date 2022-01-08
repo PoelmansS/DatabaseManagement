@@ -1,6 +1,4 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
-import be.kuleuven.pccustomizer.controller.Objects.CPU;
-import be.kuleuven.pccustomizer.controller.Objects.Extra;
 import be.kuleuven.pccustomizer.controller.Objects.RAM;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,14 +9,13 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class beheerRAM extends _BeheerCommon {
-    RAM modifiedRAM;
-    List<RAM> rams = new ArrayList<RAM>();
-    //table
+    private RAM modifiedRAM;
+    private final List<RAM> rams = new ArrayList<RAM>();
+
     @FXML
     private TableView<RAM> tableView;
-    //input text fields
+
     @FXML
     private TextField addName;
     @FXML
@@ -38,26 +35,7 @@ public class beheerRAM extends _BeheerCommon {
     private TableColumn<RAM, Integer> sizeColumn;
 
     public void initialize() {
-        ReadFromDB();
-        initTable();
-        btnAdd.setOnAction(e -> {
-            verifyInput();
-        });
-        btnModify.setOnAction(e -> {
-            verifyOneRowSelected(tableView);
-            verifyModifyInput();
-        });
-        btnDelete.setOnAction(e -> {
-            verifyOneRowSelected(tableView);
-            deleteCurrentRow();
-        });
-        btnLoad.setOnAction(e -> {
-            LoadCurrentRow();
-        });
-        btnClose.setOnAction(e -> {
-            var stage = (Stage) btnClose.getScene().getWindow();
-            stage.close();
-        });
+        init(tableView);
     }
 
     public void ReadFromDB(){
@@ -129,6 +107,4 @@ public class beheerRAM extends _BeheerCommon {
         RAMList.set(selectedRow,modifiedRAM);
         tableView.setItems(RAMList);
     }
-
-
 }

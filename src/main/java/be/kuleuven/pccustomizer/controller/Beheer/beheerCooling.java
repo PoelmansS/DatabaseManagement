@@ -1,5 +1,4 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
-import be.kuleuven.pccustomizer.controller.Objects.Case;
 import be.kuleuven.pccustomizer.controller.Objects.Cooling;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,9 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class beheerCooling extends _BeheerCommon {
-    Cooling modifiedCooling;
-    List<Cooling> coolings = new ArrayList<Cooling>();
-
+    private Cooling modifiedCooling;
+    private final List<Cooling> coolings = new ArrayList<Cooling>();
 
     @FXML
     private TableView<Cooling> tableView;
@@ -38,28 +36,7 @@ public class beheerCooling extends _BeheerCommon {
 
 
     public void initialize() {
-        ReadFromDB();
-        initTable();
-        btnAdd.setOnAction(e -> {
-            verifyInput();
-        });
-        btnModify.setOnAction(e -> {
-            verifyOneRowSelected(tableView);
-            verifyModifyInput();
-        });
-        btnDelete.setOnAction(e -> {
-            verifyOneRowSelected(tableView);
-            deleteCurrentRow();
-        });
-        btnLoad.setOnAction(e -> {
-            LoadCurrentRow();
-        });
-        btnClose.setOnAction(e -> {
-            var stage = (Stage) btnClose.getScene().getWindow();
-            stage.close();
-        });
-
-
+        init(tableView);
     }
     public void ReadFromDB(){
         List<String> names = readDBstring("Cooling","Name");

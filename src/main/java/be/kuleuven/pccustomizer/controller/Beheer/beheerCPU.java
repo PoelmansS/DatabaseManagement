@@ -11,10 +11,9 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class beheerCPU extends _BeheerCommon {
-    CPU modifiedCPU;
-    List<CPU> cpus = new ArrayList<CPU>();
+    private CPU modifiedCPU;
+    private final List<CPU> cpus = new ArrayList<CPU>();
     //table
     @FXML
     private TableView<CPU> tableView;
@@ -46,26 +45,7 @@ public class beheerCPU extends _BeheerCommon {
     private TableColumn<CPU, Integer> powerUsageColumn;
 
     public void initialize() {
-        ReadFromDB();
-        initTable();
-        btnAdd.setOnAction(e -> {
-            verifyInput();
-        });
-        btnModify.setOnAction(e -> {
-            verifyOneRowSelected(tableView);
-            verifyModifyInput();
-        });
-        btnDelete.setOnAction(e -> {
-            verifyOneRowSelected(tableView);
-            deleteCurrentRow();
-        });
-        btnLoad.setOnAction(e -> {
-            LoadCurrentRow();
-        });
-        btnClose.setOnAction(e -> {
-            var stage = (Stage) btnClose.getScene().getWindow();
-            stage.close();
-        });
+        init(tableView);
     }
     public void ReadFromDB(){
         List<String> names = readDBstring("CPU","Name");
@@ -145,10 +125,4 @@ public class beheerCPU extends _BeheerCommon {
         CPUList.set(selectedRow,modifiedCPU);
         tableView.setItems(CPUList);
     }
-
-
-
-
-
-
 }

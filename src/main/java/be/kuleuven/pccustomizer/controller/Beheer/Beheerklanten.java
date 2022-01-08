@@ -1,7 +1,4 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
-
-import be.kuleuven.pccustomizer.controller.Objects.CPU;
-import be.kuleuven.pccustomizer.controller.Objects.Extra;
 import be.kuleuven.pccustomizer.controller.Objects.Klant;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Beheerklanten extends _BeheerCommon {
-    Klant modifiedKlant;
-    List<Klant> klanten = new ArrayList<Klant>();
+    private Klant modifiedKlant;
+    private final List<Klant> klanten = new ArrayList<Klant>();
 
     //table
     @FXML
@@ -55,26 +52,7 @@ public class Beheerklanten extends _BeheerCommon {
     private TableColumn<Klant, String> mailColumn;
 
     public void initialize() {
-        ReadFromDB();
-        initTable();
-        btnAdd.setOnAction(e -> {
-            verifyInput();
-        });
-        btnModify.setOnAction(e -> {
-            verifyOneRowSelected(tableView);
-            verifyModifyInput();
-        });
-        btnDelete.setOnAction(e -> {
-            verifyOneRowSelected(tableView);
-            deleteCurrentRow();
-        });
-        btnLoad.setOnAction(e -> {
-            LoadCurrentRow();
-        });
-        btnClose.setOnAction(e -> {
-            var stage = (Stage) btnClose.getScene().getWindow();
-            stage.close();
-        });
+        init(tableView);
     }
     public void ReadFromDB(){
         List<Integer> ids = readDBint("Klant","ID");
@@ -92,16 +70,6 @@ public class Beheerklanten extends _BeheerCommon {
         }
     }
 
-    public void deleteCurrentRow() {
-        ObservableList<Klant> KlantList = tableView.getItems();
-        selectedRow = tableView.getSelectionModel().getSelectedIndex();
-        jdbi.useHandle(handle -> {
-            handle.execute("DELETE FROM Klant WHERE ID = ?", KlantList.get(0).getID());
-        });
-        tableView.getItems().remove(selectedRow);
-    }
-
-
     public void initTable() {
         IDColumn.setCellValueFactory(new PropertyValueFactory<Klant, Integer>("ID"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<Klant, String>("lastName"));
@@ -117,6 +85,16 @@ public class Beheerklanten extends _BeheerCommon {
         klantList.addAll(klanten);
         tableView.setItems(klantList);
     }
+
+    public void deleteCurrentRow() {
+        ObservableList<Klant> KlantList = tableView.getItems();
+        selectedRow = tableView.getSelectionModel().getSelectedIndex();
+        jdbi.useHandle(handle -> {
+            handle.execute("DELETE FROM Klant WHERE ID = ?", KlantList.get(0).getID());
+        });
+        tableView.getItems().remove(selectedRow);
+    }
+
     public void addNewRow() {
         Klant klant = new Klant(Integer.parseInt(addID.getText()),addLastName.getText(),addFirstName.getText(),Integer.parseInt(addPostalCode.getText()),
                 addStreet.getText(),addNR.getText(),addPhone.getText(),addMail.getText());
