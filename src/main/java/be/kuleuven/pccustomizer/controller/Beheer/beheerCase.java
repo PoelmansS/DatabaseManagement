@@ -42,7 +42,13 @@ public class beheerCase extends _BeheerCommon {
         ReadFromDB();
         initTable();
         btnAdd.setOnAction(e -> {
-            verifyInput();
+            if(doubles("PcCase", "Name", addName.getText())){
+                System.out.println("Deze case bestaat al");
+                //we kunnen hier toevoegen voor de aantallen
+            }
+            else{
+                addNewRow();
+            }
         });
         btnModify.setOnAction(e -> {
             verifyOneRowSelected(tableView);
@@ -92,6 +98,10 @@ public class beheerCase extends _BeheerCommon {
     }
 
     public void addNewRow() {
+        if(doubles("PcCase", "Name", addName.getText())){
+            System.out.println("Deze case bestaat al");
+            //we kunnen hier toevoegen voor de aantallen
+        }
         Case cases = new Case(addName.getText(),addType.getText(), Integer.parseInt(addPrice.getText()),addSize.getText());
         jdbi.useHandle(handle -> {
             handle.execute("insert into PcCase (Name, Type, Price, Size) values (?, ?, ?, ?)",

@@ -47,6 +47,15 @@ public class _BeheerCommon {
         return list;
     }
 
+    public boolean doubles(String Table , String Column, String name){
+        List<String> names = readDBstring(Table, Column);
+        for(int i = 0; i < names.size(); i++){
+            if(name.equals(names.get(i))){
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void ReadFromDB(){}
     public void initTable() {}
