@@ -44,8 +44,7 @@ public class configExtra extends _beheerConfig{
         btnAdd.setOnAction(e -> {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
                 addComponent();
-                var stage = (Stage) btnClose.getScene().getWindow();
-                stage.close();
+                showBeheerScherm("Checkout");
             }});
         btnClose.setOnAction(e -> {
             var stage = (Stage) btnClose.getScene().getWindow();
@@ -77,7 +76,7 @@ public class configExtra extends _beheerConfig{
         }
     }
 
-    public void ReadFromDB(){
+    private void ReadFromDB(){
         List<String> names = readDBstring("Extra","Name");
         List<String> types =  readDBstring("Extra","Type");
         List<Integer> prices =  readDBint("Extra","Price");
@@ -87,7 +86,7 @@ public class configExtra extends _beheerConfig{
         }
     }
 
-    public void initTable() {
+    private void initTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<Extra, String>("Name"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Extra, String>("Type"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<Extra, Integer>("Price"));
@@ -111,7 +110,7 @@ public class configExtra extends _beheerConfig{
         componenten.add(component);
     }
 
-    public void initTableComponenten() {
+    private void initTableComponenten() {
         componentColumn.setCellValueFactory(new PropertyValueFactory<Component, String>("name"));
         ObservableList<Component> viewComponenten = FXCollections.observableArrayList();
         viewComponenten.addAll(componenten);

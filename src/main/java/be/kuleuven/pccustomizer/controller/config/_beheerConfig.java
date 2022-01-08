@@ -43,6 +43,12 @@ public class _beheerConfig {
                         .mapTo(Integer.class)
                         .list());
     }
+    public Integer readAndCalculateDBint(String clas, String columnName, String item){
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT " + columnName + " FROM " + clas + " WHERE Name = " + item)
+                        .mapTo(Integer.class)
+                        .one());
+    }
     public List<Boolean> readDBbool(String clas, String columnName){
         List<Boolean> list = jdbi.withHandle(handle ->
                 handle.createQuery("SELECT " + columnName + " FROM " + clas)

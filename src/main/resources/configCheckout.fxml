@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ConfigCheckout">
+    <children>
+        <ImageView fitHeight="421.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../build/resources/main/_c_bg.png" />
+            </image>
+        </ImageView>
+        <Button fx:id="btnAdd" layoutX="465.0" layoutY="390.0" mnemonicParsing="false" text="Voeg Bestelling Toe" />
+        <Button fx:id="btnClose" layoutX="31.0" layoutY="390.0" mnemonicParsing="false" text="end config" />
+        <Button fx:id="btnAddK" layoutX="0.0" layoutY="360.0" mnemonicParsing="false" text="Voeg Klant Toe" />
+        <TableView fx:id="tableView" layoutX="212.0" layoutY="58.0" prefHeight="266.0" prefWidth="356.0">
+            <columns>
+                <TableColumn fx:id="IDColumn" prefWidth="35.0" text="ID" />
+                <TableColumn fx:id="lastNameColumn" prefWidth="75.0" text="Last Name" />
+                <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="First Name" />
+                <TableColumn fx:id="mailColumn1" prefWidth="58.0" text="adress">
+                    <columns>
+                        <TableColumn fx:id="postalCodeColumn" prefWidth="75.0" text="Postal Code" />
+                        <TableColumn fx:id="streetColumn" prefWidth="75.0" text="Street" />
+                        <TableColumn fx:id="NRColumn" prefWidth="35.0" text="NR" />
+                    </columns>
+                </TableColumn>
+                <TableColumn fx:id="phoneColumn" prefWidth="75.0" text="Phone" />
+                <TableColumn fx:id="mailColumn" prefWidth="121.0" text="mail" />
+            </columns>
+        </TableView>
+        <TableView fx:id="componentView" layoutX="34.0" layoutY="58.0" prefHeight="266.0" prefWidth="140.0">
+            <columns>
+                <TableColumn fx:id="componentColumn" prefWidth="141.0" text="componenten" />
+            </columns>
+        </TableView>
+        <TextField fx:id="addID" layoutX="91.0" layoutY="360.0" prefHeight="25.0" prefWidth="42.0" />
+        <TextField fx:id="addLastName" layoutX="133.0" layoutY="360.0" prefHeight="25.0" prefWidth="63.0" />
+        <TextField fx:id="addFirstName" layoutX="196.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
+        <TextField fx:id="addPostalCode" layoutX="269.0" layoutY="360.0" prefHeight="25.0" prefWidth="63.0" />
+        <TextField fx:id="addStreet" layoutX="329.0" layoutY="360.0" prefHeight="25.0" prefWidth="67.0" />
+        <TextField fx:id="addNR" layoutX="391.0" layoutY="360.0" prefHeight="25.0" prefWidth="42.0" />
+        <TextField fx:id="addPhone" layoutX="431.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
+        <TextField fx:id="addMail" layoutX="509.0" layoutY="360.0" prefHeight="25.0" prefWidth="84.0" />
+    </children>
+</AnchorPane>

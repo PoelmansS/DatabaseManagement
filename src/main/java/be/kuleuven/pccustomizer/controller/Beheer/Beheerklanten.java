@@ -77,7 +77,6 @@ public class Beheerklanten extends _BeheerCommon {
         });
     }
     public void ReadFromDB(){
-        //TODO: klanten toevoegen aan DB
         List<Integer> ids = readDBint("Klant","ID");
         List<String> lastNames =  readDBstring("Klant","LastName");
         List<String> firstNames =  readDBstring("Klant","FirstName");
