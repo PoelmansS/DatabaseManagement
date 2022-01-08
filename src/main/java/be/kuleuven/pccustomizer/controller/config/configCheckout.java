@@ -19,7 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configCheckout extends _beheerConfig{
-    CustomPC costumPc = new CustomPC();
+    private String name;
+    private CustomPC costumPc = new CustomPC();
     private int totalPrice = 0;
     private List<Klant> klanten = new ArrayList<Klant>();
 
@@ -66,10 +67,13 @@ public class configCheckout extends _beheerConfig{
         calculatePriceFromDB();
         System.out.println(totalPrice);
         btnAdd.setOnAction(e -> {
+            if (tableView.getSelectionModel().getSelectedItem() != null) {
                 addComputer();
+                addBestelling();
                 var stage = (Stage) btnClose.getScene().getWindow();
                 stage.close();
-            });
+            }
+        });
         btnClose.setOnAction(e -> {
             var stage = (Stage) btnClose.getScene().getWindow();
             stage.close();
@@ -150,7 +154,7 @@ public class configCheckout extends _beheerConfig{
 
     private void addComputer(){
         Integer addNumber = countNumberOfCostums() + 1;
-        String name = "Custom" + addNumber.toString();
+        name = "Custom" + addNumber.toString();
         String cpu = componenten.get(0).getName();
         String gpu = componenten.get(1).getName();
         String ram = componenten.get(2).getName();
@@ -173,9 +177,10 @@ public class configCheckout extends _beheerConfig{
     }
 
     private void addBestelling(){
-        //Integer curId = countOfID() + 1;
-        //jdbi.useHandle(handle -> { handle.execute("insert into Bestelling (ID, Klant , Computer, Price) values (?,?,?,?)",
-        //        );});
+        Integer id = countOfID() + 1;
+        Klant klant = tableView.getSelectionModel().getSelectedItem();
+        jdbi.useHandle(handle -> { handle.execute("insert into Bestelling (ID, Klant , Computer, Price) values (?,?,?,?)",
+                id, klant.getID(), name, totalPrice);});
     }
 
     private void initTableComponenten() {

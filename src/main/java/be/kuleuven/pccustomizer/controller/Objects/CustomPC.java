@@ -17,7 +17,7 @@ public class CustomPC {
     String extra;
     public CustomPC(){}
 
-    public CustomPC(String name, String type, int price, String motherBoard, String cpu, String gpu, String ram, String cases, String psu, String storage, String cooling, String extra) {
+    public CustomPC(String name, String type, Integer price, String motherBoard, String cpu, String gpu, String ram, String cases, String psu, String storage, String cooling, String extra) {
         this.name = name;
         this.type = type;
         this.price = price;

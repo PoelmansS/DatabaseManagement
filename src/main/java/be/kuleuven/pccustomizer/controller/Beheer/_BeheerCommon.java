@@ -26,21 +26,21 @@ public class _BeheerCommon {
     @FXML
     public Button btnLoad;
 
-    public List<String> readDBstring(String clas, String columnName){
+    public List<String> readDBstring(String Table, String Column){
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT " + columnName + " FROM " + clas)
+                handle.createQuery("SELECT " + Column + " FROM " + Table)
                         .mapTo(String.class)
                         .list());
     }
-    public List<Integer> readDBint(String clas, String columnName){
+    public List<Integer> readDBint(String Table, String Column){
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT " + columnName + " FROM " + clas)
+                handle.createQuery("SELECT " + Column + " FROM " + Table)
                         .mapTo(Integer.class)
                         .list());
     }
-    public List<Boolean> readDBbool(String clas, String columnName){
+    public List<Boolean> readDBbool(String Table, String Column){
         List<Boolean> list = jdbi.withHandle(handle ->
-                handle.createQuery("SELECT " + columnName + " FROM " + clas)
+                handle.createQuery("SELECT " + Column + " FROM " + Table)
                         .mapTo(Boolean.class)
                         .list());
         return list;
