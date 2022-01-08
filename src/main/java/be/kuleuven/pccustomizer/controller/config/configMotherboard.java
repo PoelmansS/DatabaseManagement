@@ -12,7 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class configCommonMotherboard extends _ConfigCommon {
+public class configMotherboard extends _ConfigCommon {
     Component component = new Component();
     List<MotherBoard> motherBoards = new ArrayList<MotherBoard>();
     //table

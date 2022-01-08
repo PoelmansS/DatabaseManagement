@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class configCommonExtra extends _ConfigCommon {
+public class configExtra extends _ConfigCommon {
     Component component = new Component();
     List<Extra> extras = new ArrayList<Extra>();
     @FXML

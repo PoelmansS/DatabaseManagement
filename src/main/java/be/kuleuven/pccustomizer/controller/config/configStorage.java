@@ -12,7 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class configCommonStorage extends _ConfigCommon {
+public class configStorage extends _ConfigCommon {
     Component component = new Component();
     List<Storage> storages = new ArrayList<Storage>();
     //table

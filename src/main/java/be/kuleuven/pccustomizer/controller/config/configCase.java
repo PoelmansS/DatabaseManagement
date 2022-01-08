@@ -11,7 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class configCommonCase extends _ConfigCommon {
+public class configCase extends _ConfigCommon {
     Component component = new Component();
     List<Case> cases = new ArrayList<Case>();
 

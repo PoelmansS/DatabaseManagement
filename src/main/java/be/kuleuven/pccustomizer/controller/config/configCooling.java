@@ -12,7 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class configCommonCooling extends _ConfigCommon {
+public class configCooling extends _ConfigCommon {
     Component component = new Component();
     List<Cooling> coolings = new ArrayList<Cooling>();
     @FXML

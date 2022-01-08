@@ -12,7 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class configCommonRam extends _ConfigCommon {
+public class configRAM extends _ConfigCommon {
     Component component = new Component();
     List<RAM> rams = new ArrayList<RAM>();
     //table

@@ -12,7 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class configCommonPSU extends _ConfigCommon {
+public class configPSU extends _ConfigCommon {
     Component component = new Component();
     List<PSU> psus = new ArrayList<PSU>();
     //table

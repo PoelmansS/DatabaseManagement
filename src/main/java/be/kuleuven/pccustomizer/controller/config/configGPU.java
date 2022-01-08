@@ -13,7 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class configCommonGpu extends _ConfigCommon {
+public class configGPU extends _ConfigCommon {
     Component component = new Component();
     List<GPU> gpus = new ArrayList<GPU>();
     //table

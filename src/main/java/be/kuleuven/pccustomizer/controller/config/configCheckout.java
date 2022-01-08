@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class configCommonCheckout extends _ConfigCommon {
+public class configCheckout extends _ConfigCommon {
     private String name;
     private CustomPC costumPc = new CustomPC();
     private int totalPrice = 0;

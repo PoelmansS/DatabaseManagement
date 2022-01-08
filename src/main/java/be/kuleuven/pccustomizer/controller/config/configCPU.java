@@ -11,7 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class configCommonCpu extends _ConfigCommon {
+public class configCPU extends _ConfigCommon {
     Component component = new Component();
     List<CPU> cpus = new ArrayList<CPU>();
     @FXML
