@@ -95,11 +95,19 @@ public class Beheerklanten extends _BeheerCommon {
         tableView.getItems().remove(selectedRow);
     }
 
+    public Integer countOfID(){
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT MAX(ID) FROM Klant")
+                        .mapTo(Integer.class)
+                        .one());
+    }
+
     public void addNewRow() {
-        Klant klant = new Klant(Integer.parseInt(addID.getText()),addLastName.getText(),addFirstName.getText(),Integer.parseInt(addPostalCode.getText()),
+        int id = countOfID() +1;
+        Klant klant = new Klant(id, addLastName.getText(),addFirstName.getText(),Integer.parseInt(addPostalCode.getText()),
                 addStreet.getText(),addNR.getText(),addPhone.getText(),addMail.getText());
         jdbi.useHandle(handle -> { handle.execute("insert into Klant (ID, LastName,FirstName,PostalCode,Street,NR ,Phone,Mail ) values (?, ?, ?, ?, ?, ?,?,?)",
-                klant.getID(),klant.getLastName(),klant.getFirstName(),klant.getPostalCode(),
+                id, klant.getLastName(),klant.getFirstName(),klant.getPostalCode(),
                 klant.getStreet(),klant.getNumber(),klant.getPhone(),klant.getMail()); });
         ObservableList<Klant> klantList = tableView.getItems();
         klantList.add(klant);
@@ -146,6 +154,4 @@ public class Beheerklanten extends _BeheerCommon {
         klantList.set(selectedRow,modifiedKlant);
         tableView.setItems(klantList);
     }
-
-
 }

@@ -35,7 +35,7 @@
         </TableView>
         <Button fx:id="btnClose" layoutX="533.0" layoutY="329.0" mnemonicParsing="false" text="Sluiten" />
         <Button fx:id="btnLoad" layoutX="12.0" layoutY="329.0" mnemonicParsing="false" text="Load klant" />
-
+        <Button fx:id="btnAddKlant" layoutX="60.0" layoutY="329.0" mnemonicParsing="false" text="Voeg klant Toe" />
         <TextField fx:id="addID" layoutX="91.0" layoutY="360.0" prefHeight="25.0" prefWidth="42.0" />
         <TextField fx:id="addLastName" layoutX="133.0" layoutY="360.0" prefHeight="25.0" prefWidth="63.0" />
         <TextField fx:id="addFirstName" layoutX="196.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />

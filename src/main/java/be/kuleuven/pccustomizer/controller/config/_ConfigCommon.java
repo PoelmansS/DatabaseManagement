@@ -102,6 +102,16 @@ public class _ConfigCommon {
                         .one());
     }
 
+    public boolean doubles(String Table , String Column, Integer id){
+        List<Integer> ids = readDBint(Table, Column);
+        for(int i = 0; i < ids.size(); i++){
+            if(id.equals(ids.get(i))){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void showBeheerScherm(String id) {
         var resourceName = "config" + id + ".fxml";
         try {

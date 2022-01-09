@@ -25,6 +25,8 @@ public class configCheckout extends _ConfigCommon {
     @FXML
     public Button btnAdd;
     @FXML
+    public Button btnAddKlant;
+    @FXML
     public Button btnClose;
     @FXML
     public Button btnLoad;
@@ -83,6 +85,7 @@ public class configCheckout extends _ConfigCommon {
                 stage.close();
             }
         });
+        btnAddKlant.setOnAction(e -> addNewRow());
         btnClose.setOnAction(e -> {
             var stage = (Stage) btnClose.getScene().getWindow();
             stage.close();
@@ -195,17 +198,8 @@ public class configCheckout extends _ConfigCommon {
         Klant klant = new Klant(Integer.parseInt(addID.getText()),addLastName.getText(),addFirstName.getText(),Integer.parseInt(addPostalCode.getText()),
                 addStreet.getText(),addNR.getText(),addPhone.getText(),addMail.getText());
 
-        boolean bestaandeKlant = false;
-        List<Klant> list =klantList.stream().collect(Collectors.toList());
 
-        for(int i = 0;i< list.size() ;i++) {
-            if (klantList.get(i).getID() == klant.getID()) {
-                bestaandeKlant = true;
-                return;
-            }
-        }
-
-        if (!bestaandeKlant) {
+        if (!doubles("Klant", "ID", Integer.parseInt(addID.getText()))) {
             jdbi.useHandle(handle -> {
                 handle.execute("insert into Klant (ID, LastName,FirstName,PostalCode,Street,NR ,Phone,Mail ) values (?, ?, ?, ?, ?, ?,?,?)",
                         klant.getID(), klant.getLastName(), klant.getFirstName(), klant.getPostalCode(),
