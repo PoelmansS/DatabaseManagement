@@ -4,6 +4,7 @@ import be.kuleuven.pccustomizer.controller.Objects.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -14,10 +15,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configCheckout extends _ConfigCommon {
+    private int selectedRow;
     private String name;
-    private CustomPC costumPc = new CustomPC();
     private int totalPrice = 0;
+    private Klant modifiedKlant;
+
+    private CustomPC costumPc = new CustomPC();
     private List<Klant> klanten = new ArrayList<Klant>();
+
+    @FXML
+    public Button btnAdd;
+    @FXML
+    public Button btnClose;
+    @FXML
+    public Button btnLoad;
 
     @FXML
     private TableView<Klant> tableView;
@@ -61,12 +72,16 @@ public class configCheckout extends _ConfigCommon {
         initTable();
         calculatePriceFromDB();
         System.out.println(totalPrice);
+        btnLoad.setOnAction(e ->{
+            LoadCurrentRow();
+        });
         btnAdd.setOnAction(e -> {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
                 addComputer();
                 addBestelling();
                 var stage = (Stage) btnClose.getScene().getWindow();
                 stage.close();
+                addNewRow();
             }
         });
         btnClose.setOnAction(e -> {
@@ -169,5 +184,43 @@ public class configCheckout extends _ConfigCommon {
         viewComponenten.addAll(componenten);
         System.out.println(viewComponenten);
         componentView.setItems(viewComponenten);
+    }
+
+    public void addNewRow() {
+        ObservableList<Klant> klantList = tableView.getItems();
+        Klant klant = new Klant(Integer.parseInt(addID.getText()),addLastName.getText(),addFirstName.getText(),Integer.parseInt(addPostalCode.getText()),
+                addStreet.getText(),addNR.getText(),addPhone.getText(),addMail.getText());
+
+        boolean bestaandeKlant = false;
+        for(int i = 0;i<klantList.toArray().length;i++) {
+            bestaandeKlant = klantList.get(i).getID() == Integer.parseInt(addID.getText()); }
+
+        if (!bestaandeKlant) {
+            jdbi.useHandle(handle -> {
+                handle.execute("insert into Klant (ID, LastName,FirstName,PostalCode,Street,NR ,Phone,Mail ) values (?, ?, ?, ?, ?, ?,?,?)",
+                        klant.getID(), klant.getLastName(), klant.getFirstName(), klant.getPostalCode(),
+                        klant.getStreet(), klant.getNumber(), klant.getPhone(), klant.getMail());
+            });
+            klantList.add(klant);
+        }
+        tableView.setItems(klantList);
+    }
+
+    public void LoadCurrentRow() {
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            Klant klant = tableView.getSelectionModel().getSelectedItem();
+
+            addID.setText(String.valueOf(klant.getID()));
+            addLastName.setText(klant.getLastName());
+            addFirstName.setText(klant.getFirstName());
+            addPostalCode.setText(String.valueOf(klant.getPostalCode()));
+            addStreet.setText(klant.getStreet());
+            addNR.setText(klant.getNumber());
+            addPhone.setText(klant.getPhone());
+            addMail.setText(klant.getMail());
+
+            modifiedKlant = new Klant(klant.getID(),klant.getLastName(),klant.getFirstName(),klant.getPostalCode(),
+                    klant.getStreet(),klant.getNumber(),klant.getPhone(),klant.getMail());
+        }
     }
 }
