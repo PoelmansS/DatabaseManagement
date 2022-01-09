@@ -78,9 +78,9 @@ public class configCheckout extends _ConfigCommon {
             if (tableView.getSelectionModel().getSelectedItem() != null) {
                 addComputer();
                 addBestelling();
+                addNewRow();
                 var stage = (Stage) btnClose.getScene().getWindow();
                 stage.close();
-                addNewRow();
             }
         });
         btnClose.setOnAction(e -> {
@@ -124,14 +124,24 @@ public class configCheckout extends _ConfigCommon {
     private void calculatePriceFromDB(){
         totalPrice = 0;
         totalPrice = totalPrice + readAndCalculateDBint("CPU", "Price", componenten.get(0).getName());
+        System.out.println(totalPrice);
         if(!componenten.get(1).getName().equals("")) totalPrice = totalPrice + readAndCalculateDBint("GPU", "Price", componenten.get(1).getName());
+        System.out.println(totalPrice);
         totalPrice = totalPrice + readAndCalculateDBint("RAM", "Price", componenten.get(2).getName());
-        totalPrice = totalPrice + readAndCalculateDBint("Storage", "Price", componenten.get(3).getName());
+        System.out.println(totalPrice);
+
         totalPrice = totalPrice + readAndCalculateDBint("Motherbord", "Price", componenten.get(4).getName());
+        System.out.println(totalPrice);
         totalPrice = totalPrice + readAndCalculateDBint("Cooling", "Price", componenten.get(5).getName());
+        System.out.println(totalPrice);
         totalPrice = totalPrice + readAndCalculateDBint("Power_supply", "Price", componenten.get(6).getName());
+        System.out.println(totalPrice);
         totalPrice = totalPrice + readAndCalculateDBint("PcCase", "Price", componenten.get(7).getName());
+        System.out.println(totalPrice);
         if(!componenten.get(8).getName().equals("")) totalPrice = totalPrice + readAndCalculateDBint("Extra", "Price", componenten.get(8).getName());
+        System.out.println(totalPrice);
+        totalPrice = totalPrice + readAndCalculateDBint("Storage", "Price", componenten.get(3).getName());
+        System.out.println(totalPrice);
     }
 
     public Integer countNumberOfCostums(){

@@ -1,5 +1,6 @@
 package be.kuleuven.pccustomizer.controller.config;
 
+import be.kuleuven.pccustomizer.controller.Objects.Case;
 import be.kuleuven.pccustomizer.controller.Objects.Component;
 import be.kuleuven.pccustomizer.controller.Objects.Storage;
 import javafx.collections.FXCollections;
@@ -60,5 +61,12 @@ public class configStorage extends _ConfigCommon {
         tableView.setItems(storageList);
     }
 
+    public void addComponent(){
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            Storage storage = tableView.getSelectionModel().getSelectedItem();
+            component.setName(storage.getName());
+            componenten.add(component);
+        }
+    }
 
 }
