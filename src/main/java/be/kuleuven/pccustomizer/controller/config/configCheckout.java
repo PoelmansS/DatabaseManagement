@@ -110,14 +110,18 @@ public class configCheckout extends _ConfigCommon {
     private void calculatePriceFromDB(){
         totalPrice = 0;
         totalPrice = totalPrice + readAndCalculateDBint("CPU", "Price", componenten.get(0).getName());
-        totalPrice = totalPrice + readAndCalculateDBint("GPU", "Price", componenten.get(1).getName());
+        if (!componenten.get(1).getName().equals("")) {
+            totalPrice = totalPrice + readAndCalculateDBint("GPU", "Price", componenten.get(1).getName());
+        }
         totalPrice = totalPrice + readAndCalculateDBint("RAM", "Price", componenten.get(2).getName());
         totalPrice = totalPrice + readAndCalculateDBint("Storage", "Price", componenten.get(3).getName());
         totalPrice = totalPrice + readAndCalculateDBint("Motherbord", "Price", componenten.get(4).getName());
         totalPrice = totalPrice + readAndCalculateDBint("Cooling", "Price", componenten.get(5).getName());
         totalPrice = totalPrice + readAndCalculateDBint("Power_supply", "Price", componenten.get(6).getName());
         totalPrice = totalPrice + readAndCalculateDBint("PcCase", "Price", componenten.get(7).getName());
-        totalPrice = totalPrice + readAndCalculateDBint("Extra", "Price", componenten.get(8).getName());
+        if (!componenten.get(8).getName().equals("")) {
+            totalPrice = totalPrice + readAndCalculateDBint("Extra", "Price", componenten.get(8).getName());
+        }
     }
 
     public Integer countNumberOfCostums(){
