@@ -1,8 +1,10 @@
 package be.kuleuven.pccustomizer.controller.config;
 
 import be.kuleuven.pccustomizer.ProjectMain;
+import be.kuleuven.pccustomizer.controller.Objects.Storage;
 import be.kuleuven.pccustomizer.controller.SQLiteClient;
 import be.kuleuven.pccustomizer.controller.Objects.Component;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -22,7 +25,7 @@ import java.util.List;
 
 public class _ConfigCommon {
     public static List<Component> componenten = new ArrayList();
-
+    Component component = new Component();
     SQLiteClient client = new SQLiteClient();
     Jdbi jdbi = client.getJdbi();
 
@@ -35,7 +38,7 @@ public class _ConfigCommon {
     @FXML
     public TableColumn<Component, String> componentColumn;
 
-    public void initTableComponenten(){}
+
     public void initTable(){}
     public void ReadFromDB(){}
     public void addComponent(){}
@@ -54,6 +57,19 @@ public class _ConfigCommon {
             stage.close();
         });
     }
+
+    private void initTableComponenten() {
+        componentColumn.setCellValueFactory(new PropertyValueFactory<Component, String>("name"));
+        ObservableList<Component> viewComponenten = FXCollections.observableArrayList();
+        viewComponenten.addAll(componenten);
+        componentView.setItems(viewComponenten);
+    }
+
+    public void skipComponent(){
+        component.setName("");
+        componenten.add(component);
+    }
+
     //function to querry a column of strings
     public List<String> readDBstring(String clas, String columnName){
         return jdbi.withHandle(handle ->
@@ -80,7 +96,7 @@ public class _ConfigCommon {
     //function to querry and return the price of components
     public Integer readAndCalculateDBint(String clas, String columnName, String item){
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT " + columnName + " FROM " + clas + " WHERE Name = :Name")
+                handle.createQuery("SELECT " + columnName + " FROM " + clas + " WHERE Name= :Name")
                         .bind("Name", item)
                         .mapTo(Integer.class)
                         .one());
@@ -104,5 +120,4 @@ public class _ConfigCommon {
             throw new RuntimeException("Kan beheerscherm " + resourceName + " niet vinden", e);
         }
     }
-
 }

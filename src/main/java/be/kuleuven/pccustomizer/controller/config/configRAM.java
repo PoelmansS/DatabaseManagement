@@ -67,7 +67,6 @@ public class configRAM extends _ConfigCommon {
         componentColumn.setCellValueFactory(new PropertyValueFactory<Component, String>("name"));
         ObservableList<Component> viewComponenten = FXCollections.observableArrayList();
         viewComponenten.addAll(componenten);
-        System.out.println(viewComponenten);
         componentView.setItems(viewComponenten);
     }
 }

@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configMotherboard extends _ConfigCommon {
-    Component component = new Component();
     List<MotherBoard> motherBoards = new ArrayList<MotherBoard>();
     //table
     @FXML
@@ -70,13 +69,5 @@ public class configMotherboard extends _ConfigCommon {
             component.setName(motherBoard.getName());
             componenten.add(component);
         }
-    }
-
-    public void initTableComponenten() {
-        componentColumn.setCellValueFactory(new PropertyValueFactory<Component, String>("name"));
-        ObservableList<Component> viewComponenten = FXCollections.observableArrayList();
-        viewComponenten.addAll(componenten);
-        System.out.println(viewComponenten);
-        componentView.setItems(viewComponenten);
     }
 }

@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configStorage extends _ConfigCommon {
-    Component component = new Component();
     List<Storage> storages = new ArrayList<Storage>();
     //table
     @FXML
@@ -61,19 +60,5 @@ public class configStorage extends _ConfigCommon {
         tableView.setItems(storageList);
     }
 
-    public void addComponent(){
-        if (tableView.getSelectionModel().getSelectedItem() != null) {
-            Storage storage = tableView.getSelectionModel().getSelectedItem();
-            component.setName(storage.getName());
-            componenten.add(component);
-        }
-    }
 
-    public void initTableComponenten() {
-        componentColumn.setCellValueFactory(new PropertyValueFactory<Component, String>("name"));
-        ObservableList<Component> viewComponenten = FXCollections.observableArrayList();
-        viewComponenten.addAll(componenten);
-        System.out.println(viewComponenten);
-        componentView.setItems(viewComponenten);
-    }
 }

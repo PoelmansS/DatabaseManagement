@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configExtra extends _ConfigCommon {
-    Component component = new Component();
     List<Extra> extras = new ArrayList<Extra>();
     @FXML
     private Button btnSkip;
@@ -37,8 +36,6 @@ public class configExtra extends _ConfigCommon {
             showBeheerScherm("Checkout");
         });
     }
-
-
 
     public void ReadFromDB(){
         List<String> names = readDBstring("Extra","Name");
@@ -66,18 +63,5 @@ public class configExtra extends _ConfigCommon {
             component.setName(extra.getName());
             componenten.add(component);
         }
-    }
-
-    private void skipComponent(){
-        component.setName("");
-        componenten.add(component);
-    }
-
-    public void initTableComponenten() {
-        componentColumn.setCellValueFactory(new PropertyValueFactory<Component, String>("name"));
-        ObservableList<Component> viewComponenten = FXCollections.observableArrayList();
-        viewComponenten.addAll(componenten);
-        System.out.println(viewComponenten);
-        componentView.setItems(viewComponenten);
     }
 }

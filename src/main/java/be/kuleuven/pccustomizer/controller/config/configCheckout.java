@@ -13,12 +13,11 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class configCheckout extends _ConfigCommon {
-    private int selectedRow;
     private String name;
     private int totalPrice = 0;
-    private Klant modifiedKlant;
 
     private CustomPC costumPc = new CustomPC();
     private List<Klant> klanten = new ArrayList<Klant>();
@@ -125,18 +124,14 @@ public class configCheckout extends _ConfigCommon {
     private void calculatePriceFromDB(){
         totalPrice = 0;
         totalPrice = totalPrice + readAndCalculateDBint("CPU", "Price", componenten.get(0).getName());
-        if (!componenten.get(1).getName().equals("")) {
-            totalPrice = totalPrice + readAndCalculateDBint("GPU", "Price", componenten.get(1).getName());
-        }
+        if(!componenten.get(1).getName().equals("")) totalPrice = totalPrice + readAndCalculateDBint("GPU", "Price", componenten.get(1).getName());
         totalPrice = totalPrice + readAndCalculateDBint("RAM", "Price", componenten.get(2).getName());
         totalPrice = totalPrice + readAndCalculateDBint("Storage", "Price", componenten.get(3).getName());
         totalPrice = totalPrice + readAndCalculateDBint("Motherbord", "Price", componenten.get(4).getName());
         totalPrice = totalPrice + readAndCalculateDBint("Cooling", "Price", componenten.get(5).getName());
         totalPrice = totalPrice + readAndCalculateDBint("Power_supply", "Price", componenten.get(6).getName());
         totalPrice = totalPrice + readAndCalculateDBint("PcCase", "Price", componenten.get(7).getName());
-        if (!componenten.get(8).getName().equals("")) {
-            totalPrice = totalPrice + readAndCalculateDBint("Extra", "Price", componenten.get(8).getName());
-        }
+        if(!componenten.get(8).getName().equals("")) totalPrice = totalPrice + readAndCalculateDBint("Extra", "Price", componenten.get(8).getName());
     }
 
     public Integer countNumberOfCostums(){
@@ -182,7 +177,6 @@ public class configCheckout extends _ConfigCommon {
         componentColumn.setCellValueFactory(new PropertyValueFactory<Component, String>("name"));
         ObservableList<Component> viewComponenten = FXCollections.observableArrayList();
         viewComponenten.addAll(componenten);
-        System.out.println(viewComponenten);
         componentView.setItems(viewComponenten);
     }
 
@@ -192,8 +186,14 @@ public class configCheckout extends _ConfigCommon {
                 addStreet.getText(),addNR.getText(),addPhone.getText(),addMail.getText());
 
         boolean bestaandeKlant = false;
-        for(int i = 0;i<klantList.toArray().length;i++) {
-            bestaandeKlant = klantList.get(i).getID() == Integer.parseInt(addID.getText()); }
+        List<Klant> list =klantList.stream().collect(Collectors.toList());
+
+        for(int i = 0;i< list.size() ;i++) {
+            if (klantList.get(i).getID() == klant.getID()) {
+                bestaandeKlant = true;
+                return;
+            }
+        }
 
         if (!bestaandeKlant) {
             jdbi.useHandle(handle -> {
@@ -218,9 +218,6 @@ public class configCheckout extends _ConfigCommon {
             addNR.setText(klant.getNumber());
             addPhone.setText(klant.getPhone());
             addMail.setText(klant.getMail());
-
-            modifiedKlant = new Klant(klant.getID(),klant.getLastName(),klant.getFirstName(),klant.getPostalCode(),
-                    klant.getStreet(),klant.getNumber(),klant.getPhone(),klant.getMail());
         }
     }
 }

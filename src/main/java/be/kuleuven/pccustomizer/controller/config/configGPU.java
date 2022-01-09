@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configGPU extends _ConfigCommon {
-    Component component = new Component();
     List<GPU> gpus = new ArrayList<GPU>();
     //table
     @FXML
@@ -30,7 +29,6 @@ public class configGPU extends _ConfigCommon {
     private TableColumn<GPU, Integer> VRAMColumn;
     @FXML
     private TableColumn<GPU, Integer> powerUsageColumn;
-
 
     public void initialize() {
         init(tableView, "Ram");
@@ -69,18 +67,5 @@ public class configGPU extends _ConfigCommon {
             component.setName(gpu.getName());
             componenten.add(component);
         }
-    }
-
-    private void skipComponent(){
-        component.setName("");
-        componenten.add(component);
-    }
-
-    public void initTableComponenten() {
-        componentColumn.setCellValueFactory(new PropertyValueFactory<Component, String>("name"));
-        ObservableList<Component> viewComponenten = FXCollections.observableArrayList();
-        viewComponenten.addAll(componenten);
-        System.out.println(viewComponenten);
-        componentView.setItems(viewComponenten);
     }
 }

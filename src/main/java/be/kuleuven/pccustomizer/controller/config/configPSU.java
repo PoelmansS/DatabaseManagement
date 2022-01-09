@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configPSU extends _ConfigCommon {
-    Component component = new Component();
     List<PSU> psus = new ArrayList<PSU>();
     //table
     @FXML
@@ -57,13 +56,5 @@ public class configPSU extends _ConfigCommon {
             component.setName(psu.getName());
             componenten.add(component);
         }
-    }
-
-    public void initTableComponenten() {
-        componentColumn.setCellValueFactory(new PropertyValueFactory<Component, String>("name"));
-        ObservableList<Component> viewComponenten = FXCollections.observableArrayList();
-        viewComponenten.addAll(componenten);
-        System.out.println(viewComponenten);
-        componentView.setItems(viewComponenten);
     }
 }

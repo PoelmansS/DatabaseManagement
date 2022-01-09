@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configCooling extends _ConfigCommon {
-    Component component = new Component();
     List<Cooling> coolings = new ArrayList<Cooling>();
     @FXML
     private TableView<Cooling> tableView;
@@ -60,13 +59,5 @@ public class configCooling extends _ConfigCommon {
             component.setName(cooling.getName());
             componenten.add(component);
         }
-    }
-
-    public void initTableComponenten() {
-        componentColumn.setCellValueFactory(new PropertyValueFactory<Component, String>("name"));
-        ObservableList<Component> viewComponenten = FXCollections.observableArrayList();
-        viewComponenten.addAll(componenten);
-        System.out.println(viewComponenten);
-        componentView.setItems(viewComponenten);
     }
 }
