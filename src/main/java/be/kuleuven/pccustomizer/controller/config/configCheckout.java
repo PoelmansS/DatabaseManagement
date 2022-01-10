@@ -18,8 +18,6 @@ import java.util.stream.Collectors;
 public class configCheckout extends _ConfigCommon {
     private String name;
     private int totalPrice = 0;
-
-    private CustomPC costumPc = new CustomPC();
     private List<Klant> klanten = new ArrayList<Klant>();
 
     @FXML
@@ -85,7 +83,6 @@ public class configCheckout extends _ConfigCommon {
                 stage.close();
             }
         });
-        btnAddKlant.setOnAction(e -> addNewRow());
         btnClose.setOnAction(e -> {
             var stage = (Stage) btnClose.getScene().getWindow();
             stage.close();
@@ -127,24 +124,15 @@ public class configCheckout extends _ConfigCommon {
     private void calculatePriceFromDB(){
         totalPrice = 0;
         totalPrice = totalPrice + readAndCalculateDBint("CPU", "Price", componenten.get(0).getName());
-        System.out.println(totalPrice);
         if(!componenten.get(1).getName().equals("")) totalPrice = totalPrice + readAndCalculateDBint("GPU", "Price", componenten.get(1).getName());
-        System.out.println(totalPrice);
         totalPrice = totalPrice + readAndCalculateDBint("RAM", "Price", componenten.get(2).getName());
-        System.out.println(totalPrice);
-
         totalPrice = totalPrice + readAndCalculateDBint("Motherbord", "Price", componenten.get(4).getName());
-        System.out.println(totalPrice);
         totalPrice = totalPrice + readAndCalculateDBint("Cooling", "Price", componenten.get(5).getName());
-        System.out.println(totalPrice);
         totalPrice = totalPrice + readAndCalculateDBint("Power_supply", "Price", componenten.get(6).getName());
-        System.out.println(totalPrice);
         totalPrice = totalPrice + readAndCalculateDBint("PcCase", "Price", componenten.get(7).getName());
-        System.out.println(totalPrice);
         if(!componenten.get(8).getName().equals("")) totalPrice = totalPrice + readAndCalculateDBint("Extra", "Price", componenten.get(8).getName());
-        System.out.println(totalPrice);
         totalPrice = totalPrice + readAndCalculateDBint("Storage", "Price", componenten.get(3).getName());
-        System.out.println(totalPrice);
+
     }
 
     public Integer countNumberOfCostums(){
@@ -198,6 +186,8 @@ public class configCheckout extends _ConfigCommon {
         Klant klant = new Klant(Integer.parseInt(addID.getText()),addLastName.getText(),addFirstName.getText(),Integer.parseInt(addPostalCode.getText()),
                 addStreet.getText(),addNR.getText(),addPhone.getText(),addMail.getText());
 
+        boolean bestaandeKlant = false;
+        List<Klant> list =klantList.stream().collect(Collectors.toList());
 
         if (!doubles("Klant", "ID", Integer.parseInt(addID.getText()))) {
             jdbi.useHandle(handle -> {
