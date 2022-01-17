@@ -55,12 +55,14 @@ public class beheerExtra extends _BeheerCommon {
         tableView.setItems(extraList);
     }
     public void deleteCurrentRow() {
-        ObservableList<Extra> extraList = tableView.getItems();
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
-        jdbi.useHandle(handle -> {
-            handle.execute("DELETE FROM Extra WHERE Name = ?", extraList.get(0).getName());
-        });
-        tableView.getItems().remove(selectedRow);
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            Extra extra = tableView.getSelectionModel().getSelectedItem();
+            jdbi.useHandle(handle -> {
+                handle.execute("DELETE FROM Extra WHERE Name = ?", extra.getName());
+            });
+            tableView.getItems().remove(selectedRow);
+        }
     }
 
     public void addNewRow() {

@@ -74,12 +74,14 @@ public class beheerMotherboard extends _BeheerCommon {
     }
 
     public void deleteCurrentRow() {
-        ObservableList<MotherBoard> motherBoardList = tableView.getItems();
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
-        jdbi.useHandle(handle -> {
-            handle.execute("DELETE FROM Motherbord WHERE Name = ?", motherBoardList.get(0).getName());
-        });
-        tableView.getItems().remove(selectedRow);
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            Motherboard motherboard = tableView.getSelectionModel().getSelectedItem();
+            jdbi.useHandle(handle -> {
+                handle.execute("DELETE FROM CPU WHERE Name = ?", motherboard.getName());
+            });
+            tableView.getItems().remove(selectedRow);
+        }
     }
 
     public void addNewRow() {

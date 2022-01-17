@@ -101,9 +101,12 @@ public class BeheerComputerConfigs extends _BeheerCommon {
     public void deleteCurrentRow() {
         ObservableList<CustomPC> customPCList = tableView.getItems();
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
-        jdbi.useHandle(handle -> {
-            handle.execute("DELETE FROM Computer WHERE Name = ?", customPCList.get(0).getName());
-        });
-        tableView.getItems().remove(selectedRow);
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            CostumPc pc = tableView.getSelectionModel().getSelectedItem();
+            jdbi.useHandle(handle -> {
+                handle.execute("DELETE FROM Computer WHERE Name = ?", pc.getName());
+            });
+            tableView.getItems().remove(selectedRow);
+        }
     }
 }

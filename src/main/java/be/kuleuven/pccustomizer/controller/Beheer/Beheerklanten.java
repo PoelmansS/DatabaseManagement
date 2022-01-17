@@ -87,12 +87,14 @@ public class Beheerklanten extends _BeheerCommon {
     }
 
     public void deleteCurrentRow() {
-        ObservableList<Klant> KlantList = tableView.getItems();
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
-        jdbi.useHandle(handle -> {
-            handle.execute("DELETE FROM Klant WHERE ID = ?", KlantList.get(0).getID());
-        });
-        tableView.getItems().remove(selectedRow);
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            Klant klant = tableView.getSelectionModel().getSelectedItem();
+            jdbi.useHandle(handle -> {
+                handle.execute("DELETE FROM Klant WHERE ID = ?", klant.getID());
+            });
+            tableView.getItems().remove(selectedRow);
+        }
     }
 
     public Integer countOfID(){

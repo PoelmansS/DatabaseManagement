@@ -70,12 +70,14 @@ public class beheerRAM extends _BeheerCommon {
     }
 
     public void deleteCurrentRow() {
-        ObservableList<RAM> RAMList = tableView.getItems();
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
-        jdbi.useHandle(handle -> {
-            handle.execute("DELETE FROM RAM WHERE Name = ?", RAMList.get(0).getName());
-        });
-        tableView.getItems().remove(selectedRow);
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            RAM ram = tableView.getSelectionModel().getSelectedItem();
+            jdbi.useHandle(handle -> {
+                handle.execute("DELETE FROM CPU WHERE Name = ?", ram.getName());
+            });
+            tableView.getItems().remove(selectedRow);
+        }
     }
 
     public void addNewRow() {

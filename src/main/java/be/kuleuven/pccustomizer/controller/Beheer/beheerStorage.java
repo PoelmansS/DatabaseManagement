@@ -72,12 +72,14 @@ public class beheerStorage extends _BeheerCommon {
     }
 
     public void deleteCurrentRow() {
-        ObservableList<Storage> storageList = tableView.getItems();
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
-        jdbi.useHandle(handle -> {
-            handle.execute("DELETE FROM Storage WHERE Name = ?", storageList.get(0).getName());
-        });
-        tableView.getItems().remove(selectedRow);
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            Storage storage = tableView.getSelectionModel().getSelectedItem();
+            jdbi.useHandle(handle -> {
+                handle.execute("DELETE FROM CPU WHERE Name = ?", storage.getName());
+            });
+            tableView.getItems().remove(selectedRow);
+        }
     }
 
     public void addNewRow() {

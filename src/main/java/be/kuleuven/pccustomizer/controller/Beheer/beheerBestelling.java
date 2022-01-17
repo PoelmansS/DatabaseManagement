@@ -87,12 +87,13 @@ public class beheerBestelling extends _BeheerCommon {
     }
 
     public void deleteCurrentRow() {
-        ObservableList<Bestelling> bestellingList = tableView.getItems();
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
-        jdbi.useHandle(handle -> {
-            handle.execute("DELETE FROM PcCase WHERE Name = ?", bestellingList.get(0).getID());
-        });
-        tableView.getItems().remove(selectedRow);
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            Bestelling bestelling = tableView.getSelectionModel().getSelectedItem();
+            jdbi.useHandle(handle -> {
+                handle.execute("DELETE FROM PcCase WHERE Name = ?", bestelling.getName()); });
+            tableView.getItems().remove(selectedRow);
+        }
     }
 
     public boolean pcAvailable(String name){

@@ -58,12 +58,14 @@ public class beheerPSU extends _BeheerCommon {
     }
 
     public void deleteCurrentRow() {
-        ObservableList<PSU> PSUList = tableView.getItems();
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
-        jdbi.useHandle(handle -> {
-            handle.execute("DELETE FROM Power_supply WHERE Name = ?", PSUList.get(0).getName());
-        });
-        tableView.getItems().remove(selectedRow);
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            PSU psu = tableView.getSelectionModel().getSelectedItem();
+            jdbi.useHandle(handle -> {
+                handle.execute("DELETE FROM CPU WHERE Name = ?", psu.getName());
+            });
+            tableView.getItems().remove(selectedRow);
+        }
     }
 
     public void addNewRow() {

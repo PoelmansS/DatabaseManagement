@@ -60,12 +60,14 @@ public class beheerCooling extends _BeheerCommon {
     }
 
     public void deleteCurrentRow() {
-        ObservableList<Cooling> coolingList = tableView.getItems();
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
-        jdbi.useHandle(handle -> {
-            handle.execute("DELETE FROM Cooling WHERE Name = ?", coolingList.get(0).getName());
-        });
-        tableView.getItems().remove(selectedRow);
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            Cooling cooling = tableView.getSelectionModel().getSelectedItem();
+            jdbi.useHandle(handle -> {
+                handle.execute("DELETE FROM Cooling WHERE Name = ?", cooling.getName());
+            });
+            tableView.getItems().remove(selectedRow);
+        }
     }
 
     public void addNewRow() {

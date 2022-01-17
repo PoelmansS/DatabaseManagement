@@ -90,11 +90,13 @@ public class beheerCase extends _BeheerCommon {
     }
 
     public void deleteCurrentRow() {
-        ObservableList<Case> caseList = tableView.getItems();
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
-        jdbi.useHandle(handle -> {
-            handle.execute("DELETE FROM PcCase WHERE Name = ?", caseList.get(0).getName()); });
-        tableView.getItems().remove(selectedRow);
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            Case cases = tableView.getSelectionModel().getSelectedItem();
+            jdbi.useHandle(handle -> {
+                handle.execute("DELETE FROM PcCase WHERE Name = ?", cases.getName()); });
+            tableView.getItems().remove(selectedRow);
+        }
     }
 
     public void addNewRow() {

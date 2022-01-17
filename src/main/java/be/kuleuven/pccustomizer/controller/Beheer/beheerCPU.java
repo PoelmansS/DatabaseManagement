@@ -74,12 +74,14 @@ public class beheerCPU extends _BeheerCommon {
     }
 
     public void deleteCurrentRow() {
-        ObservableList<CPU> CPUList = tableView.getItems();
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
-        jdbi.useHandle(handle -> {
-            handle.execute("DELETE FROM CPU WHERE Name = ?", CPUList.get(0).getName());
-        });
-        tableView.getItems().remove(selectedRow);
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            CPU cpu = tableView.getSelectionModel().getSelectedItem();
+            jdbi.useHandle(handle -> {
+                handle.execute("DELETE FROM CPU WHERE Name = ?", cpu.getName());
+            });
+            tableView.getItems().remove(selectedRow);
+        }
     }
 
     public void addNewRow() {
