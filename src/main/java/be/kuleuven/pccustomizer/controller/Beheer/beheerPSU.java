@@ -1,7 +1,5 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
-import be.kuleuven.pccustomizer.controller.Objects.CPU;
-import be.kuleuven.pccustomizer.controller.Objects.Extra;
-import be.kuleuven.pccustomizer.controller.Objects.PSU;
+import be.kuleuven.pccustomizer.controller.Objects.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -32,6 +30,8 @@ public class beheerPSU extends _BeheerCommon {
     private TableColumn<PSU, Integer> wattageColumn;
     @FXML
     private TableColumn<PSU, Integer> priceColumn;
+    @FXML
+    private TableColumn<PSU, Integer> aantalColumn;
 
     public void initialize() {
         init(tableView);
@@ -51,6 +51,7 @@ public class beheerPSU extends _BeheerCommon {
         nameColumn.setCellValueFactory(new PropertyValueFactory<PSU, String>("name"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<PSU, Integer>("price"));
         wattageColumn.setCellValueFactory(new PropertyValueFactory<PSU, Integer>("wattage"));
+        aantalColumn.setCellValueFactory(new PropertyValueFactory<PSU, Integer>("aantal"));
 
         ObservableList<PSU> PSUList = tableView.getItems();
         PSUList.addAll(psus);

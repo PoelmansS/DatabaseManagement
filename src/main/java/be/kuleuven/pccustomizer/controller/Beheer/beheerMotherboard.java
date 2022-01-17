@@ -1,4 +1,6 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
+import be.kuleuven.pccustomizer.controller.Objects.Case;
+import be.kuleuven.pccustomizer.controller.Objects.GPU;
 import be.kuleuven.pccustomizer.controller.Objects.MotherBoard;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -42,6 +44,8 @@ public class beheerMotherboard extends _BeheerCommon {
     private TableColumn<MotherBoard, Integer> RAMSlotsColumn;
     @FXML
     private TableColumn<MotherBoard, Integer> PCIESlotsColumn;
+    @FXML
+    private TableColumn<MotherBoard, Integer> aantalColumn;
 
     public void initialize() {
         init(tableView);
@@ -69,6 +73,7 @@ public class beheerMotherboard extends _BeheerCommon {
         caseSizeColumn.setCellValueFactory(new PropertyValueFactory<MotherBoard, String>("caseSize"));
         RAMSlotsColumn.setCellValueFactory(new PropertyValueFactory<MotherBoard, Integer>("RAMSlots"));
         PCIESlotsColumn.setCellValueFactory(new PropertyValueFactory<MotherBoard, Integer>("PCIESlots"));
+        aantalColumn.setCellValueFactory(new PropertyValueFactory<MotherBoard, Integer>("aantal"));
 
         ObservableList<MotherBoard> MotherBoardList = tableView.getItems();
         MotherBoardList.addAll(motherBoards);

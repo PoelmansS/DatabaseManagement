@@ -1,5 +1,7 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
+import be.kuleuven.pccustomizer.controller.Objects.Case;
 import be.kuleuven.pccustomizer.controller.Objects.Cooling;
+import be.kuleuven.pccustomizer.controller.Objects.GPU;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -33,6 +35,8 @@ public class beheerCooling extends _BeheerCommon {
     private TableColumn<Cooling, Integer> priceColumn;
     @FXML
     private TableColumn<Cooling, Integer> wattageColumn;
+    @FXML
+    private TableColumn<Cooling, Integer> aantalColumn;
 
     public void initialize() {
         init(tableView);
@@ -55,6 +59,7 @@ public class beheerCooling extends _BeheerCommon {
         typeColumn.setCellValueFactory(new PropertyValueFactory<Cooling, String>("type"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<Cooling, Integer>("price"));
         wattageColumn.setCellValueFactory(new PropertyValueFactory<Cooling, Integer>("wattage"));
+        aantalColumn.setCellValueFactory(new PropertyValueFactory<Cooling, Integer>("aantal"));
 
         ObservableList<Cooling> coolingList = tableView.getItems();
         coolingList.addAll(coolings);

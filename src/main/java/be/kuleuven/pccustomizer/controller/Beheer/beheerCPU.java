@@ -1,7 +1,5 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
-import be.kuleuven.pccustomizer.controller.Objects.CPU;
-import be.kuleuven.pccustomizer.controller.Objects.Extra;
-import be.kuleuven.pccustomizer.controller.Objects.Storage;
+import be.kuleuven.pccustomizer.controller.Objects.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -44,6 +42,8 @@ public class beheerCPU extends _BeheerCommon {
     private TableColumn<CPU, Integer> clockSpeedColumn;
     @FXML
     private TableColumn<CPU, Integer> powerUsageColumn;
+    @FXML
+    private TableColumn<CPU, Integer> aantalColumn;
 
     public void initialize() {
         init(tableView);
@@ -70,6 +70,7 @@ public class beheerCPU extends _BeheerCommon {
         coresColumn.setCellValueFactory(new PropertyValueFactory<CPU, Integer>("cores"));
         clockSpeedColumn.setCellValueFactory(new PropertyValueFactory<CPU, Integer>("clockSpeed"));
         powerUsageColumn.setCellValueFactory(new PropertyValueFactory<CPU, Integer>("powerUsage"));
+        aantalColumn.setCellValueFactory(new PropertyValueFactory<CPU, Integer>("aantal"));
 
         ObservableList<CPU> CPUList = tableView.getItems();
         CPUList.addAll(cpus);

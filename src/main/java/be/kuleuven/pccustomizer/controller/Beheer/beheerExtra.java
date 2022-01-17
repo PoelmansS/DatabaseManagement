@@ -1,5 +1,7 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
+import be.kuleuven.pccustomizer.controller.Objects.Case;
 import be.kuleuven.pccustomizer.controller.Objects.Extra;
+import be.kuleuven.pccustomizer.controller.Objects.GPU;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -30,6 +32,8 @@ public class beheerExtra extends _BeheerCommon {
     private TableColumn<Extra, String> typeColumn;
     @FXML
     private TableColumn<Extra, Integer> priceColumn;
+    @FXML
+    private TableColumn<Extra, Integer> aantalColumn;
 
     public void initialize() {
         init(tableView);
@@ -50,6 +54,7 @@ public class beheerExtra extends _BeheerCommon {
         nameColumn.setCellValueFactory(new PropertyValueFactory<Extra, String>("Name"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Extra, String>("Type"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<Extra, Integer>("Price"));
+        aantalColumn.setCellValueFactory(new PropertyValueFactory<Extra, Integer>("aantal"));
 
         ObservableList<Extra> extraList = tableView.getItems();
         extraList.addAll(extras);

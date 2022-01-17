@@ -1,4 +1,6 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
+import be.kuleuven.pccustomizer.controller.Objects.Case;
+import be.kuleuven.pccustomizer.controller.Objects.GPU;
 import be.kuleuven.pccustomizer.controller.Objects.Storage;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -41,6 +43,8 @@ public class beheerStorage extends _BeheerCommon {
     private TableColumn<Storage, Integer> readSpeedColumn;
     @FXML
     private TableColumn<Storage, Integer> writeSpeedColumn;
+    @FXML
+    private TableColumn<Storage, Integer> aantalColumn;
 
     public void initialize() {
         init(tableView);
@@ -67,6 +71,7 @@ public class beheerStorage extends _BeheerCommon {
         sizeColumn.setCellValueFactory(new PropertyValueFactory<Storage, Integer>("size"));
         readSpeedColumn.setCellValueFactory(new PropertyValueFactory<Storage, Integer>("readSpeed"));
         writeSpeedColumn.setCellValueFactory(new PropertyValueFactory<Storage, Integer>("writeSpeed"));
+        aantalColumn.setCellValueFactory(new PropertyValueFactory<Storage, Integer>("aantal"));
 
         ObservableList<Storage> storageList = tableView.getItems();
         storageList.addAll(storages);

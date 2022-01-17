@@ -1,6 +1,7 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
 import be.kuleuven.pccustomizer.controller.Objects.Case;
 import be.kuleuven.pccustomizer.controller.Objects.Extra;
+import be.kuleuven.pccustomizer.controller.Objects.GPU;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -38,6 +39,8 @@ public class beheerCase extends _BeheerCommon {
     private TableColumn<Case, Integer> priceColumn;
     @FXML
     private TableColumn<Case, String> sizeColumn;
+    @FXML
+    private TableColumn<Case, Integer> aantalColumn;
 
     public void initialize() {
         ReadFromDB();
@@ -85,6 +88,7 @@ public class beheerCase extends _BeheerCommon {
         typeColumn.setCellValueFactory(new PropertyValueFactory<Case, String>("type"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<Case, Integer>("price"));
         sizeColumn.setCellValueFactory(new PropertyValueFactory<Case, String>("size"));
+        aantalColumn.setCellValueFactory(new PropertyValueFactory<Case, Integer>("aantal"));
 
         ObservableList<Case> caseList = tableView.getItems();
         caseList.addAll(cases);
