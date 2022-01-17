@@ -8,10 +8,11 @@ public class Extra {
 
     public Extra(){}
 
-    public Extra(String name, String type, int price) {
+    public Extra(String name, String type, int price, int aantal) {
         this.name = name;
         this.type = type;
         this.price = price;
+        this.aantal = aantal;
     }
 
     public String getName() {

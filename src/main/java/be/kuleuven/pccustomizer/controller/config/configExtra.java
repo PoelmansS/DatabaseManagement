@@ -41,9 +41,10 @@ public class configExtra extends _ConfigCommon {
         List<String> names = readDBstring("Extra","Name");
         List<String> types =  readDBstring("Extra","Type");
         List<Integer> prices =  readDBint("Extra","Price");
+        List<Integer> aantallen =  readDBint("Extra","Aantal");
 
         for(int i = 0; i < names.size(); i++){
-            extras.add(new Extra(names.get(i), types.get(i), prices.get(i)));
+            extras.add(new Extra(names.get(i), types.get(i), prices.get(i), aantallen.get(i)));
         }
     }
 

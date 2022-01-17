@@ -39,9 +39,10 @@ public class beheerExtra extends _BeheerCommon {
         List<String> names = readDBstring("Extra","Name");
         List<String> types =  readDBstring("Extra","Type");
         List<Integer> prices =  readDBint("Extra","Price");
+        List<Integer> aantallen =  readDBint("Extra","Aantal");
 
         for(int i = 0; i < names.size(); i++){
-            extras.add(new Extra(names.get(i), types.get(i), prices.get(i)));
+            extras.add(new Extra(names.get(i), types.get(i), prices.get(i), aantallen.get(i)));
         }
     }
 
@@ -68,7 +69,8 @@ public class beheerExtra extends _BeheerCommon {
 
     public void addNewRow() {
         if(!doubles("Extra", "Name", addName.getText())) {
-            Extra extra = new Extra(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()));
+            Extra extra = new Extra(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()),
+                    Integer.parseInt(addAantal.getText()));
             jdbi.useHandle(handle -> {
                 handle.execute("insert into Extra (Name,Type,  Price) values (?, ?, ?)",
                         extra.getName(), extra.getType(), extra.getPrice());
@@ -89,8 +91,9 @@ public class beheerExtra extends _BeheerCommon {
             addName.setText(extra.getName());
             addType.setText(extra.getType());
             addPrice.setText(String.valueOf(extra.getPrice()));
+            addAantal.setText(String.valueOf(extra.getAantal()));
 
-            modifiedExtra = new Extra(extra.getName(), extra.getType(),extra.getPrice());
+            modifiedExtra = new Extra(extra.getName(), extra.getType(), extra.getPrice(), extra.getAantal());
         }
     }
 
