@@ -5,12 +5,25 @@ public class GPU {
     int price;
     int VRAM;
     int powerUsage;
+    int NRofSlots;
+    int aantal;
 
-    public GPU(String name, int price, int VRAM, int powerUsage) {
+
+    public GPU(String name, int price, int VRAM, int powerUsage, int NRofSlots) {
         this.name = name;
         this.price = price;
         this.VRAM = VRAM;
         this.powerUsage = powerUsage;
+        this.NRofSlots = NRofSlots;
+    }
+
+
+    public int getNRofSlots() {
+        return NRofSlots;
+    }
+
+    public int getAantal() {
+        return aantal;
     }
 
     public String getName() {
@@ -43,5 +56,13 @@ public class GPU {
 
     public void setPowerUsage(int powerUsage) {
         this.powerUsage = powerUsage;
+    }
+
+    public void setNRofSlots(int NRofSlots) {
+        this.NRofSlots = NRofSlots;
+    }
+
+    public void setAantal(int aantal) {
+        this.aantal = aantal;
     }
 }

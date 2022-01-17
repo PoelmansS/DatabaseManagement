@@ -27,6 +27,11 @@ public class configRAM extends _ConfigCommon {
     private TableColumn<RAM, Integer> priceColumn;
     @FXML
     private TableColumn<RAM, Integer> sizeColumn;
+    @FXML
+    private TableColumn<RAM, Integer> NRofSlotsColumn;
+    @FXML
+    private TableColumn<RAM, Integer> aantalColumn;
+
 
     public void initialize() {
         init(tableView, "Storage");
@@ -38,9 +43,10 @@ public class configRAM extends _ConfigCommon {
         List<String> types =  readDBstring("RAM","Type");
         List<Integer> prices =  readDBint("RAM","Price");
         List<Integer> sizes =  readDBint("RAM","Size");
+        List<Integer> NRofSlots =  readDBint("RAM","Number_of_sticks");
 
         for(int i = 0; i < names.size(); i++){
-            rams.add(new RAM(names.get(i), types.get(i), prices.get(i), sizes.get(i)));
+            rams.add(new RAM(names.get(i), types.get(i), prices.get(i), sizes.get(i), NRofSlots.get(i)));
         }
     }
 
@@ -49,7 +55,8 @@ public class configRAM extends _ConfigCommon {
         typeColumn.setCellValueFactory(new PropertyValueFactory<RAM, String>("type"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<RAM, Integer>("price"));
         sizeColumn.setCellValueFactory(new PropertyValueFactory<RAM, Integer>("size"));
-
+        NRofSlotsColumn.setCellValueFactory(new PropertyValueFactory<RAM, Integer>("NRofSlots"));
+        AantalColumn.setCellValueFactory(new PropertyValueFactory<RAM, Integer>("Aantal"));
         ObservableList<RAM> RAMList = tableView.getItems();
         RAMList.addAll(rams);
         tableView.setItems(RAMList);

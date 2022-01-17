@@ -5,12 +5,15 @@ public class RAM {
     String type;
     int price;
     int size;
+    int NRofSlots;
+    int aantal;
 
-    public RAM(String name, String type, int price, int size) {
+    public RAM(String name, String type, int price, int size, int NRofSlots) {
         this.name = name;
         this.type = type;
         this.price = price;
         this.size = size;
+        this.NRofSlots = NRofSlots;
     }
 
     public String getName() {
@@ -43,5 +46,21 @@ public class RAM {
 
     public void setSize(int size) {
         this.size = size;
+    }
+
+    public int getNRofSlots() {
+        return NRofSlots;
+    }
+
+    public void setNRofSlots(int NRofSlots) {
+        this.NRofSlots = NRofSlots;
+    }
+
+    public int getAantal() {
+        return aantal;
+    }
+
+    public void setAantal(int aantal) {
+        this.aantal = aantal;
     }
 }

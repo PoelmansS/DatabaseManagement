@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="be.kuleuven.pccustomizer.controller.Beheer.beheerRAM"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.kuleuven.pccustomizer.controller.Beheer.beheerRAM">
     <children>
         <ImageView fitHeight="420.0" fitWidth="608.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -26,6 +18,8 @@
             <TableColumn fx:id="typeColumn" prefWidth="75.0" text="Type" />
             <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
             <TableColumn fx:id="sizeColumn" prefWidth="75.0" text="Size" />
+                <TableColumn fx:id="NRofSticksColumn" prefWidth="75.0" text="slots" />
+                <TableColumn fx:id="aantalColumn" prefWidth="75.0" text="aantal" />
         </columns>
         </TableView>
         <Text layoutX="9.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beheer Ram" wrappingWidth="567.21875">
@@ -42,11 +36,14 @@
         <TextField fx:id="addName" layoutX="91.0" layoutY="360.0" prefHeight="25.0" prefWidth="67.0" />
         <TextField fx:id="addType" layoutX="167.0" layoutY="360.0" prefHeight="25.0" prefWidth="92.0" />
         <TextField fx:id="addPrice" layoutX="267.0" layoutY="360.0" prefHeight="25.0" prefWidth="85.0" />
-        <TextField fx:id="addSize" layoutX="362.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
-
+        <TextField fx:id="addSize" layoutX="352.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
+        <TextField fx:id="addNRofSticks" layoutX="431.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
+        <TextField fx:id="addAantal" layoutX="508.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
         <Text layoutX="91.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="53.0" />
         <Text layoutX="167.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" wrappingWidth="92.0" />
         <Text layoutX="267.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" />
         <Text layoutX="362.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Size" />
+        <Text layoutX="431.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="sticks" />
+        <Text layoutX="504.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="aantal" />
     </children>
 </AnchorPane>

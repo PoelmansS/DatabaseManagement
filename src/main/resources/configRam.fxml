@@ -21,6 +21,8 @@
                 <TableColumn fx:id="typeColumn" prefWidth="75.0" text="Type" />
                 <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
                 <TableColumn fx:id="sizeColumn" prefWidth="75.0" text="Size" />
+                <TableColumn fx:id="NRofSlotsColumn" prefWidth="75.0" text="sticks" />
+                <TableColumn fx:id="aantalColumn" prefWidth="75.0" text="aantal" />
             </columns>
         </TableView>
         <Label layoutX="24.0" layoutY="7.0" prefHeight="30.0" prefWidth="101.0" text="RAM">

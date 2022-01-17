@@ -18,6 +18,8 @@
                 <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
                 <TableColumn fx:id="VRAMColumn" prefWidth="75.0" text="VRAM" />
                 <TableColumn fx:id="powerUsageColumn" prefWidth="75" text="PowerUsage" />
+                <TableColumn fx:id="NrOfSlotsColumn" prefWidth="75" text="slots" />
+                <TableColumn fx:id="aantalColumn" prefWidth="75" text="aantal" />
             </columns>
         </TableView>
         <Text layoutX="9.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beheer GPU" wrappingWidth="567.21875">
@@ -35,10 +37,14 @@
         <TextField fx:id="addPrice" layoutX="166.0" layoutY="360.0" prefHeight="25.0" prefWidth="92.0" />
         <TextField fx:id="addVRAM" layoutX="268.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
         <TextField fx:id="addPowerUsage" layoutX="357.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
+        <TextField fx:id="addNrOfSlots" layoutX="442.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
+        <TextField fx:id="addAantal" layoutX="520.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
 
         <Text layoutX="91.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="53.0" />
         <Text layoutX="166.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" wrappingWidth="92.0" />
         <Text layoutX="268.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VRAM" />
         <Text layoutX="362.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Power Usage" />
+        <Text layoutX="442.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Slots" />
+        <Text layoutX="520.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aantal" />
     </children>
 </AnchorPane>
