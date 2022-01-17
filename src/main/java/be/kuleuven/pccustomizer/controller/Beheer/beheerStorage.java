@@ -53,9 +53,10 @@ public class beheerStorage extends _BeheerCommon {
         List<Integer> sizes =  readDBint("Storage","Size");
         List<Integer> readSpeeds =  readDBint("Storage","Read_speed");
         List<Integer> writeSpeeds =  readDBint("Storage","Write_speed");
+        List<Integer> aantallen =  readDBint("Storage","Aantal");
 
         for(int i = 0; i < names.size(); i++){
-            storages.add(new Storage(names.get(i), types.get(i), prices.get(i), sizes.get(i), readSpeeds.get(i), writeSpeeds.get(i)));
+            storages.add(new Storage(names.get(i), types.get(i), prices.get(i), sizes.get(i), readSpeeds.get(i), writeSpeeds.get(i), aantallen.get(i)));
         }
     }
 
@@ -86,7 +87,8 @@ public class beheerStorage extends _BeheerCommon {
     public void addNewRow() {
         if(!doubles("Storage", "name", addName.getText())) {
             Storage storage = new Storage(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()),
-                    Integer.parseInt(addSize.getText()), Integer.parseInt(addReadSpeed.getText()), Integer.parseInt(addWriteSpeed.getText()));
+                    Integer.parseInt(addSize.getText()), Integer.parseInt(addReadSpeed.getText()), Integer.parseInt(addWriteSpeed.getText()),
+                    Integer.parseInt(addAantal.getText()));
             jdbi.useHandle(handle -> {
                 handle.execute("insert into Storage (Name, Type, Price, Size, Read_speed, Write_speed) values (?, ?, ?, ?, ?, ?)",
                         storage.getName(), storage.getType(), storage.getPrice(), storage.getSize(), storage.getReadSpeed(), storage.getWriteSpeed());
@@ -110,8 +112,9 @@ public class beheerStorage extends _BeheerCommon {
             addSize.setText(String.valueOf(storage.getSize()));
             addReadSpeed.setText(String.valueOf(storage.getReadSpeed()));
             addWriteSpeed.setText(String.valueOf(storage.getWriteSpeed()));
+            addAantal.setText(String.valueOf(storage.getAantal()));
             modifiedStorage = new Storage(storage.getName(), storage.getType(), storage.getPrice(), storage.getSize(),
-                    storage.getReadSpeed(), storage.getWriteSpeed());
+                    storage.getReadSpeed(), storage.getWriteSpeed(), storage.getAantal());
         }
     }
 

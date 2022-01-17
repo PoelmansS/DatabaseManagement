@@ -9,13 +9,14 @@ public class Storage {
     private int writeSpeed;
     private int aantal;
 
-    public Storage(String name, String type, int price, int size, int readSpeed, int writeSpeed) {
+    public Storage(String name, String type, int price, int size, int readSpeed, int writeSpeed, int aantal) {
         this.name = name;
         this.type = type;
         this.price = price;
         this.size = size;
         this.readSpeed = readSpeed;
         this.writeSpeed = writeSpeed;
+        this.aantal = aantal;
     }
 
     public String getName() {

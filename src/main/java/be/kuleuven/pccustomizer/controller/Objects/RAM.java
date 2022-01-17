@@ -1,12 +1,12 @@
 package be.kuleuven.pccustomizer.controller.Objects;
 
 public class RAM {
-    String name;
-    String type;
-    int price;
-    int size;
-    int NRofSticks;
-    int aantal;
+    private String name;
+    private String type;
+    private int price;
+    private int size;
+    private int NRofSticks;
+    private int aantal;
 
     public RAM(String name, String type, int price, int size, int NRofSticks, int aantal) {
         this.name = name;

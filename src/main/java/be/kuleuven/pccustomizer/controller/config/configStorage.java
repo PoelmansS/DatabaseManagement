@@ -43,9 +43,10 @@ public class configStorage extends _ConfigCommon {
         List<Integer> sizes =  readDBint("Storage","Size");
         List<Integer> readSpeeds =  readDBint("Storage","Read_speed");
         List<Integer> writeSpeeds =  readDBint("Storage","Write_speed");
+        List<Integer> aantallen =  readDBint("Storage","Aantal");
 
         for(int i = 0; i < names.size(); i++){
-            storages.add(new Storage(names.get(i), types.get(i), prices.get(i), sizes.get(i), readSpeeds.get(i), writeSpeeds.get(i)));
+            storages.add(new Storage(names.get(i), types.get(i), prices.get(i), sizes.get(i), readSpeeds.get(i), writeSpeeds.get(i), aantallen.get(i)));
         }
     }
     public void initTable() {
