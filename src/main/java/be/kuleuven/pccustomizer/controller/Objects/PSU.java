@@ -6,10 +6,11 @@ public class PSU {
     private int wattage;
     private int aantal;
 
-    public PSU(String name, int price, int wattage) {
+    public PSU(String name, int price, int wattage, int aantal) {
         this.name = name;
         this.price = price;
         this.wattage = wattage;
+        this.aantal = aantal;
     }
 
     public String getName() {

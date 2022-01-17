@@ -41,8 +41,9 @@ public class beheerPSU extends _BeheerCommon {
         List<String> names = readDBstring("Power_supply","Name");
         List<Integer> prices =  readDBint("Power_supply","Price");
         List<Integer> wattages =  readDBint("Power_supply","Wattage");
+        List<Integer> aantallen =  readDBint("Power_supply","Aantal");
         for(int i = 0; i < names.size(); i++){
-            psus.add(new PSU(names.get(i), prices.get(i), wattages.get(i)));
+            psus.add(new PSU(names.get(i), prices.get(i), wattages.get(i), aantallen.get(i)));
         }
     }
 
@@ -70,7 +71,7 @@ public class beheerPSU extends _BeheerCommon {
 
     public void addNewRow() {
         if(!doubles("Power_supply", "Name", addName.getText())) {
-            PSU psu = new PSU(addName.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addWattage.getText()));
+            PSU psu = new PSU(addName.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addWattage.getText()), Integer.parseInt(addAantal.getText()));
             jdbi.useHandle(handle -> {
                 handle.execute("insert into Power_supply (Name ,Price, Wattage) values (?, ?, ?)",
                         psu.getName(), psu.getPrice(), psu.getWattage());
@@ -91,8 +92,9 @@ public class beheerPSU extends _BeheerCommon {
             addName.setText(psu.getName());
             addPrice.setText(String.valueOf(psu.getPrice()));
             addWattage.setText(String.valueOf(psu.getWattage()));
+            addAantal.setText(String.valueOf(psu.getAantal()));
 
-            modifiedPSU = new PSU(psu.getName(), psu.getPrice(),psu.getWattage());
+            modifiedPSU = new PSU(psu.getName(), psu.getPrice(), psu.getWattage(), psu.getAantal());
         }
     }
 

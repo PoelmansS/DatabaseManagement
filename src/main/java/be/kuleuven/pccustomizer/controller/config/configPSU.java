@@ -35,15 +35,17 @@ public class configPSU extends _ConfigCommon {
         List<String> names = readDBstring("Power_supply","Name");
         List<Integer> prices =  readDBint("Power_supply","Price");
         List<Integer> wattages =  readDBint("Power_supply","Wattage");
+        List<Integer> aantallen =  readDBint("Power_supply","Aantal");
         for(int j = 0; j < wattages.size(); j++){
             if(wattages.get(j) < totalW){
                 names.remove(j);
                 prices.remove(j);
                 wattages.remove(j);
+                aantallen.remove(j);
             }
         }
         for(int i = 0; i < names.size(); i++){
-            psus.add(new PSU(names.get(i), prices.get(i), wattages.get(i)));
+            psus.add(new PSU(names.get(i), prices.get(i), wattages.get(i), aantallen.get(i)));
         }
     }
 
