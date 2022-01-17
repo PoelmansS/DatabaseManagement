@@ -13,11 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configMotherboard extends _ConfigCommon {
-    List<MotherBoard> motherBoards = new ArrayList<MotherBoard>();
+    private List<MotherBoard> motherBoards = new ArrayList<MotherBoard>();
     //table
     @FXML
     private TableView<MotherBoard> tableView;
-
     @FXML
     private TableColumn<MotherBoard, String> nameColumn;
     @FXML
@@ -34,7 +33,6 @@ public class configMotherboard extends _ConfigCommon {
     public void initialize() {
         init(tableView, "Cooling");
     }
-
 
     public void ReadFromDB(){
         List<String> names = readDBstring("MotherBord","Name");

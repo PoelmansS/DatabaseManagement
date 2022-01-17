@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configCPU extends _ConfigCommon {
-    List<CPU> cpus = new ArrayList<CPU>();
+    private List<CPU> cpus = new ArrayList<CPU>();
+
     @FXML
     private TableView<CPU> tableView;
-
     @FXML
     private TableColumn<CPU, String> nameColumn;
     @FXML

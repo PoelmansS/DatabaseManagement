@@ -41,7 +41,6 @@ public class _ConfigCommon {
     @FXML
     public TableColumn<Component, String> componentColumn;
 
-
     public void initTable(){}
     public void ReadFromDB(){}
     public void addComponent(){}

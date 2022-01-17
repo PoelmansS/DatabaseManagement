@@ -13,12 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configRAM extends _ConfigCommon {
-    Component component = new Component();
-    List<RAM> rams = new ArrayList<RAM>();
+    private Component component = new Component();
+    private List<RAM> rams = new ArrayList<RAM>();
     //table
     @FXML
     private TableView<RAM> tableView;
-
     @FXML
     private TableColumn<RAM, String> nameColumn;
     @FXML
@@ -32,11 +31,9 @@ public class configRAM extends _ConfigCommon {
     @FXML
     private TableColumn<RAM, Integer> aantalColumn;
 
-
     public void initialize() {
         init(tableView, "Storage");
     }
-
 
     public void ReadFromDB(){
         List<String> names = readDBstring("RAM","Name");

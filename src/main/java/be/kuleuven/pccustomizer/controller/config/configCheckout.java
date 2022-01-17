@@ -28,7 +28,6 @@ public class configCheckout extends _ConfigCommon {
     public Button btnClose;
     @FXML
     public Button btnLoad;
-
     @FXML
     private TableView<Klant> tableView;
     @FXML
@@ -47,7 +46,6 @@ public class configCheckout extends _ConfigCommon {
     private TextField addPhone;
     @FXML
     private TextField addMail;
-
     @FXML
     private TableColumn<Klant, Integer> IDColumn;
     @FXML

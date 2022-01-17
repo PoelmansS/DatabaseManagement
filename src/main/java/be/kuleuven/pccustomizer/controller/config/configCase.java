@@ -12,12 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configCase extends _ConfigCommon {
-    Component component = new Component();
-    List<Case> cases = new ArrayList<Case>();
+    private Component component = new Component();
+    private List<Case> cases = new ArrayList<Case>();
 
     @FXML
     private TableView<Case> tableView;
-
     @FXML
     private TableColumn<Case, String> nameColumn;
     @FXML
@@ -56,8 +55,8 @@ public class configCase extends _ConfigCommon {
 
     public void addComponent(){
         if (tableView.getSelectionModel().getSelectedItem() != null) {
-            Case cases = tableView.getSelectionModel().getSelectedItem();
-            component.setName(cases.getName());
+            Case _case = tableView.getSelectionModel().getSelectedItem();
+            component.setName(_case.getName());
             componenten.add(component);
         }
     }

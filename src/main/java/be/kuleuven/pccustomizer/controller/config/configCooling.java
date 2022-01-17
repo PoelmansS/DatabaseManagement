@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configCooling extends _ConfigCommon {
-    List<Cooling> coolings = new ArrayList<Cooling>();
+    private List<Cooling> coolings = new ArrayList<Cooling>();
+
     @FXML
     private TableView<Cooling> tableView;
-
     @FXML
     private TableColumn<Cooling, String> nameColumn;
     @FXML
@@ -26,11 +26,9 @@ public class configCooling extends _ConfigCommon {
     @FXML
     private TableColumn<Cooling, Integer> wattageColumn;
 
-
     public void initialize() {
         init(tableView, "PSU");
     }
-
 
     public void ReadFromDB(){
         List<String> names = readDBstring("Cooling","Name");
@@ -43,6 +41,7 @@ public class configCooling extends _ConfigCommon {
             coolings.add(new Cooling(names.get(i), types.get(i), prices.get(i), wattages.get(i), aantallen.get(i)));
         }
     }
+
     public void initTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<Cooling, String>("name"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Cooling, String>("type"));

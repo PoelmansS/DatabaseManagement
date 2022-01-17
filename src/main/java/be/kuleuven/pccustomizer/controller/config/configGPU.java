@@ -14,13 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configGPU extends _ConfigCommon {
-    List<GPU> gpus = new ArrayList<GPU>();
+    private List<GPU> gpus = new ArrayList<GPU>();
     //table
     @FXML
     private TableView<GPU> tableView;
     @FXML
     private Button btnSkip;
-
     @FXML
     private TableColumn<GPU, String> nameColumn;
     @FXML
@@ -41,7 +40,6 @@ public class configGPU extends _ConfigCommon {
             showBeheerScherm("Ram");
         });
     }
-
 
     public void ReadFromDB(){
         List<String> names = readDBstring("GPU","Name");

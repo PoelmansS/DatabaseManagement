@@ -13,11 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configPSU extends _ConfigCommon {
-    List<PSU> psus = new ArrayList<PSU>();
+    private List<PSU> psus = new ArrayList<PSU>();
     //table
     @FXML
     private TableView<PSU> tableView;
-
     @FXML
     private TableColumn<PSU, String> nameColumn;
     @FXML

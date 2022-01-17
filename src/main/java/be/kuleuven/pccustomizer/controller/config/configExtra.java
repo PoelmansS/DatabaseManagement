@@ -15,13 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configExtra extends _ConfigCommon {
-    List<Extra> extras = new ArrayList<Extra>();
+    private List<Extra> extras = new ArrayList<Extra>();
+
     @FXML
     private Button btnSkip;
     @FXML
     private TableView<Extra> tableView;
-
-
     @FXML
     private TableColumn<Extra, String> nameColumn;
     @FXML

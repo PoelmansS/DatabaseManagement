@@ -14,11 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configStorage extends _ConfigCommon {
-    List<Storage> storages = new ArrayList<Storage>();
+    private List<Storage> storages = new ArrayList<Storage>();
     //table
     @FXML
     private TableView<Storage> tableView;
-
     @FXML
     private TableColumn<Storage, String> nameColumn;
     @FXML
@@ -49,6 +48,7 @@ public class configStorage extends _ConfigCommon {
             storages.add(new Storage(names.get(i), types.get(i), prices.get(i), sizes.get(i), readSpeeds.get(i), writeSpeeds.get(i), aantallen.get(i)));
         }
     }
+
     public void initTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<Storage, String>("name"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Storage, String>("type"));
@@ -69,5 +69,4 @@ public class configStorage extends _ConfigCommon {
             componenten.add(component);
         }
     }
-
 }
