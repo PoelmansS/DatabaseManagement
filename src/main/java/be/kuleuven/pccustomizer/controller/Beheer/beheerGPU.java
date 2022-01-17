@@ -65,7 +65,7 @@ public class beheerGPU extends _BeheerCommon {
         priceColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("price"));
         VRAMColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("VRAM"));
         powerUsageColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("powerUsage"));
-        NrOfSlotsColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("slots"));
+        NrOfSlotsColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("NRofSlots"));
         aantalColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("aantal"));
         ObservableList<GPU> GPUList = tableView.getItems();
         GPUList.addAll(gpus);

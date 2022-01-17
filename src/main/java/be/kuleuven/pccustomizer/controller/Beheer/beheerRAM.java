@@ -50,8 +50,9 @@ public class beheerRAM extends _BeheerCommon {
         List<Integer> prices =  readDBint("RAM","Price");
         List<Integer> sizes =  readDBint("RAM","Size");
         List<Integer> NRofSticks =  readDBint("RAM","Size");
+        List<Integer> aantallen =  readDBint("RAM","Aantal");
         for(int i = 0; i < names.size(); i++){
-            rams.add(new RAM(names.get(i), types.get(i), prices.get(i), sizes.get(i), NRofSticks.get(i)));
+            rams.add(new RAM(names.get(i), types.get(i), prices.get(i), sizes.get(i), NRofSticks.get(i), aantallen.get(i)));
         }
     }
 
@@ -79,10 +80,10 @@ public class beheerRAM extends _BeheerCommon {
 
     public void addNewRow() {
         if(!doubles("RAM", "Name", addName.getText())) {
-            RAM ram = new RAM(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addSize.getText()), Integer.parseInt(addNRofSticks.getText()));
+            RAM ram = new RAM(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addSize.getText()), Integer.parseInt(addNRofSticks.getText()), 1);
             jdbi.useHandle(handle -> {
                 handle.execute("insert into RAM (Name, Type ,Price, Size, Number_of_sticks, aantal) values (?, ?, ?, ?, ?, ?)",
-                        ram.getName(), ram.getType(), ram.getPrice(), ram.getSize(), ram.getNRofSlots(), ram.getAantal());
+                        ram.getName(), ram.getType(), ram.getPrice(), ram.getSize(), ram.getNRofSticks(), ram.getAantal());
             });
 
             ObservableList<RAM> RAMList = tableView.getItems();
@@ -101,10 +102,10 @@ public class beheerRAM extends _BeheerCommon {
             addType.setText(ram.getType());
             addPrice.setText(String.valueOf(ram.getPrice()));
             addSize.setText(String.valueOf(ram.getSize()));
-            addNRofSticks.setText(String.valueOf(ram.getNRofSlots()));
+            addNRofSticks.setText(String.valueOf(ram.getNRofSticks()));
             addAantal.setText(String.valueOf(ram.getAantal()));
 
-            modifiedRAM = new RAM(ram.getName(), ram.getType(),ram.getPrice(),ram.getSize(), ram.getNRofSlots());
+            modifiedRAM = new RAM(ram.getName(), ram.getType(),ram.getPrice(),ram.getSize(), ram.getNRofSticks(), ram.getAantal());
         }
     }
     public void modifyCurrentRow(){
@@ -117,7 +118,7 @@ public class beheerRAM extends _BeheerCommon {
 
         jdbi.useHandle(handle -> {
             handle.execute("UPDATE RAM SET Name = ?, Type = ? , Price = ?, Size = ?, Number_of_sticks=? WHERE Name = ?",
-                    modifiedRAM.getName(), modifiedRAM.getType(), modifiedRAM.getPrice(), modifiedRAM.getSize(), modifiedRAM.getName() ,modifiedRAM.getNRofSlots());
+                    modifiedRAM.getName(), modifiedRAM.getType(), modifiedRAM.getPrice(), modifiedRAM.getSize(), modifiedRAM.getName() ,modifiedRAM.getNRofSticks());
         });
 
         ObservableList<RAM> RAMList = tableView.getItems();

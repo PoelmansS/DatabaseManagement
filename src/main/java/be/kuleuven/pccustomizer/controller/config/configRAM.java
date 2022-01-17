@@ -44,11 +44,10 @@ public class configRAM extends _ConfigCommon {
         List<Integer> prices =  readDBint("RAM","Price");
         List<Integer> sizes =  readDBint("RAM","Size");
         List<Integer> NRofSticks =  readDBint("RAM","Number_of_sticks");
-
-
+        List<Integer> aantallen =  readDBint("RAM","Aantal");
 
         for(int i = 0; i < names.size(); i++){
-            rams.add(new RAM(names.get(i), types.get(i), prices.get(i), sizes.get(i), NRofSticks.get(i)));
+            rams.add(new RAM(names.get(i), types.get(i), prices.get(i), sizes.get(i), NRofSticks.get(i), aantallen.get(i)));
         }
     }
 
@@ -57,8 +56,8 @@ public class configRAM extends _ConfigCommon {
         typeColumn.setCellValueFactory(new PropertyValueFactory<RAM, String>("type"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<RAM, Integer>("price"));
         sizeColumn.setCellValueFactory(new PropertyValueFactory<RAM, Integer>("size"));
-        NRofSlotsColumn.setCellValueFactory(new PropertyValueFactory<RAM, Integer>("NRofSlots"));
-        aantalColumn.setCellValueFactory(new PropertyValueFactory<RAM, Integer>("Aantal"));
+        NRofSlotsColumn.setCellValueFactory(new PropertyValueFactory<RAM, Integer>("NRofSticks"));
+        aantalColumn.setCellValueFactory(new PropertyValueFactory<RAM, Integer>("aantal"));
         ObservableList<RAM> RAMList = tableView.getItems();
         RAMList.addAll(rams);
         tableView.setItems(RAMList);
@@ -69,7 +68,7 @@ public class configRAM extends _ConfigCommon {
             RAM ram = tableView.getSelectionModel().getSelectedItem();
             component.setName(ram.getName());
             componenten.add(component);
-            benodigdeRamSlots = ram.getNRofSlots();
+            benodigdeRamSlots = ram.getNRofSticks();
         }
     }
 
