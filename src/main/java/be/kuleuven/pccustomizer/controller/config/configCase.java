@@ -36,9 +36,10 @@ public class configCase extends _ConfigCommon {
         List<String> types =  readDBstring("PcCase","Type");
         List<Integer> prices =  readDBint("PcCase","Price");
         List<String> sizes =  readDBstring("PcCase","Size");
+        List<Integer> aantallen =  readDBint("PcCase","Aantal");
 
         for(int i = 0; i < names.size(); i++){
-            cases.add(new Case(names.get(i), types.get(i), prices.get(i), sizes.get(i)));
+            cases.add(new Case(names.get(i), types.get(i), prices.get(i), sizes.get(i), aantallen.get(i)));
         }
     }
 

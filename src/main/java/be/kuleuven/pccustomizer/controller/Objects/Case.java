@@ -8,11 +8,12 @@ public class Case {
     private int aantal;
 
 
-    public Case(String name, String type, int price, String size) {
+    public Case(String name, String type, int price, String size, int aantal) {
         this.name = name;
         this.type = type;
         this.price = price;
         this.size = size;
+        this.aantal = aantal;
     }
 
     public String getName() {

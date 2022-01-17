@@ -73,9 +73,10 @@ public class beheerCase extends _BeheerCommon {
         List<String> types =  readDBstring("PcCase","Type");
         List<Integer> prices =  readDBint("PcCase","Price");
         List<String> sizes =  readDBstring("PcCase","Size");
+        List<Integer> aantallen =  readDBint("PcCase","Aantal");
 
         for(int i = 0; i < names.size(); i++){
-            cases.add(new Case(names.get(i), types.get(i), prices.get(i), sizes.get(i)));
+            cases.add(new Case(names.get(i), types.get(i), prices.get(i), sizes.get(i), aantallen.get(i)));
         }
     }
 
@@ -105,24 +106,26 @@ public class beheerCase extends _BeheerCommon {
             System.out.println("Deze case bestaat al");
             //we kunnen hier toevoegen voor de aantallen
         }
-        Case cases = new Case(addName.getText(),addType.getText(), Integer.parseInt(addPrice.getText()),addSize.getText());
+        Case _case = new Case(addName.getText(),addType.getText(), Integer.parseInt(addPrice.getText()), addSize.getText(), Integer.parseInt(addAantal.getText()));
         jdbi.useHandle(handle -> {
             handle.execute("insert into PcCase (Name, Type, Price, Size) values (?, ?, ?, ?)",
-                    cases.getName(),cases.getType(),cases.getPrice(),cases.getSize()); });
+                    _case.getName(),_case.getType(),_case.getPrice(),_case.getSize()); });
 
         ObservableList<Case> caseList = tableView.getItems();
-        caseList.add(cases);
+        caseList.add(_case);
         tableView.setItems(caseList);
     }
 
     public void LoadCurrentRow() {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
-            Case cases = tableView.getSelectionModel().getSelectedItem();
-            addName.setText(cases.getName());
-            addType.setText(cases.getType());
-            addPrice.setText(String.valueOf(cases.getPrice()));
-            addSize.setText(cases.getSize());
-            modifiedCase = new Case(cases.getName(), cases.getType(),cases.getPrice(),cases.getSize());
+            Case _case = tableView.getSelectionModel().getSelectedItem();
+            addName.setText(_case.getName());
+            addType.setText(_case.getType());
+            addPrice.setText(String.valueOf(_case.getPrice()));
+            addSize.setText(_case.getSize());
+            addAantal.setText(String.valueOf(_case.getPrice()));
+
+            modifiedCase = new Case(_case.getName(), _case.getType(), _case.getPrice(), _case.getSize(), _case.getAantal());
         }
     }
 
@@ -138,6 +141,7 @@ public class beheerCase extends _BeheerCommon {
             handle.execute("UPDATE PcCase SET Name = ? ,Type = ?, Price = ? , Size = ? WHERE Name = ?",
                     modifiedCase.getName(), modifiedCase.getType(), modifiedCase.getPrice(), modifiedCase.getSize(), modifiedCase.getName());
         });
+
         ObservableList<Case> caseList = tableView.getItems();
         caseList.set(selectedRow,modifiedCase);
         tableView.setItems(caseList);
