@@ -22,8 +22,6 @@ public class ProjectMainController {
     @FXML
     private Button btnKlanten;
     @FXML
-    private Button btnCart;
-    @FXML
     private Button btnBestellingen;
 
     public void initialize() {
@@ -31,7 +29,6 @@ public class ProjectMainController {
         btnComputerConfigs.setOnAction(e -> showBeheerScherm("computerconfigs"));
         btnConfigAttaches.setOnAction(e -> showConfigScherm("Cpu"));
         btnKlanten.setOnAction(e -> showBeheerScherm("klanten"));
-        btnCart.setOnAction(e -> showBeheerScherm("cart"));
         btnBestellingen.setOnAction(e -> showBeheerScherm("bestelling"));
     }
 

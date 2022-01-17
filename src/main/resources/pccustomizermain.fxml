@@ -22,12 +22,5 @@
       <Button fx:id="btnHwComponenten" layoutX="14.0" layoutY="70.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="158.0" text="Beheer HW Componenten" />
       <Button fx:id="btnComputerConfigs" layoutX="14.0" layoutY="221.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="158.0" text="Computer Configs" />
       <Button fx:id="btnConfigAttaches" layoutX="14.0" layoutY="264.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="158.0" text="Beheer Config Attaches" />
-      <Button fx:id="btnCart" layoutX="487.0" layoutY="14.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="37.0">
-         <graphic>
-            <ImageView fitHeight="32.0" fitWidth="33.0">
-               <Image url="@../../../src/main/resources/_icon_cart_.png" />
-            </ImageView>
-         </graphic>
-      </Button>
    </children>
 </AnchorPane>
