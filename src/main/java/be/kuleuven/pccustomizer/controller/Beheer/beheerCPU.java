@@ -56,9 +56,10 @@ public class beheerCPU extends _BeheerCommon {
         List<Integer> cores =  readDBint("CPU","Cores");
         List<Integer> clockSpeeds =  readDBint("CPU","Clock_speed");
         List<Integer> powerUsages =  readDBint("CPU","Power_usage");
+        List<Integer> aantallen =  readDBint("CPU","Aantal");
 
         for(int i = 0; i < names.size(); i++){
-            cpus.add(new CPU(names.get(i), prices.get(i), threads.get(i),cores.get(i), clockSpeeds.get(i),powerUsages.get(i)));
+            cpus.add(new CPU(names.get(i), prices.get(i), threads.get(i), cores.get(i), clockSpeeds.get(i), powerUsages.get(i), aantallen.get(i)));
         }
     }
 
@@ -89,7 +90,8 @@ public class beheerCPU extends _BeheerCommon {
     public void addNewRow() {
         if(!doubles("CPU", "Name", addName.getText())) {
             CPU cpu = new CPU(addName.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addThreads.getText()),
-                    Integer.parseInt(addCores.getText()), Integer.parseInt(addClockSpeed.getText()), Integer.parseInt(addPowerUsage.getText()));
+                    Integer.parseInt(addCores.getText()), Integer.parseInt(addClockSpeed.getText()), Integer.parseInt(addPowerUsage.getText()),
+                    Integer.parseInt(addAantal.getText()));
             jdbi.useHandle(handle -> {
                 handle.execute("insert into CPU (Name, Price, Threads, Cores, Clock_speed, Power_usage) values (?, ?, ?, ?, ?, ?)",
                         cpu.getName(), cpu.getPrice(), cpu.getThreads(), cpu.getCores(), cpu.getClockSpeed(), cpu.getPowerUsage());
@@ -112,7 +114,8 @@ public class beheerCPU extends _BeheerCommon {
             addCores.setText(String.valueOf(cpu.getCores()));
             addClockSpeed.setText(String.valueOf(cpu.getClockSpeed()));
             addPowerUsage.setText(String.valueOf(cpu.getPowerUsage()));
-            modifiedCPU = new CPU(cpu.getName(),cpu.getPrice(),cpu.getThreads(),cpu.getCores(),cpu.getClockSpeed(),cpu.getPowerUsage());
+            addAantal.setText(String.valueOf(cpu.getAantal()));
+            modifiedCPU = new CPU(cpu.getName(), cpu.getPrice(), cpu.getThreads(), cpu.getCores(), cpu.getClockSpeed(), cpu.getPowerUsage(), cpu.getAantal());
         }
     }
 

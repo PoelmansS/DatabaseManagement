@@ -9,13 +9,14 @@ public class CPU {
     private int powerUsage;
     private int aantal;
 
-    public CPU(String name, int price, int threads, int cores, int clockSpeed, int powerUsage) {
+    public CPU(String name, int price, int threads, int cores, int clockSpeed, int powerUsage, int aantal) {
         this.name = name;
         this.price = price;
         this.threads = threads;
         this.cores = cores;
         this.clockSpeed = clockSpeed;
         this.powerUsage = powerUsage;
+        this.aantal = aantal;
     }
 
     public String getName() {
