@@ -49,8 +49,9 @@ public class configGPU extends _ConfigCommon {
         List<Integer> vrams =  readDBint("GPU","Vram_size");
         List<Integer> powerUsages =  readDBint("GPU","Power_Usage");
         List<Integer> NRofSlots =  readDBint("GPU","Number_of_slots");
+        List<Integer> aantallen =  readDBint("GPU","Aantal");
         for(int i = 0; i < names.size(); i++){
-            gpus.add(new GPU(names.get(i), prices.get(i), vrams.get(i), powerUsages.get(i), NRofSlots.get(i)));
+            gpus.add(new GPU(names.get(i), prices.get(i), vrams.get(i), powerUsages.get(i), NRofSlots.get(i), aantallen.get(i)));
         }
     }
 
@@ -60,7 +61,7 @@ public class configGPU extends _ConfigCommon {
         VRAMColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("VRAM"));
         powerUsageColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("powerUsage"));
         NRofSlotsColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("NRofSlots"));
-        aantalColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("aantal"));
+        //aantalColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("aantal"));
         ObservableList<GPU> GPUList = tableView.getItems();
         GPUList.addAll(gpus);
         tableView.setItems(GPUList);
@@ -72,7 +73,7 @@ public class configGPU extends _ConfigCommon {
             component.setName(gpu.getName());
             componenten.add(component);
             totalW += gpu.getPowerUsage();
-           // benodigdePci += gpu.get
+            benodigdePci += gpu.getNRofSlots();
         }
     }
 }

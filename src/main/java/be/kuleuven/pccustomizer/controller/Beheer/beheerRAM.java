@@ -79,7 +79,7 @@ public class beheerRAM extends _BeheerCommon {
 
     public void addNewRow() {
         if(!doubles("RAM", "Name", addName.getText())) {
-            RAM ram = new RAM(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addSize.getText()), Integer.parseInt(addNRofSticks.getText());
+            RAM ram = new RAM(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addSize.getText()), Integer.parseInt(addNRofSticks.getText()));
             jdbi.useHandle(handle -> {
                 handle.execute("insert into RAM (Name, Type ,Price, Size, Number_of_sticks, aantal) values (?, ?, ?, ?, ?, ?)",
                         ram.getName(), ram.getType(), ram.getPrice(), ram.getSize(), ram.getNRofSlots(), ram.getAantal());

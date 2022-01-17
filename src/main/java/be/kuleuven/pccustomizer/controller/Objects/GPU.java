@@ -9,12 +9,13 @@ public class GPU {
     int aantal;
 
 
-    public GPU(String name, int price, int VRAM, int powerUsage, int NRofSlots) {
+    public GPU(String name, int price, int VRAM, int powerUsage, int NRofSlots, int aantal) {
         this.name = name;
         this.price = price;
         this.VRAM = VRAM;
         this.powerUsage = powerUsage;
         this.NRofSlots = NRofSlots;
+        this.aantal = aantal;
     }
 
 

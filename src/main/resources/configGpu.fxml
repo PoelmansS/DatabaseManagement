@@ -22,7 +22,7 @@
                 <TableColumn fx:id="VRAMColumn" prefWidth="75.0" text="VRAM" />
                 <TableColumn fx:id="powerUsageColumn" prefWidth="75" text="PowerUsage" />
                 <TableColumn fx:id="NRofSlotsColumn" prefWidth="75" text="slots" />
-                <TableColumn fx:id="aantalColumn" prefWidth="75" text="aantal" />
+
             </columns>
         </TableView>
         <Label layoutX="24.0" layoutY="7.0" prefHeight="30.0" prefWidth="101.0" text="GPU">

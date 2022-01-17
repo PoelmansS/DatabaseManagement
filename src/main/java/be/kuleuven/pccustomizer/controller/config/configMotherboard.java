@@ -44,7 +44,25 @@ public class configMotherboard extends _ConfigCommon {
         List<Integer> ramSlots =  readDBint("MotherBord","RAM_slots");
         List<Integer> pcieSlots =  readDBint("MotherBord","PCI_express_slots");
         for(int j = 0; j < pcieSlots.size(); j++){
+            if(pcieSlots.get(j) < benodigdePci){
+                names.remove(j);
+                hasWifis.remove(j);
+                prices.remove(j);
+                caseSizes.remove(j);
+                ramSlots.remove(j);
+                pcieSlots.remove(j);
+            }
+        }
 
+        for(int j = 0; j < pcieSlots.size(); j++){
+            if(benodigdeRamSlots < pcieSlots.get(j)){
+                names.remove(j);
+                hasWifis.remove(j);
+                prices.remove(j);
+                caseSizes.remove(j);
+                ramSlots.remove(j);
+                pcieSlots.remove(j);
+            }
         }
 
         for(int i = 0; i < names.size(); i++){

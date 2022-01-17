@@ -26,6 +26,7 @@ import java.util.List;
 public class _ConfigCommon {
     public static int totalW = 0;
     public static int benodigdePci = 0;
+    public static int benodigdeRamSlots = 0;
     public static List<Component> componenten = new ArrayList();
     Component component = new Component();
     SQLiteClient client = new SQLiteClient();

@@ -52,10 +52,11 @@ public class beheerGPU extends _BeheerCommon {
         List<Integer> prices =  readDBint("GPU","Price");
         List<Integer> vrams =  readDBint("GPU","Vram_size");
         List<Integer> powerUsages =  readDBint("GPU","Power_Usage");
-        List<Integer> nrOfSticks =  readDBint("GPU","Number_of_slots");
+        List<Integer> nrOfSlots =  readDBint("GPU","Number_of_slots");
+        List<Integer> aantallen =  readDBint("GPU","Aantal");
 
         for(int i = 0; i < names.size(); i++){
-            gpus.add(new GPU(names.get(i), prices.get(i), vrams.get(i), powerUsages.get(i), nrOfSticks.get(i)));
+            gpus.add(new GPU(names.get(i), prices.get(i), vrams.get(i), powerUsages.get(i), nrOfSlots.get(i), aantallen.get(i)));
         }
     }
 
@@ -64,7 +65,7 @@ public class beheerGPU extends _BeheerCommon {
         priceColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("price"));
         VRAMColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("VRAM"));
         powerUsageColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("powerUsage"));
-        NrOfSlotsColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("NRofSticks"));
+        NrOfSlotsColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("slots"));
         aantalColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("aantal"));
         ObservableList<GPU> GPUList = tableView.getItems();
         GPUList.addAll(gpus);
@@ -83,7 +84,7 @@ public class beheerGPU extends _BeheerCommon {
     public void addNewRow() {
         if(!doubles("GPU", "Name", addName.getText())) {
             GPU gpu = new GPU(addName.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addVRAM.getText()),
-                    Integer.parseInt(addPowerUsage.getText()),  Integer.parseInt(addNrOfSlots.getText()));
+                    Integer.parseInt(addPowerUsage.getText()),  Integer.parseInt(addNrOfSlots.getText()), 1);
             jdbi.useHandle(handle -> {
                 handle.execute("insert into GPU (Name,  Price, Vram_size, Power_Usage, Number_of_slots, aantal values (?, ?, ?, ?,?, ?)",
                         gpu.getName(), gpu.getPrice(), gpu.getVRAM(), gpu.getPowerUsage(), gpu.getNRofSlots(), gpu.getAantal());
@@ -94,6 +95,7 @@ public class beheerGPU extends _BeheerCommon {
         }
         else{
             showAlert("Unseported Entry","Dit component bestaat al in de db");
+            //aantallen plus 1 doen
         }
     }
 
@@ -105,7 +107,7 @@ public class beheerGPU extends _BeheerCommon {
             addVRAM.setText(String.valueOf(gpu.getVRAM()));
             addPowerUsage.setText(String.valueOf(gpu.getPowerUsage()));
             addNrOfSlots.setText(String.valueOf(gpu.getNRofSlots()));
-            modifiedGPU = new GPU(gpu.getName(),gpu.getPrice(),gpu.getVRAM(),gpu.getPowerUsage(), gpu.getNRofSlots());
+            modifiedGPU = new GPU(gpu.getName(),gpu.getPrice(),gpu.getVRAM(),gpu.getPowerUsage(), gpu.getNRofSlots(), gpu.getAantal());
         }
     }
     public void modifyCurrentRow(){
