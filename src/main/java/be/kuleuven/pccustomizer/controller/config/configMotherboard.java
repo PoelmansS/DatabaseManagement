@@ -43,6 +43,9 @@ public class configMotherboard extends _ConfigCommon {
         List<String> caseSizes =  readDBstring("MotherBord","Required_case_size");
         List<Integer> ramSlots =  readDBint("MotherBord","RAM_slots");
         List<Integer> pcieSlots =  readDBint("MotherBord","PCI_express_slots");
+        for(int j = 0; j < pcieSlots.size(); j++){
+
+        }
 
         for(int i = 0; i < names.size(); i++){
             motherBoards.add(new MotherBoard(names.get(i), hasWifis.get(i), prices.get(i), caseSizes.get(i),

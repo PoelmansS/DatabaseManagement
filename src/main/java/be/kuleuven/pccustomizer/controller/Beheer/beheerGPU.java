@@ -70,13 +70,20 @@ public class beheerGPU extends _BeheerCommon {
     }
 
     public void addNewRow() {
-        GPU gpu = new GPU(addName.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addVRAM.getText()),
-                 Integer.parseInt(addPowerUsage.getText()));
-        jdbi.useHandle(handle -> { handle.execute("insert into GPU (Name,  Price, Vram_size, Power_Usage) values (?, ?, ?, ?)",
-                gpu.getName(),gpu.getPrice(), gpu.getVRAM(), gpu.getPowerUsage());});
-        ObservableList<GPU> GPUList = tableView.getItems();
-        GPUList.add(gpu);
-        tableView.setItems(GPUList);
+        if(!doubles("GPU", "Name", addName.getText())) {
+            GPU gpu = new GPU(addName.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addVRAM.getText()),
+                    Integer.parseInt(addPowerUsage.getText()));
+            jdbi.useHandle(handle -> {
+                handle.execute("insert into GPU (Name,  Price, Vram_size, Power_Usage) values (?, ?, ?, ?)",
+                        gpu.getName(), gpu.getPrice(), gpu.getVRAM(), gpu.getPowerUsage());
+            });
+            ObservableList<GPU> GPUList = tableView.getItems();
+            GPUList.add(gpu);
+            tableView.setItems(GPUList);
+        }
+        else{
+            showAlert("Unseported Entry","Dit component bestaat al in de db");
+        }
     }
 
     public void LoadCurrentRow() {

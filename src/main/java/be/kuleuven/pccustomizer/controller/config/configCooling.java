@@ -58,6 +58,7 @@ public class configCooling extends _ConfigCommon {
             Cooling cooling = tableView.getSelectionModel().getSelectedItem();
             component.setName(cooling.getName());
             componenten.add(component);
+            totalW += cooling.getWattage();
         }
     }
 }

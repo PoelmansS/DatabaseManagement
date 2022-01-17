@@ -66,6 +66,8 @@ public class configGPU extends _ConfigCommon {
             GPU gpu = tableView.getSelectionModel().getSelectedItem();
             component.setName(gpu.getName());
             componenten.add(component);
+            totalW += gpu.getPowerUsage();
+            benodigdePci += gpu.get
         }
     }
 }

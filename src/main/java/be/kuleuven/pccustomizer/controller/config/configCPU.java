@@ -65,6 +65,7 @@ public class configCPU extends _ConfigCommon {
             CPU cpu = tableView.getSelectionModel().getSelectedItem();
             component.setName(cpu.getName());
             componenten.add(component);
+            totalW += cpu.getPowerUsage();
         }
     }
 }

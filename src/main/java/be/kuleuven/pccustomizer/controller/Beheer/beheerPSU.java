@@ -67,13 +67,20 @@ public class beheerPSU extends _BeheerCommon {
     }
 
     public void addNewRow() {
-        PSU psu = new PSU(addName.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addWattage.getText()));
-        jdbi.useHandle(handle -> { handle.execute("insert into Power_supply (Name ,Price, Wattage) values (?, ?, ?)",
-                psu.getName(),psu.getPrice(), psu.getWattage());});
+        if(!doubles("Power_supply", "Name", addName.getText())) {
+            PSU psu = new PSU(addName.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addWattage.getText()));
+            jdbi.useHandle(handle -> {
+                handle.execute("insert into Power_supply (Name ,Price, Wattage) values (?, ?, ?)",
+                        psu.getName(), psu.getPrice(), psu.getWattage());
+            });
 
-        ObservableList<PSU> PSUList = tableView.getItems();
-        PSUList.add(psu);
-        tableView.setItems(PSUList);
+            ObservableList<PSU> PSUList = tableView.getItems();
+            PSUList.add(psu);
+            tableView.setItems(PSUList);
+        }
+        else{
+            showAlert("Unseported Entry","Dit component bestaat al in de db");
+        }
     }
 
     public void LoadCurrentRow() {

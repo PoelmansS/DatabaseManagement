@@ -83,14 +83,21 @@ public class beheerMotherboard extends _BeheerCommon {
     }
 
     public void addNewRow() {
-            MotherBoard motherBoard = new MotherBoard(addName.getText(),Boolean.parseBoolean(addHasWifi.getText()),Integer.parseInt(addPrice.getText()),
-                    addCaseSize.getText(),Integer.parseInt(addRAMSlots.getText()),Integer.parseInt(addPCIESlots.getText()));
-            jdbi.useHandle(handle -> { handle.execute("insert into Motherbord (Name, Wifi ,Price, Required_case_size, RAM_slots, PCI_express_slots) values (?, ?, ?, ?,?,?)",
-                    motherBoard.getName(),motherBoard.isHasWifi() ,motherBoard.getPrice(),
-                    motherBoard.getCaseSize(), motherBoard.getRAMSlots(), motherBoard.getPCIESlots());});
+        if(!doubles("Motherbord", "Name", addName.getText())) {
+            MotherBoard motherBoard = new MotherBoard(addName.getText(), Boolean.parseBoolean(addHasWifi.getText()), Integer.parseInt(addPrice.getText()),
+                    addCaseSize.getText(), Integer.parseInt(addRAMSlots.getText()), Integer.parseInt(addPCIESlots.getText()));
+            jdbi.useHandle(handle -> {
+                handle.execute("insert into Motherbord (Name, Wifi ,Price, Required_case_size, RAM_slots, PCI_express_slots) values (?, ?, ?, ?,?,?)",
+                        motherBoard.getName(), motherBoard.isHasWifi(), motherBoard.getPrice(),
+                        motherBoard.getCaseSize(), motherBoard.getRAMSlots(), motherBoard.getPCIESlots());
+            });
             ObservableList<MotherBoard> MotherBoardList = tableView.getItems();
             MotherBoardList.add(motherBoard);
             tableView.setItems(MotherBoardList);
+        }
+        else{
+            showAlert("Unseported Entry","Dit component bestaat al in de db");
+        }
     }
 
     public void LoadCurrentRow() {

@@ -64,13 +64,20 @@ public class beheerExtra extends _BeheerCommon {
     }
 
     public void addNewRow() {
-        Extra extra = new Extra(addName.getText(),addType.getText(), Integer.parseInt(addPrice.getText()));
-        jdbi.useHandle(handle -> { handle.execute("insert into Extra (Name,Type,  Price) values (?, ?, ?)",
-                extra.getName(),extra.getType(),extra.getPrice());});
+        if(!doubles("Extra", "Name", addName.getText())) {
+            Extra extra = new Extra(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()));
+            jdbi.useHandle(handle -> {
+                handle.execute("insert into Extra (Name,Type,  Price) values (?, ?, ?)",
+                        extra.getName(), extra.getType(), extra.getPrice());
+            });
 
-        ObservableList<Extra> extraList = tableView.getItems();
-        extraList.add(extra);
-        tableView.setItems(extraList);
+            ObservableList<Extra> extraList = tableView.getItems();
+            extraList.add(extra);
+            tableView.setItems(extraList);
+        }
+        else{
+            showAlert("Unseported Entry","Dit component bestaat al in de db");
+        }
 
     }
 

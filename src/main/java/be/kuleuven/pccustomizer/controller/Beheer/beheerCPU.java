@@ -83,13 +83,20 @@ public class beheerCPU extends _BeheerCommon {
     }
 
     public void addNewRow() {
+        if(!doubles("CPU", "Name", addName.getText())) {
             CPU cpu = new CPU(addName.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addThreads.getText()),
                     Integer.parseInt(addCores.getText()), Integer.parseInt(addClockSpeed.getText()), Integer.parseInt(addPowerUsage.getText()));
-            jdbi.useHandle(handle -> { handle.execute("insert into CPU (Name, Price, Threads, Cores, Clock_speed, Power_usage) values (?, ?, ?, ?, ?, ?)",
-                    cpu.getName(),cpu.getPrice(),cpu.getThreads(), cpu.getCores(), cpu.getClockSpeed(), cpu.getPowerUsage()); });
+            jdbi.useHandle(handle -> {
+                handle.execute("insert into CPU (Name, Price, Threads, Cores, Clock_speed, Power_usage) values (?, ?, ?, ?, ?, ?)",
+                        cpu.getName(), cpu.getPrice(), cpu.getThreads(), cpu.getCores(), cpu.getClockSpeed(), cpu.getPowerUsage());
+            });
             ObservableList<CPU> CPUList = tableView.getItems();
             CPUList.add(cpu);
             tableView.setItems(CPUList);
+        }
+        else{
+            showAlert("Unseported Entry","Dit component bestaat al in de db");
+        }
     }
 
 

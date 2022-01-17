@@ -65,7 +65,7 @@ public class _BeheerCommon {
         ReadFromDB();
         initTable();
         btnAdd.setOnAction(e -> {
-            verifyInput();
+                verifyInput();
         });
         btnModify.setOnAction(e -> {
             verifyOneRowSelected(tableView);

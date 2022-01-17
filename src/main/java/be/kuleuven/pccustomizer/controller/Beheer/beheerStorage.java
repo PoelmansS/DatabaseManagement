@@ -45,6 +45,7 @@ public class beheerStorage extends _BeheerCommon {
     public void initialize() {
         init(tableView);
     }
+
     public void ReadFromDB(){
         List<String> names = readDBstring("Storage","Name");
         List<String> types =  readDBstring("Storage","Type");
@@ -68,7 +69,6 @@ public class beheerStorage extends _BeheerCommon {
         ObservableList<Storage> storageList = tableView.getItems();
         storageList.addAll(storages);
         tableView.setItems(storageList);
-
     }
 
     public void deleteCurrentRow() {
@@ -81,16 +81,21 @@ public class beheerStorage extends _BeheerCommon {
     }
 
     public void addNewRow() {
-        Storage storage = new Storage(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()),
-                Integer.parseInt(addSize.getText()), Integer.parseInt(addReadSpeed.getText()), Integer.parseInt(addWriteSpeed.getText()));
-        jdbi.useHandle(handle -> { handle.execute("insert into Storage (Name, Type, Price, Size, Read_speed, Write_speed) values (?, ?, ?, ?, ?, ?)",
-                storage.getName(),storage.getType(),storage.getPrice(),storage.getSize(), storage.getReadSpeed(), storage.getWriteSpeed()); });
+        if(!doubles("Storage", "name", addName.getText())) {
+            Storage storage = new Storage(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()),
+                    Integer.parseInt(addSize.getText()), Integer.parseInt(addReadSpeed.getText()), Integer.parseInt(addWriteSpeed.getText()));
+            jdbi.useHandle(handle -> {
+                handle.execute("insert into Storage (Name, Type, Price, Size, Read_speed, Write_speed) values (?, ?, ?, ?, ?, ?)",
+                        storage.getName(), storage.getType(), storage.getPrice(), storage.getSize(), storage.getReadSpeed(), storage.getWriteSpeed());
+            });
 
-        ObservableList<Storage> storageList = tableView.getItems();
-        storageList.add(storage);
-        tableView.setItems(storageList);
-
-
+            ObservableList<Storage> storageList = tableView.getItems();
+            storageList.add(storage);
+            tableView.setItems(storageList);
+        }
+        else{
+            showAlert("Unseported Entry","Dit component bestaat al in de db");
+        }
     }
 
     public void LoadCurrentRow() {

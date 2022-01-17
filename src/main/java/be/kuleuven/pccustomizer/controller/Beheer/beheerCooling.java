@@ -69,13 +69,20 @@ public class beheerCooling extends _BeheerCommon {
     }
 
     public void addNewRow() {
-        Cooling cooling = new Cooling(addName.getText(),addType.getText(), Integer.parseInt(addPrice.getText()),Integer.parseInt(addWattage.getText()));
-        jdbi.useHandle(handle -> { handle.execute("insert into Cooling (Name, Type, Price, Wattage) values (?, ?, ?, ?)",
-                cooling.getName(),cooling.getType(),cooling.getPrice(),cooling.getWattage()); });
+        if(!doubles("Cooling", "Name", addName.getText())) {
+            Cooling cooling = new Cooling(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addWattage.getText()));
+            jdbi.useHandle(handle -> {
+                handle.execute("insert into Cooling (Name, Type, Price, Wattage) values (?, ?, ?, ?)",
+                        cooling.getName(), cooling.getType(), cooling.getPrice(), cooling.getWattage());
+            });
 
-        ObservableList<Cooling> coolingList = tableView.getItems();
-        coolingList.add(cooling);
-        tableView.setItems(coolingList);
+            ObservableList<Cooling> coolingList = tableView.getItems();
+            coolingList.add(cooling);
+            tableView.setItems(coolingList);
+        }
+        else{
+            showAlert("Unseported Entry","Dit component bestaat al in de db");
+        }
     }
 
     public void LoadCurrentRow() {

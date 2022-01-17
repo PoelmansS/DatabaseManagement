@@ -71,13 +71,20 @@ public class beheerRAM extends _BeheerCommon {
     }
 
     public void addNewRow() {
-        RAM ram = new RAM(addName.getText(),addType.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addSize.getText()));
-        jdbi.useHandle(handle -> { handle.execute("insert into RAM (Name, Type ,Price, Size) values (?, ?, ?, ?)",
-                ram.getName(), ram.getType() ,ram.getPrice(), ram.getSize());});
+        if(!doubles("RAM", "Name", addName.getText())) {
+            RAM ram = new RAM(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addSize.getText()));
+            jdbi.useHandle(handle -> {
+                handle.execute("insert into RAM (Name, Type ,Price, Size) values (?, ?, ?, ?)",
+                        ram.getName(), ram.getType(), ram.getPrice(), ram.getSize());
+            });
 
-        ObservableList<RAM> RAMList = tableView.getItems();
-        RAMList.add(ram);
-        tableView.setItems(RAMList);
+            ObservableList<RAM> RAMList = tableView.getItems();
+            RAMList.add(ram);
+            tableView.setItems(RAMList);
+        }
+        else{
+            showAlert("Unseported Entry","Dit component bestaat al in de db");
+        }
     }
 
     public void LoadCurrentRow() {
