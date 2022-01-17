@@ -7,11 +7,12 @@ public class Cooling {
     private int Wattage;
     private int aantal;
 
-    public Cooling(String name, String type, int price, int wattage) {
-        Name = name;
-        Type = type;
-        Price = price;
-        Wattage = wattage;
+    public Cooling(String name, String type, int price, int wattage, int aantal) {
+        this.Name = name;
+        this.Type = type;
+        this.Price = price;
+        this.Wattage = wattage;
+        this.aantal = aantal;
     }
 
 

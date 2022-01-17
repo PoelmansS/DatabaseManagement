@@ -43,9 +43,10 @@ public class beheerCooling extends _BeheerCommon {
         List<String> types =  readDBstring("Cooling","Type");
         List<Integer> prices =  readDBint("Cooling","Price");
         List<Integer> wattages =  readDBint("Cooling","Wattage");
+        List<Integer> aantallen =  readDBint("Cooling","Aantal");
 
         for(int i = 0; i < names.size(); i++){
-            coolings.add(new Cooling(names.get(i), types.get(i), prices.get(i), wattages.get(i)));
+            coolings.add(new Cooling(names.get(i), types.get(i), prices.get(i), wattages.get(i), aantallen.get(i)));
         }
     }
 
@@ -73,7 +74,7 @@ public class beheerCooling extends _BeheerCommon {
 
     public void addNewRow() {
         if(!doubles("Cooling", "Name", addName.getText())) {
-            Cooling cooling = new Cooling(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addWattage.getText()));
+            Cooling cooling = new Cooling(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addWattage.getText()), Integer.parseInt(addAantal.getText()));
             jdbi.useHandle(handle -> {
                 handle.execute("insert into Cooling (Name, Type, Price, Wattage) values (?, ?, ?, ?)",
                         cooling.getName(), cooling.getType(), cooling.getPrice(), cooling.getWattage());
@@ -95,7 +96,8 @@ public class beheerCooling extends _BeheerCommon {
             addType.setText(cooling.getType());
             addPrice.setText(String.valueOf(cooling.getPrice()));
             addWattage.setText(String.valueOf(cooling.getWattage()));
-            modifiedCooling = new Cooling(cooling.getName(), cooling.getType(),cooling.getPrice(),cooling.getWattage());
+            addAantal.setText(String.valueOf(cooling.getAantal()));
+            modifiedCooling = new Cooling(cooling.getName(), cooling.getType(), cooling.getPrice(), cooling.getWattage(), cooling.getAantal());
         }
     }
 

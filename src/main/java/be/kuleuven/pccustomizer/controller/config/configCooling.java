@@ -37,9 +37,10 @@ public class configCooling extends _ConfigCommon {
         List<String> types =  readDBstring("Cooling","Type");
         List<Integer> prices =  readDBint("Cooling","Price");
         List<Integer> wattages =  readDBint("Cooling","Wattage");
+        List<Integer> aantallen =  readDBint("Cooling","Aantal");
 
         for(int i = 0; i < names.size(); i++){
-            coolings.add(new Cooling(names.get(i), types.get(i), prices.get(i), wattages.get(i)));
+            coolings.add(new Cooling(names.get(i), types.get(i), prices.get(i), wattages.get(i), aantallen.get(i)));
         }
     }
     public void initTable() {
