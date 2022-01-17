@@ -5,6 +5,7 @@ public class Case {
     private String type;
     private int price;
     private String size;
+    private int aantal;
 
 
     public Case(String name, String type, int price, String size) {
@@ -44,5 +45,13 @@ public class Case {
 
     public void setSize(String size) {
         this.size = size;
+    }
+
+    public int getAantal() {
+        return aantal;
+    }
+
+    public void setAantal(int aantal) {
+        this.aantal = aantal;
     }
 }

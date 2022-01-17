@@ -12,7 +12,6 @@ import java.util.List;
 public class beheerExtra extends _BeheerCommon {
     private Extra modifiedExtra;
     private final List<Extra> extras = new ArrayList<Extra>();
-
     //table
     @FXML
     private TableView<Extra> tableView;
@@ -23,7 +22,8 @@ public class beheerExtra extends _BeheerCommon {
     private TextField addType;
     @FXML
     private TextField addPrice;
-
+    @FXML
+    private TextField addAantal;
     @FXML
     private TableColumn<Extra, String> nameColumn;
     @FXML
@@ -54,6 +54,7 @@ public class beheerExtra extends _BeheerCommon {
         extraList.addAll(extras);
         tableView.setItems(extraList);
     }
+
     public void deleteCurrentRow() {
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
         if (tableView.getSelectionModel().getSelectedItem() != null) {
@@ -80,7 +81,6 @@ public class beheerExtra extends _BeheerCommon {
         else{
             showAlert("Unseported Entry","Dit component bestaat al in de db");
         }
-
     }
 
     public void LoadCurrentRow() {
@@ -93,6 +93,7 @@ public class beheerExtra extends _BeheerCommon {
             modifiedExtra = new Extra(extra.getName(), extra.getType(),extra.getPrice());
         }
     }
+
     public void modifyCurrentRow(){
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
 

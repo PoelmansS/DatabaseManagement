@@ -15,7 +15,6 @@ public class beheerRAM extends _BeheerCommon {
 
     @FXML
     private TableView<RAM> tableView;
-
     @FXML
     private TextField addName;
     @FXML
@@ -40,6 +39,7 @@ public class beheerRAM extends _BeheerCommon {
     private TableColumn<RAM, Integer> NRofSticksColumn;
     @FXML
     private TableColumn<RAM, Integer> aantalColumn;
+
     public void initialize() {
         init(tableView);
     }
@@ -74,7 +74,7 @@ public class beheerRAM extends _BeheerCommon {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             RAM ram = tableView.getSelectionModel().getSelectedItem();
             jdbi.useHandle(handle -> {
-                handle.execute("DELETE FROM CPU WHERE Name = ?", ram.getName());
+                handle.execute("DELETE FROM RAM WHERE Name = ?", ram.getName());
             });
             tableView.getItems().remove(selectedRow);
         }
@@ -110,6 +110,7 @@ public class beheerRAM extends _BeheerCommon {
             modifiedRAM = new RAM(ram.getName(), ram.getType(),ram.getPrice(),ram.getSize(), ram.getNRofSticks(), ram.getAantal());
         }
     }
+
     public void modifyCurrentRow(){
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
 
@@ -117,10 +118,12 @@ public class beheerRAM extends _BeheerCommon {
         modifiedRAM.setType(addType.getText());
         modifiedRAM.setPrice(Integer.parseInt(addPrice.getText()));
         modifiedRAM.setSize(Integer.parseInt(addSize.getText()));
+        modifiedRAM.setNRofSticks(Integer.parseInt(addNRofSticks.getText()));
+        modifiedRAM.setAantal(Integer.parseInt(addAantal.getText()));
 
         jdbi.useHandle(handle -> {
-            handle.execute("UPDATE RAM SET Name = ?, Type = ? , Price = ?, Size = ?, Number_of_sticks=? WHERE Name = ?",
-                    modifiedRAM.getName(), modifiedRAM.getType(), modifiedRAM.getPrice(), modifiedRAM.getSize(), modifiedRAM.getName() ,modifiedRAM.getNRofSticks());
+            handle.execute("UPDATE RAM SET Name = ?, Type = ? , Price = ?, Size = ?, Number_of_sticks=?, Aantal = ?  WHERE Name = ?",
+                    modifiedRAM.getName(), modifiedRAM.getType(), modifiedRAM.getPrice(), modifiedRAM.getSize(), modifiedRAM.getNRofSticks(), modifiedRAM.getAantal(), modifiedRAM.getName() );
         });
 
         ObservableList<RAM> RAMList = tableView.getItems();

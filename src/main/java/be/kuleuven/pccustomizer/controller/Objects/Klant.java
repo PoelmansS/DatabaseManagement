@@ -1,14 +1,14 @@
 package be.kuleuven.pccustomizer.controller.Objects;
 
 public class Klant {
-    int ID;
-    String lastName;
-    String firstName;
-    int postalCode;
-    String street;
-    String number;
-    String phone;
-    String mail;
+    private int ID;
+    private String lastName;
+    private String firstName;
+    private int postalCode;
+    private String street;
+    private String number;
+    private String phone;
+    private String mail;
 
     public Klant(int ID, String lastName, String firstName, int postalCode, String street, String number, String phone, String mail) {
         this.ID = ID;

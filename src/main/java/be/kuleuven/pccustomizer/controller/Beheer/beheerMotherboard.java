@@ -28,7 +28,8 @@ public class beheerMotherboard extends _BeheerCommon {
     private TextField addRAMSlots;
     @FXML
     private TextField addPCIESlots;
-
+    @FXML
+    private TextField addAantal;
     @FXML
     private TableColumn<MotherBoard, String> nameColumn;
     @FXML
@@ -45,6 +46,7 @@ public class beheerMotherboard extends _BeheerCommon {
     public void initialize() {
         init(tableView);
     }
+
     public void ReadFromDB(){
         List<String> names = readDBstring("MotherBord","Name");
         List<Boolean> hasWifis =  readDBbool("MotherBord","Wifi");
@@ -76,9 +78,9 @@ public class beheerMotherboard extends _BeheerCommon {
     public void deleteCurrentRow() {
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
         if (tableView.getSelectionModel().getSelectedItem() != null) {
-            Motherboard motherboard = tableView.getSelectionModel().getSelectedItem();
+            MotherBoard motherboard = tableView.getSelectionModel().getSelectedItem();
             jdbi.useHandle(handle -> {
-                handle.execute("DELETE FROM CPU WHERE Name = ?", motherboard.getName());
+                handle.execute("DELETE FROM Motherbord WHERE Name = ?", motherboard.getName());
             });
             tableView.getItems().remove(selectedRow);
         }
@@ -115,6 +117,7 @@ public class beheerMotherboard extends _BeheerCommon {
                     motherBoard.getCaseSize(), motherBoard.getRAMSlots(),motherBoard.getPCIESlots());
         }
     }
+
     public void modifyCurrentRow(){
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
 
@@ -136,7 +139,4 @@ public class beheerMotherboard extends _BeheerCommon {
         MotherBoardList.set(selectedRow,modifiedMotherboard);
         tableView.setItems(MotherBoardList);
     }
-
-
-
 }

@@ -15,7 +15,6 @@ public class beheerGPU extends _BeheerCommon {
 
     @FXML
     private TableView<GPU> tableView;
-
     @FXML
     private TextField addName;
     @FXML
@@ -28,7 +27,6 @@ public class beheerGPU extends _BeheerCommon {
     private TextField addNrOfSlots;
     @FXML
     private TextField addAantal;
-
     @FXML
     private TableColumn<GPU, String> nameColumn;
     @FXML
@@ -77,18 +75,19 @@ public class beheerGPU extends _BeheerCommon {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             GPU gpu = tableView.getSelectionModel().getSelectedItem();
             jdbi.useHandle(handle -> {
-                handle.execute("DELETE FROM CPU WHERE Name = ?", gpu.getName());
+                handle.execute("DELETE FROM GPU WHERE Name = ?", gpu.getName());
             });
             tableView.getItems().remove(selectedRow);
         }
     }
 
     public void addNewRow() {
+        //geven mee hoeveel we hebben binnen gekregen of ter beschikking hebben
         if(!doubles("GPU", "Name", addName.getText())) {
             GPU gpu = new GPU(addName.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addVRAM.getText()),
-                    Integer.parseInt(addPowerUsage.getText()),  Integer.parseInt(addNrOfSlots.getText()), 1);
+                    Integer.parseInt(addPowerUsage.getText()),  Integer.parseInt(addNrOfSlots.getText()), Integer.parseInt(addAantal.getText()));
             jdbi.useHandle(handle -> {
-                handle.execute("insert into GPU (Name,  Price, Vram_size, Power_Usage, Number_of_slots, aantal values (?, ?, ?, ?,?, ?)",
+                handle.execute("insert into GPU (Name,  Price, Vram_size, Power_Usage, Number_of_slots, aantal values (?, ?, ?, ?, ?, ?)",
                         gpu.getName(), gpu.getPrice(), gpu.getVRAM(), gpu.getPowerUsage(), gpu.getNRofSlots(), gpu.getAantal());
             });
             ObservableList<GPU> GPUList = tableView.getItems();
@@ -96,8 +95,12 @@ public class beheerGPU extends _BeheerCommon {
             tableView.setItems(GPUList);
         }
         else{
-            showAlert("Unseported Entry","Dit component bestaat al in de db");
-            //aantallen plus 1 doen
+            GPU gpu = new GPU(addName.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addVRAM.getText()),
+                    Integer.parseInt(addPowerUsage.getText()),  Integer.parseInt(addNrOfSlots.getText()), Integer.parseInt(addAantal.getText()));
+            jdbi.useHandle(handle -> {
+                handle.execute("UPDATE GPU SET Aantal = ? WHERE Name = ? ,Price = ?, Vram_size = ? , Power_usage = ?, Number_of_slots = ? ",
+                        gpu.getAantal(), gpu.getName(), gpu.getPrice(), gpu.getVRAM(), gpu.getPowerUsage(), gpu.getNRofSlots());
+            });
         }
     }
 
@@ -112,6 +115,7 @@ public class beheerGPU extends _BeheerCommon {
             modifiedGPU = new GPU(gpu.getName(),gpu.getPrice(),gpu.getVRAM(),gpu.getPowerUsage(), gpu.getNRofSlots(), gpu.getAantal());
         }
     }
+
     public void modifyCurrentRow(){
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
 
@@ -119,11 +123,13 @@ public class beheerGPU extends _BeheerCommon {
         modifiedGPU.setPrice(Integer.parseInt(addPrice.getText()));
         modifiedGPU.setVRAM(Integer.parseInt(addVRAM.getText()));
         modifiedGPU.setPowerUsage(Integer.parseInt(addPowerUsage.getText()));
+        modifiedGPU.setNRofSlots(Integer.parseInt(addNrOfSlots.getText()));
+        modifiedGPU.setAantal(Integer.parseInt(addAantal.getText()));
 
         jdbi.useHandle(handle -> {
-            handle.execute("UPDATE GPU SET Name = ? ,Price = ?, Vram_size = ? , Power_usage = ?, Number_of_slots = ? WHERE Name = ?",
+            handle.execute("UPDATE GPU SET Name = ? ,Price = ?, Vram_size = ? , Power_usage = ?, Number_of_slots = ?, Aantal = ?  WHERE Name = ?",
                     modifiedGPU.getName(), modifiedGPU.getPrice(), modifiedGPU.getVRAM(),
-                    modifiedGPU.getPowerUsage(), modifiedGPU.getName(), modifiedGPU.getNRofSlots());
+                    modifiedGPU.getPowerUsage(),  modifiedGPU.getNRofSlots(), modifiedGPU.getAantal(), modifiedGPU.getName());
         });
 
         ObservableList<GPU> GPUList = tableView.getItems();

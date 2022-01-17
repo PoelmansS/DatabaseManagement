@@ -1,9 +1,10 @@
 package be.kuleuven.pccustomizer.controller.Objects;
 
 public class Extra {
-    String name;
-    String type;
-    int price;
+    private String name;
+    private String type;
+    private int price;
+    private int aantal;
 
     public Extra(){}
 
@@ -35,5 +36,13 @@ public class Extra {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getAantal() {
+        return aantal;
+    }
+
+    public void setAantal(int aantal) {
+        this.aantal = aantal;
     }
 }

@@ -15,7 +15,6 @@ import java.util.List;
 public class beheerBestelling extends _BeheerCommon {
     private Bestelling modifiedBestelling;
     private final List<Bestelling> bestellingen = new ArrayList<Bestelling>();
-    String comp ;
     //table
     @FXML
     private TableView<Bestelling> tableView;
@@ -28,7 +27,6 @@ public class beheerBestelling extends _BeheerCommon {
     private TextField addComputer;
     @FXML
     private TextField addPrice;
-
     @FXML
     private TableColumn<Bestelling, Integer> IDColumn;
     @FXML
@@ -91,12 +89,12 @@ public class beheerBestelling extends _BeheerCommon {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             Bestelling bestelling = tableView.getSelectionModel().getSelectedItem();
             jdbi.useHandle(handle -> {
-                handle.execute("DELETE FROM PcCase WHERE Name = ?", bestelling.getName()); });
+                handle.execute("DELETE FROM Bestelling WHERE ID = ?", bestelling.getID()); });
             tableView.getItems().remove(selectedRow);
         }
     }
 
-    public boolean pcAvailable(String name){
+    private boolean pcAvailable(String name){
         List<String> names = readDBstring("Computer", "Name");
         for(int i = 0; i < names.size(); i++){
             if(name.equals(names.get(i))){
@@ -106,7 +104,7 @@ public class beheerBestelling extends _BeheerCommon {
         return false;
     }
 
-    public Integer getPriceComputer(String name){
+    private Integer getPriceComputer(String name){
         Integer i = jdbi.withHandle(handle ->
                 handle.createQuery("SELECT Price FROM Computer WHERE Name = :Name")
                         .bind("Name", name)
@@ -137,6 +135,7 @@ public class beheerBestelling extends _BeheerCommon {
             modifiedBestelling = new Bestelling(bestelling.getID(), bestelling.getKlant(),bestelling.getComputer(),bestelling.getPrice());
         }
     }
+
     public void modifyCurrentRow(){
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
 
@@ -151,6 +150,4 @@ public class beheerBestelling extends _BeheerCommon {
         bestellingList.set(selectedRow,modifiedBestelling);
         tableView.setItems(bestellingList);
     }
-
-
 }

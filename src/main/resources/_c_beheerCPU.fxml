@@ -20,6 +20,7 @@
                 <TableColumn fx:id="coresColumn" prefWidth="75.0" text="Cores" />
                 <TableColumn fx:id="clockSpeedColumn" prefWidth="100" text="Clock Speed" />
                 <TableColumn fx:id="powerUsageColumn" prefWidth="100" text="PowerUsage" />
+                <TableColumn fx:id="aantalColumn" prefWidth="75" text="aantal" />
             </columns>
         </TableView>
         <Text layoutX="9.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beheer CPU" wrappingWidth="567.21875">

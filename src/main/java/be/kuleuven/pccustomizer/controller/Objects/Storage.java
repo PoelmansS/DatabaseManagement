@@ -1,12 +1,13 @@
 package be.kuleuven.pccustomizer.controller.Objects;
 
 public class Storage {
-    String name;
-    String type;
-    int price;
-    int size;
-    int readSpeed;
-    int writeSpeed;
+    private String name;
+    private String type;
+    private int price;
+    private int size;
+    private int readSpeed;
+    private int writeSpeed;
+    private int aantal;
 
     public Storage(String name, String type, int price, int size, int readSpeed, int writeSpeed) {
         this.name = name;
@@ -63,5 +64,13 @@ public class Storage {
 
     public void setWriteSpeed(int writeSpeed) {
         this.writeSpeed = writeSpeed;
+    }
+
+    public int getAantal() {
+        return aantal;
+    }
+
+    public void setAantal(int aantal) {
+        this.aantal = aantal;
     }
 }

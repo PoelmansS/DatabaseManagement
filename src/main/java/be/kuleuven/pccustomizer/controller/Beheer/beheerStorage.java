@@ -15,7 +15,6 @@ public class beheerStorage extends _BeheerCommon {
 
     @FXML
     private TableView<Storage> tableView;
-
     @FXML
     private TextField addName;
     @FXML
@@ -28,7 +27,8 @@ public class beheerStorage extends _BeheerCommon {
     private TextField addReadSpeed;
     @FXML
     private TextField addWriteSpeed;
-
+    @FXML
+    private TextField addAantal;
     @FXML
     private TableColumn<Storage, String> nameColumn;
     @FXML
@@ -58,6 +58,7 @@ public class beheerStorage extends _BeheerCommon {
             storages.add(new Storage(names.get(i), types.get(i), prices.get(i), sizes.get(i), readSpeeds.get(i), writeSpeeds.get(i)));
         }
     }
+
     public void initTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<Storage, String>("name"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Storage, String>("type"));
@@ -76,7 +77,7 @@ public class beheerStorage extends _BeheerCommon {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             Storage storage = tableView.getSelectionModel().getSelectedItem();
             jdbi.useHandle(handle -> {
-                handle.execute("DELETE FROM CPU WHERE Name = ?", storage.getName());
+                handle.execute("DELETE FROM Storage WHERE Name = ?", storage.getName());
             });
             tableView.getItems().remove(selectedRow);
         }

@@ -20,6 +20,7 @@
                 <TableColumn fx:id="sizeColumn" prefWidth="75.0" text="Size" />
                 <TableColumn fx:id="readSpeedColumn" prefWidth="75.0" text="Read Speed" />
                 <TableColumn fx:id="writeSpeedColumn" prefWidth="75.0" text="Write Speed" />
+                <TableColumn fx:id="aantalColumn" prefWidth="75" text="aantal" />
             </columns>
         </TableView>
         <Text layoutX="9.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beheer Storage" wrappingWidth="567.21875">

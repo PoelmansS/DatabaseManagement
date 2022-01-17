@@ -16,10 +16,8 @@ public class BeheerComputerConfigs extends _BeheerCommon {
     private Button btnDelete;
     @FXML
     private Button btnClose;
-
     @FXML
     private TableView<CustomPC> tableView;
-
     @FXML
     private TableColumn<CustomPC, String> nameColumn;
     @FXML
@@ -97,12 +95,11 @@ public class BeheerComputerConfigs extends _BeheerCommon {
         tableView.setItems(customPCList);
     }
 
-
     public void deleteCurrentRow() {
         ObservableList<CustomPC> customPCList = tableView.getItems();
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
         if (tableView.getSelectionModel().getSelectedItem() != null) {
-            CostumPc pc = tableView.getSelectionModel().getSelectedItem();
+            CustomPC pc = tableView.getSelectionModel().getSelectedItem();
             jdbi.useHandle(handle -> {
                 handle.execute("DELETE FROM Computer WHERE Name = ?", pc.getName());
             });

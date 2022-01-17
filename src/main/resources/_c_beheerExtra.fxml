@@ -25,6 +25,7 @@
                 <TableColumn fx:id="nameColumn" prefWidth="150.0" text="Name" />
                 <TableColumn fx:id="typeColumn" prefWidth="75.0" text="Type" />
                 <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
+                <TableColumn fx:id="aantalColumn" prefWidth="75" text="aantal" />
             </columns>
         </TableView>
         <Text layoutX="9.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beheer Extra's" wrappingWidth="567.21875">

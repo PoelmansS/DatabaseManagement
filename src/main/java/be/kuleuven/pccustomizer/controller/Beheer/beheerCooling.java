@@ -15,7 +15,6 @@ public class beheerCooling extends _BeheerCommon {
 
     @FXML
     private TableView<Cooling> tableView;
-
     @FXML
     private TextField addName;
     @FXML
@@ -24,7 +23,8 @@ public class beheerCooling extends _BeheerCommon {
     private TextField addPrice;
     @FXML
     private TextField addWattage;
-
+    @FXML
+    private TextField addAantal;
     @FXML
     private TableColumn<Cooling, String> nameColumn;
     @FXML
@@ -34,10 +34,10 @@ public class beheerCooling extends _BeheerCommon {
     @FXML
     private TableColumn<Cooling, Integer> wattageColumn;
 
-
     public void initialize() {
         init(tableView);
     }
+
     public void ReadFromDB(){
         List<String> names = readDBstring("Cooling","Name");
         List<String> types =  readDBstring("Cooling","Type");
@@ -48,6 +48,7 @@ public class beheerCooling extends _BeheerCommon {
             coolings.add(new Cooling(names.get(i), types.get(i), prices.get(i), wattages.get(i)));
         }
     }
+
     public void initTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<Cooling, String>("name"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Cooling, String>("type"));
@@ -97,6 +98,7 @@ public class beheerCooling extends _BeheerCommon {
             modifiedCooling = new Cooling(cooling.getName(), cooling.getType(),cooling.getPrice(),cooling.getWattage());
         }
     }
+
     public void modifyCurrentRow(){
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
 

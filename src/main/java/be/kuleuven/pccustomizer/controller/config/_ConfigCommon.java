@@ -80,6 +80,7 @@ public class _ConfigCommon {
                         .mapTo(String.class)
                         .list());
     }
+
     //function to querry a column of ints
     public List<Integer> readDBint(String clas, String columnName){
         return jdbi.withHandle(handle ->

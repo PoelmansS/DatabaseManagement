@@ -1,7 +1,7 @@
 package be.kuleuven.pccustomizer.controller.Objects;
 
 public class Component {
-    String name;
+    private String name;
 
     public Component() {}
     public Component(String name) {
@@ -15,4 +15,5 @@ public class Component {
     public void setName(String name) {
         this.name = name;
     }
+
 }

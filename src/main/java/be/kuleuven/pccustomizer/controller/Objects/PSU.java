@@ -1,9 +1,10 @@
 package be.kuleuven.pccustomizer.controller.Objects;
 
 public class PSU {
-    String name;
-    int price;
-    int wattage;
+    private String name;
+    private int price;
+    private int wattage;
+    private int aantal;
 
     public PSU(String name, int price, int wattage) {
         this.name = name;
@@ -33,5 +34,13 @@ public class PSU {
 
     public void setWattage(int wattage) {
         this.wattage = wattage;
+    }
+
+    public int getAantal() {
+        return aantal;
+    }
+
+    public void setAantal(int aantal) {
+        this.aantal = aantal;
     }
 }

@@ -18,14 +18,14 @@ public class beheerPSU extends _BeheerCommon {
 
     @FXML
     private TableView<PSU> tableView;
-
     @FXML
     private TextField addName;
     @FXML
     private TextField addPrice;
     @FXML
     private TextField addWattage;
-
+    @FXML
+    private TextField addAantal;
     @FXML
     private TableColumn<PSU, String> nameColumn;
     @FXML
@@ -62,7 +62,7 @@ public class beheerPSU extends _BeheerCommon {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             PSU psu = tableView.getSelectionModel().getSelectedItem();
             jdbi.useHandle(handle -> {
-                handle.execute("DELETE FROM CPU WHERE Name = ?", psu.getName());
+                handle.execute("DELETE FROM PSU WHERE Name = ?", psu.getName());
             });
             tableView.getItems().remove(selectedRow);
         }
@@ -95,6 +95,7 @@ public class beheerPSU extends _BeheerCommon {
             modifiedPSU = new PSU(psu.getName(), psu.getPrice(),psu.getWattage());
         }
     }
+
     public void modifyCurrentRow(){
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
 
@@ -111,5 +112,4 @@ public class beheerPSU extends _BeheerCommon {
         PSUList.set(selectedRow,modifiedPSU);
         tableView.setItems(PSUList);
     }
-
 }

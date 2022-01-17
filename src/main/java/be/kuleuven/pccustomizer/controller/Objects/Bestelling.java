@@ -8,9 +8,9 @@ public class Bestelling {
 
     public Bestelling(int ID, int klant, String computer, int price) {
         this.ID = ID;
-        Klant = klant;
-        Computer = computer;
-        Price = price;
+        this.Klant = klant;
+        this.Computer = computer;
+        this.Price = price;
     }
 
     public int getID() {

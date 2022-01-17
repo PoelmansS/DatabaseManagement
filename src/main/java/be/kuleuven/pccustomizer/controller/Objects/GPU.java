@@ -1,12 +1,12 @@
 package be.kuleuven.pccustomizer.controller.Objects;
 
 public class GPU {
-    String name;
-    int price;
-    int VRAM;
-    int powerUsage;
-    int NRofSlots;
-    int aantal;
+    private String name;
+    private int price;
+    private int VRAM;
+    private int powerUsage;
+    private int NRofSlots;
+    private int aantal;
 
 
     public GPU(String name, int price, int VRAM, int powerUsage, int NRofSlots, int aantal) {
@@ -21,10 +21,6 @@ public class GPU {
 
     public int getNRofSlots() {
         return NRofSlots;
-    }
-
-    public int getAantal() {
-        return aantal;
     }
 
     public String getName() {
@@ -61,6 +57,10 @@ public class GPU {
 
     public void setNRofSlots(int NRofSlots) {
         this.NRofSlots = NRofSlots;
+    }
+
+    public int getAantal() {
+        return aantal;
     }
 
     public void setAantal(int aantal) {

@@ -1,12 +1,13 @@
 package be.kuleuven.pccustomizer.controller.Objects;
 
 public class MotherBoard {
-    String name;
-    boolean hasWifi;
-    int price;
-    String caseSize;
-    int RAMSlots;
-    int PCIESlots;
+    private String name;
+    private boolean hasWifi;
+    private int price;
+    private String caseSize;
+    private int RAMSlots;
+    private int PCIESlots;
+    private int aantal;
 
     public MotherBoard(String name, boolean hasWifi, int price, String caseSize, int RAMSlots, int PCIESlots) {
         this.name = name;
@@ -63,5 +64,13 @@ public class MotherBoard {
 
     public void setPCIESlots(int PCIESlots) {
         this.PCIESlots = PCIESlots;
+    }
+
+    public int getAantal() {
+        return aantal;
+    }
+
+    public void setAantal(int aantal) {
+        this.aantal = aantal;
     }
 }

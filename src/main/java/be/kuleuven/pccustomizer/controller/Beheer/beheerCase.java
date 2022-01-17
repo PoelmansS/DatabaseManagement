@@ -28,7 +28,8 @@ public class beheerCase extends _BeheerCommon {
     private TextField addPrice;
     @FXML
     private TextField addSize;
-
+    @FXML
+    private TextField addAantal;
     @FXML
     private TableColumn<Case, String> nameColumn;
     @FXML
@@ -124,6 +125,7 @@ public class beheerCase extends _BeheerCommon {
             modifiedCase = new Case(cases.getName(), cases.getType(),cases.getPrice(),cases.getSize());
         }
     }
+
     public void modifyCurrentRow(){
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
 
@@ -140,7 +142,4 @@ public class beheerCase extends _BeheerCommon {
         caseList.set(selectedRow,modifiedCase);
         tableView.setItems(caseList);
     }
-
-
-
 }

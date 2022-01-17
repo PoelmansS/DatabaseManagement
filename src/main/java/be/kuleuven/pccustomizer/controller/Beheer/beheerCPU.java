@@ -30,7 +30,8 @@ public class beheerCPU extends _BeheerCommon {
     private TextField addClockSpeed;
     @FXML
     private TextField addPowerUsage;
-
+    @FXML
+    private TextField addAantal;
     @FXML
     private TableColumn<CPU, String> nameColumn;
     @FXML
@@ -47,6 +48,7 @@ public class beheerCPU extends _BeheerCommon {
     public void initialize() {
         init(tableView);
     }
+
     public void ReadFromDB(){
         List<String> names = readDBstring("CPU","Name");
         List<Integer> prices =  readDBint("CPU","Price");
@@ -101,7 +103,6 @@ public class beheerCPU extends _BeheerCommon {
         }
     }
 
-
     public void LoadCurrentRow() {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             CPU cpu = tableView.getSelectionModel().getSelectedItem();
@@ -114,6 +115,7 @@ public class beheerCPU extends _BeheerCommon {
             modifiedCPU = new CPU(cpu.getName(),cpu.getPrice(),cpu.getThreads(),cpu.getCores(),cpu.getClockSpeed(),cpu.getPowerUsage());
         }
     }
+
     public void modifyCurrentRow(){
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
 

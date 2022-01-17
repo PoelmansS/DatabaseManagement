@@ -33,7 +33,6 @@ public class Beheerklanten extends _BeheerCommon {
     private TextField addPhone;
     @FXML
     private TextField addMail;
-
     @FXML
     private TableColumn<Klant, Integer> IDColumn;
     @FXML
@@ -54,6 +53,7 @@ public class Beheerklanten extends _BeheerCommon {
     public void initialize() {
         init(tableView);
     }
+
     public void ReadFromDB(){
         List<Integer> ids = readDBint("Klant","ID");
         List<String> lastNames =  readDBstring("Klant","LastName");
@@ -133,6 +133,7 @@ public class Beheerklanten extends _BeheerCommon {
                     klant.getStreet(),klant.getNumber(),klant.getPhone(),klant.getMail());
         }
     }
+
     public void modifyCurrentRow(){
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
 

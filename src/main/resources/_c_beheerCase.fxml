@@ -18,6 +18,7 @@
                 <TableColumn fx:id="typeColumn" prefWidth="75.0" text="Type" />
                 <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
                 <TableColumn fx:id="sizeColumn" prefWidth="75.0" text="Size" />
+                <TableColumn fx:id="aantalColumn" prefWidth="75" text="aantal" />
             </columns>
         </TableView>
         <Text layoutX="9.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beheer case" wrappingWidth="567.21875">

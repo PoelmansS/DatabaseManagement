@@ -1,12 +1,13 @@
 package be.kuleuven.pccustomizer.controller.Objects;
 
 public class CPU {
-    String name;
-    int price;
-    int threads;
-    int cores;
-    int clockSpeed;
-    int powerUsage;
+    private String name;
+    private int price;
+    private int threads;
+    private int cores;
+    private int clockSpeed;
+    private int powerUsage;
+    private int aantal;
 
     public CPU(String name, int price, int threads, int cores, int clockSpeed, int powerUsage) {
         this.name = name;
@@ -63,5 +64,13 @@ public class CPU {
 
     public void setPowerUsage(int powerUsage) {
         this.powerUsage = powerUsage;
+    }
+
+    public int getAantal() {
+        return aantal;
+    }
+
+    public void setAantal(int aantal) {
+        this.aantal = aantal;
     }
 }

@@ -1,10 +1,11 @@
 package be.kuleuven.pccustomizer.controller.Objects;
 
 public class Cooling {
-    String Name;
-    String Type;
-    int Price;
-    int Wattage;
+    private String Name;
+    private String Type;
+    private int Price;
+    private int Wattage;
+    private int aantal;
 
     public Cooling(String name, String type, int price, int wattage) {
         Name = name;
@@ -44,5 +45,13 @@ public class Cooling {
 
     public void setWattage(int wattage) {
         Wattage = wattage;
+    }
+
+    public int getAantal() {
+        return aantal;
+    }
+
+    public void setAantal(int aantal) {
+        this.aantal = aantal;
     }
 }

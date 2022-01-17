@@ -135,7 +135,7 @@ public class configCheckout extends _ConfigCommon {
 
     }
 
-    public Integer countNumberOfCostums(){
+    private Integer countNumberOfCostums(){
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT Count(name) FROM Computer WHERE Type = :Type")
                         .bind("Type", "Custom")
@@ -160,7 +160,7 @@ public class configCheckout extends _ConfigCommon {
                 name, cpu, cooling, extra, gpu, motherboard, cases, psu, ram, storage, totalPrice, "Custom");});
     }
 
-    public Integer countOfID(){
+    private Integer countOfID(){
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT MAX(ID) FROM Bestelling")
                         .mapTo(Integer.class)
@@ -174,14 +174,14 @@ public class configCheckout extends _ConfigCommon {
                 id, klant.getID(), name, totalPrice);});
     }
 
-    public void initTableComponenten() {
+    private void initTableComponenten() {
         componentColumn.setCellValueFactory(new PropertyValueFactory<Component, String>("name"));
         ObservableList<Component> viewComponenten = FXCollections.observableArrayList();
         viewComponenten.addAll(componenten);
         componentView.setItems(viewComponenten);
     }
 
-    public void addNewRow() {
+    private void addNewRow() {
         ObservableList<Klant> klantList = tableView.getItems();
         Klant klant = new Klant(Integer.parseInt(addID.getText()),addLastName.getText(),addFirstName.getText(),Integer.parseInt(addPostalCode.getText()),
                 addStreet.getText(),addNR.getText(),addPhone.getText(),addMail.getText());
@@ -200,7 +200,7 @@ public class configCheckout extends _ConfigCommon {
         tableView.setItems(klantList);
     }
 
-    public void LoadCurrentRow() {
+    private void LoadCurrentRow() {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             Klant klant = tableView.getSelectionModel().getSelectedItem();
 
