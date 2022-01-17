@@ -54,10 +54,11 @@ public class beheerMotherboard extends _BeheerCommon {
         List<String> caseSizes =  readDBstring("MotherBord","Required_case_size");
         List<Integer> ramSlots =  readDBint("MotherBord","RAM_slots");
         List<Integer> pcieSlots =  readDBint("MotherBord","PCI_express_slots");
+        List<Integer> aantallen =  readDBint("MotherBord","Aantal");
 
         for(int i = 0; i < names.size(); i++){
             motherBoards.add(new MotherBoard(names.get(i), hasWifis.get(i), prices.get(i), caseSizes.get(i),
-                    ramSlots.get(i), pcieSlots.get(i)));
+                    ramSlots.get(i), pcieSlots.get(i), aantallen.get(i)));
         }
     }
 
@@ -89,7 +90,8 @@ public class beheerMotherboard extends _BeheerCommon {
     public void addNewRow() {
         if(!doubles("Motherbord", "Name", addName.getText())) {
             MotherBoard motherBoard = new MotherBoard(addName.getText(), Boolean.parseBoolean(addHasWifi.getText()), Integer.parseInt(addPrice.getText()),
-                    addCaseSize.getText(), Integer.parseInt(addRAMSlots.getText()), Integer.parseInt(addPCIESlots.getText()));
+                    addCaseSize.getText(), Integer.parseInt(addRAMSlots.getText()), Integer.parseInt(addPCIESlots.getText()),
+                    Integer.parseInt(addAantal.getText()));
             jdbi.useHandle(handle -> {
                 handle.execute("insert into Motherbord (Name, Wifi ,Price, Required_case_size, RAM_slots, PCI_express_slots) values (?, ?, ?, ?,?,?)",
                         motherBoard.getName(), motherBoard.isHasWifi(), motherBoard.getPrice(),
@@ -113,8 +115,9 @@ public class beheerMotherboard extends _BeheerCommon {
             addCaseSize.setText(motherBoard.getCaseSize());
             addRAMSlots.setText(String.valueOf(motherBoard.getRAMSlots()));
             addPCIESlots.setText(String.valueOf(motherBoard.getPCIESlots()));
-            modifiedMotherboard = new MotherBoard(motherBoard.getName(), motherBoard.isHasWifi(),motherBoard.getPrice(),
-                    motherBoard.getCaseSize(), motherBoard.getRAMSlots(),motherBoard.getPCIESlots());
+            addAantal.setText(String.valueOf(motherBoard.getAantal()));
+            modifiedMotherboard = new MotherBoard(motherBoard.getName(), motherBoard.isHasWifi(), motherBoard.getPrice(),
+                    motherBoard.getCaseSize(), motherBoard.getRAMSlots(), motherBoard.getPCIESlots(), motherBoard.getAantal());
         }
     }
 

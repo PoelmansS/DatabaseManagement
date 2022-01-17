@@ -43,6 +43,8 @@ public class configMotherboard extends _ConfigCommon {
         List<String> caseSizes =  readDBstring("MotherBord","Required_case_size");
         List<Integer> ramSlots =  readDBint("MotherBord","RAM_slots");
         List<Integer> pcieSlots =  readDBint("MotherBord","PCI_express_slots");
+        List<Integer> aantallen =  readDBint("MotherBord","Aantal");
+
         for(int j = 0; j < pcieSlots.size(); j++){
             if(pcieSlots.get(j) < benodigdePci){
                 names.remove(j);
@@ -51,6 +53,7 @@ public class configMotherboard extends _ConfigCommon {
                 caseSizes.remove(j);
                 ramSlots.remove(j);
                 pcieSlots.remove(j);
+                aantallen.remove(j);
             }
         }
 
@@ -62,12 +65,13 @@ public class configMotherboard extends _ConfigCommon {
                 caseSizes.remove(j);
                 ramSlots.remove(j);
                 pcieSlots.remove(j);
+                aantallen.remove(j);
             }
         }
 
         for(int i = 0; i < names.size(); i++){
             motherBoards.add(new MotherBoard(names.get(i), hasWifis.get(i), prices.get(i), caseSizes.get(i),
-                    ramSlots.get(i), pcieSlots.get(i)));
+                    ramSlots.get(i), pcieSlots.get(i), aantallen.get(i)));
         }
     }
 

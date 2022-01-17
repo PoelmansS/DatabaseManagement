@@ -9,13 +9,14 @@ public class MotherBoard {
     private int PCIESlots;
     private int aantal;
 
-    public MotherBoard(String name, boolean hasWifi, int price, String caseSize, int RAMSlots, int PCIESlots) {
+    public MotherBoard(String name, boolean hasWifi, int price, String caseSize, int RAMSlots, int PCIESlots, int aantal) {
         this.name = name;
         this.hasWifi = hasWifi;
         this.price = price;
         this.caseSize = caseSize;
         this.RAMSlots = RAMSlots;
         this.PCIESlots = PCIESlots;
+        this.aantal = aantal;
     }
 
     public String getName() {
