@@ -1,4 +1,5 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
+import be.kuleuven.pccustomizer.controller.Objects.PSU;
 import be.kuleuven.pccustomizer.controller.Objects.RAM;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -82,7 +83,7 @@ public class beheerRAM extends _BeheerCommon {
 
     public void addNewRow() {
         if(!doubles("RAM", "Name", addName.getText())) {
-            RAM ram = new RAM(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addSize.getText()), Integer.parseInt(addNRofSticks.getText()), 1);
+            RAM ram = new RAM(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addSize.getText()), Integer.parseInt(addNRofSticks.getText()), Integer.parseInt(addAantal.getText()));
             jdbi.useHandle(handle -> {
                 handle.execute("insert into RAM (Name, Type ,Price, Size, Number_of_sticks, aantal) values (?, ?, ?, ?, ?, ?)",
                         ram.getName(), ram.getType(), ram.getPrice(), ram.getSize(), ram.getNRofSticks(), ram.getAantal());
@@ -93,7 +94,11 @@ public class beheerRAM extends _BeheerCommon {
             tableView.setItems(RAMList);
         }
         else{
-            showAlert("Unseported Entry","Dit component bestaat al in de db");
+            RAM ram = new RAM(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addSize.getText()), Integer.parseInt(addNRofSticks.getText()), Integer.parseInt(addAantal.getText()));
+            jdbi.useHandle(handle -> {
+                handle.execute("UPDATE RAM SET Aantal = ? WHERE Name = ?, Type = ?, Price = ?, Size = ?, Number_of_sticks = ?, aantal = ?",
+                        ram.getAantal(), ram.getName(), ram.getType(), ram.getPrice(), ram.getSize(), ram.getNRofSticks());
+            });
         }
     }
 

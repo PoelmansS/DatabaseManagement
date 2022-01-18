@@ -1,4 +1,5 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
+import be.kuleuven.pccustomizer.controller.Objects.GPU;
 import be.kuleuven.pccustomizer.controller.Objects.MotherBoard;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -105,7 +106,13 @@ public class beheerMotherboard extends _BeheerCommon {
             tableView.setItems(MotherBoardList);
         }
         else{
-            showAlert("Unseported Entry","Dit component bestaat al in de db");
+            MotherBoard motherBoard = new MotherBoard(addName.getText(), Boolean.parseBoolean(addHasWifi.getText()), Integer.parseInt(addPrice.getText()),
+                    addCaseSize.getText(), Integer.parseInt(addRAMSlots.getText()), Integer.parseInt(addPCIESlots.getText()),
+                    Integer.parseInt(addAantal.getText()));
+            jdbi.useHandle(handle -> {
+                handle.execute("UPDATE Motherbord SET Aantal = ? WHERE Name = ?, Wifi = ?, Price = ?, Required_case_size = ?, RAM_slots = ?, PCI_express_slots = ?",
+                        motherBoard.getAantal(), motherBoard.getName(), motherBoard.isHasWifi(), motherBoard.getPrice(), motherBoard.getCaseSize(), motherBoard.getRAMSlots(), motherBoard.getPCIESlots());
+            });
         }
     }
 

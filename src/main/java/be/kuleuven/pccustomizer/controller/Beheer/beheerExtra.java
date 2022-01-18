@@ -1,4 +1,5 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
+import be.kuleuven.pccustomizer.controller.Objects.CPU;
 import be.kuleuven.pccustomizer.controller.Objects.Extra;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -84,7 +85,12 @@ public class beheerExtra extends _BeheerCommon {
             tableView.setItems(extraList);
         }
         else{
-            showAlert("Unseported Entry","Dit component bestaat al in de db");
+            Extra extra = new Extra(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()),
+                    Integer.parseInt(addAantal.getText()));
+            jdbi.useHandle(handle -> {
+                handle.execute("UPDATE Extra SET Aantal = ? WHERE Name = ?, Type = ?,  Price = ?",
+                        extra.getAantal(), extra.getName(), extra.getType(), extra.getPrice());
+            });
         }
     }
 

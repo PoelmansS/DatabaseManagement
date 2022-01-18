@@ -1,5 +1,6 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
 import be.kuleuven.pccustomizer.controller.Objects.Cooling;
+import be.kuleuven.pccustomizer.controller.Objects.GPU;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -88,7 +89,11 @@ public class beheerCooling extends _BeheerCommon {
             tableView.setItems(coolingList);
         }
         else{
-            showAlert("Unseported Entry","Dit component bestaat al in de db");
+            Cooling cooling = new Cooling(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addWattage.getText()), Integer.parseInt(addAantal.getText()));
+            jdbi.useHandle(handle -> {
+                handle.execute("UPDATE Cooling SET Aantal = ? WHERE Name = ?, Type = ?, Price = ?, Wattage = ?",
+                        cooling.getAantal(), cooling.getName(), cooling.getType(), cooling.getPrice(), cooling.getWattage());
+            });
         }
     }
 

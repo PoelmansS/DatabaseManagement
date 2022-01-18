@@ -1,4 +1,5 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
+import be.kuleuven.pccustomizer.controller.Objects.RAM;
 import be.kuleuven.pccustomizer.controller.Objects.Storage;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -102,7 +103,13 @@ public class beheerStorage extends _BeheerCommon {
             tableView.setItems(storageList);
         }
         else{
-            showAlert("Unseported Entry","Dit component bestaat al in de db");
+            Storage storage = new Storage(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()),
+                    Integer.parseInt(addSize.getText()), Integer.parseInt(addReadSpeed.getText()), Integer.parseInt(addWriteSpeed.getText()),
+                    Integer.parseInt(addAantal.getText()));
+            jdbi.useHandle(handle -> {
+                handle.execute("UPDATE Storage SET Name = ?, Type = ?, Price = ?, Size = ?, Read_speed = ?, Write_speed = ?",
+                        storage.getAantal(), storage.getName(), storage.getType(), storage.getPrice(), storage.getSize(), storage.getReadSpeed(), storage.getWriteSpeed());
+            });
         }
     }
 
