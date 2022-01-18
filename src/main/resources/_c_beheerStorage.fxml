@@ -35,17 +35,19 @@
         <Button fx:id="btnLoad" layoutX="16.0" layoutY="304.0" mnemonicParsing="false" text="Load" />
 
         <TextField fx:id="addName" layoutX="91.0" layoutY="360.0" prefHeight="25.0" prefWidth="67.0" />
-        <TextField fx:id="addType" layoutX="158.0" layoutY="360.0" prefHeight="25.0" prefWidth="92.0" />
-        <TextField fx:id="addPrice" layoutX="242.0" layoutY="360.0" prefHeight="25.0" prefWidth="85.0" />
-        <TextField fx:id="addSize" layoutX="333.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
-        <TextField fx:id="addReadSpeed" layoutX="425.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
-        <TextField fx:id="addWriteSpeed" layoutX="508.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
+        <TextField fx:id="addType" layoutX="158.0" layoutY="360.0" prefHeight="25.0" prefWidth="63.0" />
+        <TextField fx:id="addPrice" layoutX="221.0" layoutY="360.0" prefHeight="25.0" prefWidth="85.0" />
+        <TextField fx:id="addSize" layoutX="309.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
+        <TextField fx:id="addReadSpeed" layoutX="387.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
+        <TextField fx:id="addWriteSpeed" layoutX="458.0" layoutY="360.0" prefHeight="25.0" prefWidth="63.0" />
+        <TextField fx:id="addAantal" layoutX="520.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
 
         <Text layoutX="91.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="53.0" />
         <Text layoutX="158.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" wrappingWidth="92.0" />
-        <Text layoutX="259.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" />
-        <Text layoutX="362.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Size" />
-        <Text layoutX="433.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Read Speed" />
-        <Text layoutX="514.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Write Speed" />
+        <Text layoutX="221.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" />
+        <Text layoutX="309.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Size" />
+        <Text layoutX="387.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Read Speed" />
+        <Text layoutX="458.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Write Speed" />
+        <Text layoutX="530.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="aantal" />
     </children>
 </AnchorPane>

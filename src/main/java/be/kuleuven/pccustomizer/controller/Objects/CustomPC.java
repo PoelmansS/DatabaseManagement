@@ -3,18 +3,19 @@ package be.kuleuven.pccustomizer.controller.Objects;
 import be.kuleuven.pccustomizer.controller.Objects.*;
 
 public class CustomPC {
-    String name;
-    String type;
-    int price;
-    String motherBoard;
-    String cpu;
-    String gpu;
-    String ram;
-    String cases;
-    String psu;
-    String storage;
-    String cooling;
-    String extra;
+    private String name;
+    private String type;
+    private int price;
+    private String motherBoard;
+    private String cpu;
+    private String gpu;
+    private String ram;
+    private String cases;
+    private String psu;
+    private String storage;
+    private String cooling;
+    private String extra;
+
     public CustomPC(){}
 
     public CustomPC(String name, String type, Integer price, String motherBoard, String cpu, String gpu, String ram, String cases, String psu, String storage, String cooling, String extra) {

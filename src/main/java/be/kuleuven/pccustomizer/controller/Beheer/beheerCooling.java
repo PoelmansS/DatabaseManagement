@@ -1,7 +1,5 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
-import be.kuleuven.pccustomizer.controller.Objects.Case;
 import be.kuleuven.pccustomizer.controller.Objects.Cooling;
-import be.kuleuven.pccustomizer.controller.Objects.GPU;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

@@ -35,17 +35,19 @@
         <Button fx:id="btnLoad" layoutX="16.0" layoutY="304.0" mnemonicParsing="false" text="Load" />
 
         <TextField fx:id="addName" layoutX="91.0" layoutY="360.0" prefHeight="25.0" prefWidth="67.0" />
-        <TextField fx:id="addPrice" layoutX="158.0" layoutY="360.0" prefHeight="25.0" prefWidth="92.0" />
-        <TextField fx:id="addThreads" layoutX="255.0" layoutY="360.0" prefHeight="25.0" prefWidth="85.0" />
-        <TextField fx:id="addCores" layoutX="340.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
-        <TextField fx:id="addClockSpeed" layoutX="418.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
-        <TextField fx:id="addPowerUsage" layoutX="496.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
+        <TextField fx:id="addPrice" layoutX="158.0" layoutY="360.0" prefHeight="25.0" prefWidth="65.0" />
+        <TextField fx:id="addThreads" layoutX="229.0" layoutY="360.0" prefHeight="25.0" prefWidth="53.0" />
+        <TextField fx:id="addCores" layoutX="293.0" layoutY="360.0" prefHeight="25.0" prefWidth="53.0" />
+        <TextField fx:id="addClockSpeed" layoutX="353.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
+        <TextField fx:id="addPowerUsage" layoutX="442.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
+        <TextField fx:id="addAantal" layoutX="520.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
 
         <Text layoutX="91.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="53.0" />
         <Text layoutX="158.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" wrappingWidth="92.0" />
-        <Text layoutX="255.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Threads" />
-        <Text layoutX="340.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cores" />
-        <Text layoutX="418.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clock Speed" />
-        <Text layoutX="501.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Power Usage" />
+        <Text layoutX="229.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Threads" />
+        <Text layoutX="293.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cores" />
+        <Text layoutX="353.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clock Speed" />
+        <Text layoutX="442.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Power Usage" />
+        <Text layoutX="520.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="aantal" />
     </children>
 </AnchorPane>

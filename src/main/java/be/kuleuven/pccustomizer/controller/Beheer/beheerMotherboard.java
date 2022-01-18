@@ -1,6 +1,4 @@
 package be.kuleuven.pccustomizer.controller.Beheer;
-import be.kuleuven.pccustomizer.controller.Objects.Case;
-import be.kuleuven.pccustomizer.controller.Objects.GPU;
 import be.kuleuven.pccustomizer.controller.Objects.MotherBoard;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
