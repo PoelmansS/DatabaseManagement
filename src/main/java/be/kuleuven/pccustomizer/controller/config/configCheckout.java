@@ -1,5 +1,6 @@
 package be.kuleuven.pccustomizer.controller.config;
 
+import be.kuleuven.pccustomizer.controller.CouchClient;
 import be.kuleuven.pccustomizer.controller.Objects.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -170,6 +171,8 @@ public class configCheckout extends _ConfigCommon {
         Klant klant = tableView.getSelectionModel().getSelectedItem();
         jdbi.useHandle(handle -> { handle.execute("insert into Bestelling (ID, Klant , Computer, Price) values (?,?,?,?)",
                 id, klant.getID(), name, totalPrice);});
+        Bestelling bestelling = new Bestelling(id, klant.getID(), name, totalPrice);
+        new CouchClient().query(bestelling);
     }
 
     private void initTableComponenten() {
@@ -182,7 +185,7 @@ public class configCheckout extends _ConfigCommon {
     private void addNewRow() {
         ObservableList<Klant> klantList = tableView.getItems();
         Klant klant = new Klant(Integer.parseInt(addID.getText()),addLastName.getText(),addFirstName.getText(),Integer.parseInt(addPostalCode.getText()),
-                addStreet.getText(),addNR.getText(),addPhone.getText(),addMail.getText());
+                addStreet.getText(),addNR.getText(),addPhone.getText(), addMail.getText());
 
         boolean bestaandeKlant = false;
         List<Klant> list =klantList.stream().collect(Collectors.toList());
