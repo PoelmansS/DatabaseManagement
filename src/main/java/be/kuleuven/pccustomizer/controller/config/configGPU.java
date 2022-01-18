@@ -30,8 +30,6 @@ public class configGPU extends _ConfigCommon {
     private TableColumn<GPU, Integer> powerUsageColumn;
     @FXML
     private TableColumn<GPU, Integer> NRofSlotsColumn;
-    @FXML
-    private TableColumn<GPU, Integer> aantalColumn;
 
     public void initialize() {
         init(tableView, "Ram");
@@ -59,7 +57,6 @@ public class configGPU extends _ConfigCommon {
         VRAMColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("VRAM"));
         powerUsageColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("powerUsage"));
         NRofSlotsColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("NRofSlots"));
-        //aantalColumn.setCellValueFactory(new PropertyValueFactory<GPU, Integer>("aantal"));
         ObservableList<GPU> GPUList = tableView.getItems();
         GPUList.addAll(gpus);
         tableView.setItems(GPUList);

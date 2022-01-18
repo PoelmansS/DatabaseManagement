@@ -64,7 +64,7 @@ public class beheerPSU extends _BeheerCommon {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             PSU psu = tableView.getSelectionModel().getSelectedItem();
             jdbi.useHandle(handle -> {
-                handle.execute("DELETE FROM PSU WHERE Name = ?", psu.getName());
+                handle.execute("DELETE FROM Power_supply WHERE Name = ?", psu.getName());
             });
             tableView.getItems().remove(selectedRow);
         }

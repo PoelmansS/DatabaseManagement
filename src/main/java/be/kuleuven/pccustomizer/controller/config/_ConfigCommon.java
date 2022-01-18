@@ -107,8 +107,8 @@ public class _ConfigCommon {
 
     public boolean doubles(String Table , String Column, Integer id){
         List<Integer> ids = readDBint(Table, Column);
-        for(int i = 0; i < ids.size(); i++){
-            if(id.equals(ids.get(i))){
+        for (Integer integer : ids) {
+            if (id.equals(integer)) {
                 return true;
             }
         }

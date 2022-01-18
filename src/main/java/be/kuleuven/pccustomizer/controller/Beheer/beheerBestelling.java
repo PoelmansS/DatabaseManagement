@@ -96,8 +96,8 @@ public class beheerBestelling extends _BeheerCommon {
 
     private boolean pcAvailable(String name){
         List<String> names = readDBstring("Computer", "Name");
-        for(int i = 0; i < names.size(); i++){
-            if(name.equals(names.get(i))){
+        for (String s : names) {
+            if (name.equals(s)) {
                 return true;
             }
         }

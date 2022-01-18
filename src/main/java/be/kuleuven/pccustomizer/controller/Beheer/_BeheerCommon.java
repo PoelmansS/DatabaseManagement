@@ -40,17 +40,16 @@ public class _BeheerCommon {
                         .list());
     }
     public List<Boolean> readDBbool(String Table, String Column){
-        List<Boolean> list = jdbi.withHandle(handle ->
+        return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT " + Column + " FROM " + Table)
                         .mapTo(Boolean.class)
                         .list());
-        return list;
     }
 
     public boolean doubles(String Table , String Column, String name){
         List<String> names = readDBstring(Table, Column);
-        for(int i = 0; i < names.size(); i++){
-            if(name.equals(names.get(i))){
+        for (String s : names) {
+            if (name.equals(s)) {
                 return true;
             }
         }
@@ -96,7 +95,7 @@ public class _BeheerCommon {
 
     public void verifyOneRowSelected(TableView tbl) {
         if(tbl.getSelectionModel().getSelectedCells().size() == 0) {
-            showAlert("Hela!", "Eerst een record selecteren hé.");
+            showAlert("Select error", "There was no item selected for your action to be applied to.");
         }
     }
 

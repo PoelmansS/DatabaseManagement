@@ -1,8 +1,6 @@
 package be.kuleuven.pccustomizer.controller.config;
 
-import be.kuleuven.pccustomizer.controller.Objects.Component;
 import be.kuleuven.pccustomizer.controller.Objects.Cooling;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;

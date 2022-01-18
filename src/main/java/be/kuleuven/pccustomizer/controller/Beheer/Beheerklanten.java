@@ -18,8 +18,6 @@ public class Beheerklanten extends _BeheerCommon {
     private TableView<Klant> tableView;
     //input text fields
     @FXML
-    private TextField addID;
-    @FXML
     private TextField addLastName;
     @FXML
     private TextField addFirstName;
@@ -120,7 +118,6 @@ public class Beheerklanten extends _BeheerCommon {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             Klant klant = tableView.getSelectionModel().getSelectedItem();
 
-            addID.setText(String.valueOf(klant.getID()));
             addLastName.setText(klant.getLastName());
             addFirstName.setText(klant.getFirstName());
             addPostalCode.setText(String.valueOf(klant.getPostalCode()));
@@ -137,7 +134,6 @@ public class Beheerklanten extends _BeheerCommon {
     public void modifyCurrentRow(){
         selectedRow = tableView.getSelectionModel().getSelectedIndex();
 
-        modifiedKlant.setID(Integer.parseInt(addID.getText()));
         modifiedKlant.setLastName(addLastName.getText());
         modifiedKlant.setFirstName(addFirstName.getText());
         modifiedKlant.setPostalCode(Integer.parseInt(addPostalCode.getText()));
@@ -147,8 +143,8 @@ public class Beheerklanten extends _BeheerCommon {
         modifiedKlant.setMail(addMail.getText());
 
         jdbi.useHandle(handle -> {
-            handle.execute("UPDATE Klant SET ID = ?,LastName = ?,FirstName = ?,PostalCode = ?,Street = ?,NR = ?,Phone = ?,Mail =? WHERE ID = ?",
-                    modifiedKlant.getID(),modifiedKlant.getLastName(),modifiedKlant.getFirstName(),
+            handle.execute("UPDATE Klant SET LastName = ?,FirstName = ?,PostalCode = ?,Street = ?,NR = ?,Phone = ?,Mail =? WHERE ID = ?",
+                    modifiedKlant.getLastName(),modifiedKlant.getFirstName(),
                     modifiedKlant.getPostalCode(),modifiedKlant.getStreet(),modifiedKlant.getNumber(),
                     modifiedKlant.getPhone(),modifiedKlant.getMail(),modifiedKlant.getID());
         });

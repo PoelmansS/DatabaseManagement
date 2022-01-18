@@ -55,12 +55,6 @@ public class BeheerHwComponentenController {
         });
     }
 
-    private void showMainScherm(String id) {
-
-        var resourceName = id + ".fxml";
-        showMethod(id, resourceName);
-    }
-
     private void showMethod(String id, String resourceName) {
         try {
             var stage = new Stage();

@@ -1,25 +1,27 @@
 package be.kuleuven.pccustomizer;
 
-import be.kuleuven.pccustomizer.controller.SQLiteClient;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.util.Collections;
 import java.util.Objects;
-import java.util.List;
 
 /**
- * DB Taak 2021-2022: PC Customizer concept
- * Zie Taak-DATAB-2122.pdf voor opgave details
+ *  Authors: Poelmans Sander, Wakker Damianus
  *
- * Deze code is slechts een quick-start om je op weg te helpen met de integratie van JavaFX tabellen en data!
- * Het is NIET voldoende om dit slechts over te nemen! JavaFX is GEEN vereiste, maar integratie met SQL in Java/Kotlin wel.
+ *  User Manual:
+ *      -This program is an Admin tool to deal with custom built computers, Clients and orders
  *
- * Denk aan je eigen ER schema, welke data en dus schermen heb je nodig? Welke relaties? Hoe ga je dit presenteren aan gebruikers?
- * Is dit programma een admin tool voor de VERkopers of voor de kopers van de custom PCs in jullie ogen? Pas aan waar nodig!
+ *      -To modify a row you have to follow the next steps:
+ *          1) Select your row in the table
+ *          2) Click the load button to load it in the text boxes
+ *          3) Change the values you want to change
+ *          4) Click the modify button
+ *
+ *      -Adding a new row works similar to modifying except you dont have to load in any existing data
+ *
+ *      -The PC customizer is made so it only displays components that are compatible with each other (according to our input)
  */
 public class ProjectMain extends Application {
 

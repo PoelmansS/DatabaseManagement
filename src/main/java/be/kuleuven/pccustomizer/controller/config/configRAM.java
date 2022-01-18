@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class configRAM extends _ConfigCommon {
-    private Component component = new Component();
-    private List<RAM> rams = new ArrayList<RAM>();
+    private final Component component = new Component();
+    private final List<RAM> rams = new ArrayList<RAM>();
     //table
     @FXML
     private TableView<RAM> tableView;
@@ -67,12 +67,5 @@ public class configRAM extends _ConfigCommon {
             componenten.add(component);
             benodigdeRamSlots = ram.getNRofSticks();
         }
-    }
-
-    private void initTableComponenten() {
-        componentColumn.setCellValueFactory(new PropertyValueFactory<Component, String>("name"));
-        ObservableList<Component> viewComponenten = FXCollections.observableArrayList();
-        viewComponenten.addAll(componenten);
-        componentView.setItems(viewComponenten);
     }
 }

@@ -39,23 +39,23 @@
         <Button fx:id="btnDelete" layoutX="431.0" layoutY="304.0" mnemonicParsing="false" text="Verwijder" />
         <Button fx:id="btnLoad" layoutX="16.0" layoutY="304.0" mnemonicParsing="false" text="Load" />
 
-        <TextField fx:id="addID" layoutX="91.0" layoutY="360.0" prefHeight="25.0" prefWidth="42.0" />
-        <TextField fx:id="addLastName" layoutX="133.0" layoutY="360.0" prefHeight="25.0" prefWidth="63.0" />
-        <TextField fx:id="addFirstName" layoutX="196.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
-        <TextField fx:id="addPostalCode" layoutX="269.0" layoutY="360.0" prefHeight="25.0" prefWidth="63.0" />
-        <TextField fx:id="addStreet" layoutX="329.0" layoutY="360.0" prefHeight="25.0" prefWidth="67.0" />
-        <TextField fx:id="addNR" layoutX="391.0" layoutY="360.0" prefHeight="25.0" prefWidth="42.0" />
-        <TextField fx:id="addPhone" layoutX="431.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
-        <TextField fx:id="addMail" layoutX="509.0" layoutY="360.0" prefHeight="25.0" prefWidth="84.0" />
 
-        <Text layoutX="91.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="53.0" />
-        <Text layoutX="133.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" wrappingWidth="92.0" />
-        <Text layoutX="196.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" />
-        <Text layoutX="266.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Postal Code" />
-        <Text layoutX="332.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Street" />
-        <Text layoutX="396.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NR" />
-        <Text layoutX="436.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone" />
-        <Text layoutX="509.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mail" />
+        <TextField fx:id="addLastName" layoutX="102.0" layoutY="360.0" prefHeight="25.0" prefWidth="63.0" />
+        <TextField fx:id="addFirstName" layoutX="165.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
+        <TextField fx:id="addPostalCode" layoutX="243.0" layoutY="360.0" prefHeight="25.0" prefWidth="63.0" />
+        <TextField fx:id="addStreet" layoutX="306.0" layoutY="360.0" prefHeight="25.0" prefWidth="67.0" />
+        <TextField fx:id="addNR" layoutX="373.0" layoutY="360.0" prefHeight="25.0" prefWidth="42.0" />
+        <TextField fx:id="addPhone" layoutX="414.0" layoutY="360.0" prefHeight="25.0" prefWidth="78.0" />
+        <TextField fx:id="addMail" layoutX="490.0" layoutY="360.0" prefHeight="25.0" prefWidth="84.0" />
+
+      
+        <Text layoutX="102.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" wrappingWidth="92.0" />
+        <Text layoutX="165.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" />
+        <Text layoutX="243.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Postal Code" />
+        <Text layoutX="308.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Street" />
+        <Text layoutX="373.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NR" />
+        <Text layoutX="419.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone" />
+        <Text layoutX="492.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mail" />
 
     </children>
 </AnchorPane>
