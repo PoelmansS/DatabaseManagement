@@ -83,7 +83,11 @@ public class beheerPSU extends _BeheerCommon {
             tableView.setItems(PSUList);
         }
         else{
-            showAlert("Unseported Entry","Dit component bestaat al in de db");
+            PSU psu = new PSU(addName.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addWattage.getText()), Integer.parseInt(addAantal.getText()));
+            jdbi.useHandle(handle -> {
+                handle.execute("UPDATE Power_supply SET Aantal = ? WHERE Name = ?, Price = ?, Wattage = ?",
+                        psu.getAantal(), psu.getName(), psu.getPrice(), psu.getWattage());
+            });
         }
     }
 

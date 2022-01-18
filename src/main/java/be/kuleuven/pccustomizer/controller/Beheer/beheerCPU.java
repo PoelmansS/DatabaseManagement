@@ -102,7 +102,13 @@ public class beheerCPU extends _BeheerCommon {
             tableView.setItems(CPUList);
         }
         else{
-            showAlert("Unseported Entry","Dit component bestaat al in de db");
+            CPU cpu = new CPU(addName.getText(), Integer.parseInt(addPrice.getText()), Integer.parseInt(addThreads.getText()),
+                    Integer.parseInt(addCores.getText()), Integer.parseInt(addClockSpeed.getText()), Integer.parseInt(addPowerUsage.getText()),
+                    Integer.parseInt(addAantal.getText()));
+            jdbi.useHandle(handle -> {
+                handle.execute("UPDATE CPU SET Aantal = ? WHERE Name= ?, Price = ?, Threads = ?, Cores = ?, Clock_speed = ?, Power_usage = ?",
+                        cpu.getAantal(), cpu.getName(), cpu.getPrice(), cpu.getThreads(), cpu.getCores(), cpu.getClockSpeed(), cpu.getPowerUsage());
+            });
         }
     }
 
