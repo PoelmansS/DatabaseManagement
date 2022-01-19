@@ -140,11 +140,12 @@ public class beheerMotherboard extends _BeheerCommon {
         modifiedMotherboard.setCaseSize(addCaseSize.getText());
         modifiedMotherboard.setRAMSlots(Integer.parseInt(addRAMSlots.getText()));
         modifiedMotherboard.setPCIESlots(Integer.parseInt(addPCIESlots.getText()));
+        modifiedMotherboard.setAantal(Integer.parseInt(addAantal.getText()));
 
         jdbi.useHandle(handle -> {
-            handle.execute("UPDATE Motherbord SET Name = ? ,Wifi = ?, Price = ?, Required_case_size = ?, RAM_slots = ?, PCI_express_slots = ? WHERE Name = ?",
+            handle.execute("UPDATE Motherbord SET Name = ? ,Wifi = ?, Price = ?, Required_case_size = ?, RAM_slots = ?, PCI_express_slots = ?, Aantal = ? WHERE Name = ?",
                     modifiedMotherboard.getName(), modifiedMotherboard.isHasWifi(), modifiedMotherboard.getPrice(),
-                    modifiedMotherboard.getCaseSize(), modifiedMotherboard.getRAMSlots() , modifiedMotherboard.getPCIESlots()
+                    modifiedMotherboard.getCaseSize(), modifiedMotherboard.getRAMSlots() , modifiedMotherboard.getPCIESlots(), modifiedMotherboard.getAantal()
                     ,modifiedMotherboard.getName());
         });
 

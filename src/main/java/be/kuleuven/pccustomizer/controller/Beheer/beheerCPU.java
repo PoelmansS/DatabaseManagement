@@ -137,9 +137,9 @@ public class beheerCPU extends _BeheerCommon {
         modifiedCPU.setPowerUsage(Integer.parseInt(addPowerUsage.getText()));
 
         jdbi.useHandle(handle -> {
-            handle.execute("UPDATE CPU SET Name = ? ,Price = ?, Threads = ? , Cores = ? , Clock_speed = ? , Power_usage = ? WHERE Name = ?",
+            handle.execute("UPDATE CPU SET Name = ? ,Price = ?, Threads = ? , Cores = ? , Clock_speed = ? , Power_usage = ?, Aantal = ? WHERE Name = ?",
                     modifiedCPU.getName(), modifiedCPU.getPrice(), modifiedCPU.getThreads(),
-                    modifiedCPU.getCores(), modifiedCPU.getClockSpeed() , modifiedCPU.getPowerUsage(), modifiedCPU.getName());
+                    modifiedCPU.getCores(), modifiedCPU.getClockSpeed() , modifiedCPU.getPowerUsage(), modifiedCPU.getAantal(), modifiedCPU.getName());
         });
 
         ObservableList<CPU> CPUList = tableView.getItems();

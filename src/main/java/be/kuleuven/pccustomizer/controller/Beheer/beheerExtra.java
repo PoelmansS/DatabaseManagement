@@ -76,7 +76,7 @@ public class beheerExtra extends _BeheerCommon {
             Extra extra = new Extra(addName.getText(), addType.getText(), Integer.parseInt(addPrice.getText()),
                     Integer.parseInt(addAantal.getText()));
             jdbi.useHandle(handle -> {
-                handle.execute("insert into Extra (Name,Type,  Price) values (?, ?, ?)",
+                handle.execute("insert into Extra (Name, Type,  Price) values (?, ?, ?)",
                         extra.getName(), extra.getType(), extra.getPrice());
             });
 
@@ -112,10 +112,11 @@ public class beheerExtra extends _BeheerCommon {
         modifiedExtra.setName(addName.getText());
         modifiedExtra.setType(addType.getText());
         modifiedExtra.setPrice(Integer.parseInt(addPrice.getText()));
+        modifiedExtra.setAantal(Integer.parseInt(addAantal.getText()));
 
         jdbi.useHandle(handle -> {
-            handle.execute("UPDATE Extra SET Name = ?, Type = ? ,Price = ? WHERE Name = ?",
-                    modifiedExtra.getName(), modifiedExtra.getType(), modifiedExtra.getPrice(), modifiedExtra.getName());
+            handle.execute("UPDATE Extra SET Name = ?, Type = ? ,Price = ?, Aantal = ? WHERE Name = ?",
+                    modifiedExtra.getName(), modifiedExtra.getType(), modifiedExtra.getPrice(), modifiedExtra.getAantal(), modifiedExtra.getName());
         });
 
         ObservableList<Extra> extraList = tableView.getItems();

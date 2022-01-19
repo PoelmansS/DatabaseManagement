@@ -116,10 +116,11 @@ public class beheerCooling extends _BeheerCommon {
         modifiedCooling.setType(addType.getText());
         modifiedCooling.setPrice(Integer.parseInt(addPrice.getText()));
         modifiedCooling.setWattage(Integer.parseInt(addWattage.getText()));
+        modifiedCooling.setAantal(Integer.parseInt(addAantal.getText()));
 
         jdbi.useHandle(handle -> {
-            handle.execute("UPDATE Cooling SET Name = ? ,Type = ?, Price = ? , Wattage = ? WHERE Name = ?",
-                    modifiedCooling.getName(), modifiedCooling.getType(), modifiedCooling.getPrice(), modifiedCooling.getWattage(), modifiedCooling.getName());
+            handle.execute("UPDATE Cooling SET Name = ? ,Type = ?, Price = ? , Wattage = ?, Aantal = ? WHERE Name = ?",
+                    modifiedCooling.getName(), modifiedCooling.getType(), modifiedCooling.getPrice(), modifiedCooling.getWattage(), modifiedCooling.getAantal(), modifiedCooling.getName());
         });
         ObservableList<Cooling> coolingsList = tableView.getItems();
         coolingsList.set(selectedRow,modifiedCooling);

@@ -109,10 +109,10 @@ public class beheerPSU extends _BeheerCommon {
         modifiedPSU.setName(addName.getText());
         modifiedPSU.setPrice(Integer.parseInt(addPrice.getText()));
         modifiedPSU.setWattage(Integer.parseInt(addWattage.getText()));
-
+        modifiedPSU.setAantal(Integer.parseInt(addAantal.getText()));
         jdbi.useHandle(handle -> {
-            handle.execute("UPDATE Power_supply SET Name = ? , Price = ?, Wattage = ? WHERE Name = ?",
-                    modifiedPSU.getName(), modifiedPSU.getPrice(), modifiedPSU.getWattage(), modifiedPSU.getName());
+            handle.execute("UPDATE Power_supply SET Name = ? , Price = ?, Wattage = ?, Aantal = ? WHERE Name = ?",
+                    modifiedPSU.getName(), modifiedPSU.getPrice(), modifiedPSU.getWattage(), modifiedPSU.getAantal(), modifiedPSU.getName());
         });
 
         ObservableList<PSU> PSUList = tableView.getItems();

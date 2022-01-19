@@ -138,10 +138,11 @@ public class beheerCase extends _BeheerCommon {
         modifiedCase.setType(addType.getText());
         modifiedCase.setPrice(Integer.parseInt(addPrice.getText()));
         modifiedCase.setSize(addSize.getText());
+        modifiedCase.setAantal(Integer.parseInt(addAantal.getText()));
 
         jdbi.useHandle(handle -> {
-            handle.execute("UPDATE PcCase SET Name = ? ,Type = ?, Price = ? , Size = ? WHERE Name = ?",
-                    modifiedCase.getName(), modifiedCase.getType(), modifiedCase.getPrice(), modifiedCase.getSize(), modifiedCase.getName());
+            handle.execute("UPDATE PcCase SET Name = ? ,Type = ?, Price = ? , Size = ?, Aantal = ? WHERE Name = ?",
+                    modifiedCase.getName(), modifiedCase.getType(), modifiedCase.getPrice(), modifiedCase.getSize(), modifiedCase.getAantal(), modifiedCase.getName());
         });
 
         ObservableList<Case> caseList = tableView.getItems();

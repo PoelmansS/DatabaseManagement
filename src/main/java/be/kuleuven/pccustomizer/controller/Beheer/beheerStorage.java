@@ -137,10 +137,12 @@ public class beheerStorage extends _BeheerCommon {
         modifiedStorage.setSize(Integer.parseInt(addSize.getText()));
         modifiedStorage.setReadSpeed(Integer.parseInt(addReadSpeed.getText()));
         modifiedStorage.setWriteSpeed(Integer.parseInt(addWriteSpeed.getText()));
+        modifiedStorage.setAantal(Integer.parseInt(addAantal.getText()));
+
         jdbi.useHandle(handle -> {
-            handle.execute("UPDATE Storage SET Name = ? ,Type = ?, Price = ? , Size = ? , Read_speed = ? , Write_speed = ? WHERE Name = ?",
+            handle.execute("UPDATE Storage SET Name = ? ,Type = ?, Price = ? , Size = ? , Read_speed = ? , Write_speed = ?, Aantal = ? WHERE Name = ?",
                     modifiedStorage.getName(), modifiedStorage.getType(), modifiedStorage.getPrice(),
-                    modifiedStorage.getSize(), modifiedStorage.getWriteSpeed() , modifiedStorage.getReadSpeed());
+                    modifiedStorage.getSize(), modifiedStorage.getWriteSpeed(), modifiedStorage.getAantal(), modifiedStorage.getReadSpeed());
         });
 
         ObservableList<Storage> storageList = tableView.getItems();

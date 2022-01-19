@@ -23,6 +23,7 @@ import java.util.Objects;
  *
  *      -The PC customizer is made so it only displays components that are compatible with each other (according to our input)
  */
+
 public class ProjectMain extends Application {
 
     private static Stage rootStage;
